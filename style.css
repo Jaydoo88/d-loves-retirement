@@ -50,6 +50,16 @@ body {
   display: block;
 }
 
+.retiree-photo {
+  width: 100%;           /* fills the container */
+  height: auto;          /* keeps aspect ratio */
+  max-width: 400px;      /* optional: limit size */
+  border-radius: 8px;    /* optional: soft corners */
+  object-fit: cover;     /* ensures it fills without distortion */
+  display: block;
+  margin: 0 auto;        /* centers image */
+}
+
 .content-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
