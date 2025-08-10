@@ -40,6 +40,20 @@ body {
   margin: 10px 0;
 }
 
+/* NEW: make the retiree image a perfect circle */
+.retiree-photo{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;          /* crops inside the circle */
+  object-position: center;    /* center the crop */
+  border: 5px solid #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,.2);
+  margin: 20px auto;
+  display: block;
+}
+
+/* legacy circular placeholder style (kept for safety) */
 .hero-photo {
   width: 200px; height: 200px;
   border-radius: 50%;
@@ -48,16 +62,6 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   margin: 20px auto;
   display: block;
-}
-
-.retiree-photo {
-  width: 100%;           /* fills the container */
-  height: auto;          /* keeps aspect ratio */
-  max-width: 400px;      /* optional: limit size */
-  border-radius: 8px;    /* optional: soft corners */
-  object-fit: cover;     /* ensures it fills without distortion */
-  display: block;
-  margin: 0 auto;        /* centers image */
 }
 
 .content-grid {
