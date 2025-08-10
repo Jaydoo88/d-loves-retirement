@@ -156,10 +156,12 @@ body {
 }
 
 .timeline-photo {
-  width: 80px; height: 80px;
-  border-radius: 10px; object-fit: cover;
-  margin-right: 20px;
-  box-shadow: 0 3px 10px rgba(0,0,0,.1);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .timeline-content h4 { color: #1e3c72; margin-bottom: 5px; }
