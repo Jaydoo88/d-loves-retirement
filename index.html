@@ -19,8 +19,16 @@
       <div class="header">
         <h1>Celebrating Years of Dedicated Service</h1>
         <h2>Department of Homeland Security</h2>
-        <!-- Replace this placeholder with your friend's photo -->
-        <img src="assets/dloveK9.jpg" alt="Retiree with K9" class="retiree-photo">
+
+        <!-- HERO: rotates between two photos (beginning + later) -->
+        <img
+          id="retireePhoto"
+          src="assets/dlovek9beginning.jpg"
+          alt="Retiree with K9"
+          class="retiree-photo"
+          style="opacity:1; transition: opacity .6s ease"
+        >
+
         <div class="badge">Retirement Celebration</div>
         <p style="margin-top: 20px; font-size: 1.1rem; color: #555;">
           Join us as we honor an exceptional career of protecting our nation and serving our communities.
@@ -76,42 +84,42 @@
         </div>
       </div>
 
-     <!-- Scrolling Gallery (Carousel) -->
-<div class="photo-gallery" id="photo-reel">
-  <h3 style="text-align:center; color:#1e3c72; margin-bottom:16px;">📷 Photo Reel</h3>
+      <!-- Scrolling Gallery (Carousel) -->
+      <div class="photo-gallery" id="photo-reel">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:16px;">📷 Photo Reel</h3>
 
-  <div class="scroll-gallery">
-    <button class="sg-btn sg-prev" aria-label="Previous" onclick="sgScroll(-1)">‹</button>
+        <div class="scroll-gallery">
+          <button class="sg-btn sg-prev" aria-label="Previous" onclick="sgScroll(-1)">‹</button>
 
-    <div class="sg-track" id="sgTrack">
-      <!-- Replace these with your real files in assets/photos/... -->
-      <figure class="sg-item" onclick="openModal('assets/photos/k9-award.jpg')">
-        <img src="assets/photos/k9-award.jpg" alt="K9 award" loading="lazy">
-        <figcaption class="sg-cap">K9 Award</figcaption>
-      </figure>
+          <div class="sg-track" id="sgTrack">
+            <!-- Replace these with your real files in assets/photos/... -->
+            <figure class="sg-item" onclick="openModal('assets/photos/k9-award.jpg')">
+              <img src="assets/photos/k9-award.jpg" alt="K9 award" loading="lazy">
+              <figcaption class="sg-cap">K9 Award</figcaption>
+            </figure>
 
-      <figure class="sg-item" onclick="openModal('assets/photos/team-briefing.jpg')">
-        <img src="assets/photos/team-briefing.jpg" alt="Team briefing" loading="lazy">
-        <figcaption class="sg-cap">Team Briefing</figcaption>
-      </figure>
+            <figure class="sg-item" onclick="openModal('assets/photos/team-briefing.jpg')">
+              <img src="assets/photos/team-briefing.jpg" alt="Team briefing" loading="lazy">
+              <figcaption class="sg-cap">Team Briefing</figcaption>
+            </figure>
 
-      <figure class="sg-item" onclick="openModal('assets/photos/training-day.jpg')">
-        <img src="assets/photos/training-day.jpg" alt="Training day" loading="lazy">
-        <figcaption class="sg-cap">Training Day</figcaption>
-      </figure>
+            <figure class="sg-item" onclick="openModal('assets/photos/training-day.jpg')">
+              <img src="assets/photos/training-day.jpg" alt="Training day" loading="lazy">
+              <figcaption class="sg-cap">Training Day</figcaption>
+            </figure>
 
-      <figure class="sg-item" onclick="openModal('assets/photos/retirement-ceremony.jpg')">
-        <img src="assets/photos/retirement-ceremony.jpg" alt="Retirement ceremony" loading="lazy">
-        <figcaption class="sg-cap">Retirement Ceremony</figcaption>
-      </figure>
+            <figure class="sg-item" onclick="openModal('assets/photos/retirement-ceremony.jpg')">
+              <img src="assets/photos/retirement-ceremony.jpg" alt="Retirement ceremony" loading="lazy">
+              <figcaption class="sg-cap">Retirement Ceremony</figcaption>
+            </figure>
 
-      <!-- add more <figure class="sg-item">...</figure> as needed -->
-    </div>
+            <!-- add more <figure class="sg-item">...</figure> as needed -->
+          </div>
 
-    <button class="sg-btn sg-next" aria-label="Next" onclick="sgScroll(1)">›</button>
-  </div>
-</div>
-     
+          <button class="sg-btn sg-next" aria-label="Next" onclick="sgScroll(1)">›</button>
+        </div>
+      </div>
+
       <div class="career-timeline">
         <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px;">🏆 Career Journey</h3>
         <div class="timeline-item">
@@ -343,17 +351,7 @@
       }).join('');
     }
 
-    // Simple modal view for gallery
-    function openModal(src) {
-      const modal = document.getElementById('photoModal');
-      const modalImg = document.getElementById('modalImage');
-      modalImg.src = src;
-      modal.style.display = 'block';
-    }
-    function closeModal() {
-      document.getElementById('photoModal').style.display = 'none';
-    }
-  // Simple modal view for gallery
+    // Modal view for gallery
     function openModal(src) {
       const modal = document.getElementById('photoModal');
       const modalImg = document.getElementById('modalImage');
@@ -394,8 +392,37 @@
           galleryTrack.scrollLeft = scrollLeft - walk;
         });
       }
+
+      // --- Hero two-image rotator ---
+      const heroImg = document.getElementById('retireePhoto');
+      const heroPhotos = [
+        'assets/dlovek9beginning.jpg', // beginning stage
+        'assets/dloveK9.jpg'           // later stage (current)
+      ];
+      // Preload images
+      heroPhotos.forEach(src => { const i = new Image(); i.src = src; });
+
+      let heroIndex = 0;
+      setInterval(() => {
+        heroIndex = (heroIndex + 1) % heroPhotos.length;
+        // fade out, swap, fade in
+        if (heroImg) {
+          heroImg.style.opacity = 0;
+          setTimeout(() => {
+            heroImg.src = heroPhotos[heroIndex];
+            heroImg.onload = () => { heroImg.style.opacity = 1; };
+          }, 200);
+        }
+      }, 4000); // change every 4s
     });
-  
+
+    // Scroll gallery button control
+    function sgScroll(dir){
+      const track = document.getElementById('sgTrack');
+      if(!track) return;
+      const cardWidth = track.querySelector('.sg-item')?.getBoundingClientRect().width || 300;
+      track.scrollBy({ left: dir * (cardWidth + 12), behavior: 'smooth' });
+    }
   </script>
 </body>
 </html>
