@@ -353,6 +353,49 @@
     function closeModal() {
       document.getElementById('photoModal').style.display = 'none';
     }
+  // Simple modal view for gallery
+    function openModal(src) {
+      const modal = document.getElementById('photoModal');
+      const modalImg = document.getElementById('modalImage');
+      modalImg.src = src;
+      modal.style.display = 'block';
+    }
+    function closeModal() {
+      document.getElementById('photoModal').style.display = 'none';
+    }
+
+    // --- Scrollable Gallery Logic ---
+    document.addEventListener('DOMContentLoaded', function() {
+      const galleryTrack = document.querySelector('.sg-track');
+      if (galleryTrack) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        galleryTrack.addEventListener('mousedown', (e) => {
+          isDown = true;
+          galleryTrack.classList.add('active');
+          startX = e.pageX - galleryTrack.offsetLeft;
+          scrollLeft = galleryTrack.scrollLeft;
+        });
+        galleryTrack.addEventListener('mouseleave', () => {
+          isDown = false;
+          galleryTrack.classList.remove('active');
+        });
+        galleryTrack.addEventListener('mouseup', () => {
+          isDown = false;
+          galleryTrack.classList.remove('active');
+        });
+        galleryTrack.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - galleryTrack.offsetLeft;
+          const walk = (x - startX) * 2; // scroll speed
+          galleryTrack.scrollLeft = scrollLeft - walk;
+        });
+      }
+    });
+  
   </script>
 </body>
 </html>
