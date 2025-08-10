@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Celebrating a Distinguished Career</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <!-- Navigation buttons -->
+  <div class="nav-buttons">
+    <button class="nav-btn active" onclick="showPage(event,'main')">Main Page</button>
+    <button class="nav-btn" onclick="showPage(event,'rsvp-list')">RSVP List</button>
+  </div>
+
+  <!-- MAIN PAGE -->
+  <div id="main-page" class="page active">
+    <div class="container">
+      <div class="header">
+        <h1>Celebrating Years of Dedicated Service</h1>
+        <h2>Department of Homeland Security</h2>
+        <!-- Replace this placeholder with your friend's photo -->
+        <img src="https://via.placeholder.com/200x200/1e3c72/ffffff?text=Photo" alt="Retiree Photo" class="hero-photo"/>
+        <div class="badge">Retirement Celebration</div>
+        <p style="margin-top: 20px; font-size: 1.1rem; color: #555;">
+          Join us as we honor an exceptional career of protecting our nation and serving our communities.
+        </p>
+      </div>
+
+      <div class="content-grid">
+        <div class="card event-details">
+          <h3>🎉 Celebration Details</h3>
+          <div class="event-info">
+            <strong>📅 Date:</strong> [Date TBD]<br/>
+            <strong>⏰ Time:</strong> [Time TBD]<br/>
+            <strong>📍 Location:</strong> [Venue TBD]<br/>
+            <strong>👔 Attire:</strong> Business Casual
+          </div>
+          <p style="margin-top: 20px;">
+            Come celebrate the remarkable achievements and lasting impact of a distinguished career in public service.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>🏆 A Legacy of Service</h3>
+          <p>
+            Throughout their career with the Department of Homeland Security, our honoree has demonstrated unwavering commitment
+            to protecting our nation and its citizens. Their dedication, leadership, and expertise have made a lasting impact on
+            colleagues and communities alike.
+          </p>
+          <p style="margin-top: 15px;">
+            This celebration is an opportunity to reflect on achievements, share memories, and wish them well in their next chapter.
+          </p>
+        </div>
+      </div>
+
+      <div class="photo-gallery">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px;">📸 Career Highlights</h3>
+        <div class="gallery-grid">
+          <div class="gallery-item" onclick="openModal('https://via.placeholder.com/400x300/2a5298/ffffff?text=Award+Ceremony')">
+            <img src="https://via.placeholder.com/400x300/2a5298/ffffff?text=Award+Ceremony" alt="Award Ceremony"/>
+            <div class="gallery-caption">Award Ceremony</div>
+          </div>
+          <div class="gallery-item" onclick="openModal('https://via.placeholder.com/400x300/667eea/ffffff?text=Team+Photo')">
+            <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Team+Photo" alt="Team Photo"/>
+            <div class="gallery-caption">Team Leadership Summit</div>
+          </div>
+          <div class="gallery-item" onclick="openModal('https://via.placeholder.com/400x300/764ba2/ffffff?text=Conference')">
+            <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Conference" alt="Conference"/>
+            <div class="gallery-caption">National Security Conference</div>
+          </div>
+          <div class="gallery-item" onclick="openModal('https://via.placeholder.com/400x300/f7931e/ffffff?text=Office+Celebration')">
+            <img src="https://via.placeholder.com/400x300/f7931e/ffffff?text=Office+Celebration" alt="Office Celebration"/>
+            <div class="gallery-caption">Office Celebration</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="career-timeline">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px;">🏆 Career Journey</h3>
+        <div class="timeline-item">
+          <img src="https://via.placeholder.com/80x80/1e3c72/ffffff?text=Start" alt="Career Start" class="timeline-photo"/>
+          <div class="timeline-content">
+            <h4>Joined Department of Homeland Security</h4>
+            <p>Started with a mission to protect and serve our nation's security.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <img src="https://via.placeholder.com/80x80/2a5298/ffffff?text=K9" alt="K9 Handler" class="timeline-photo"/>
+          <div class="timeline-content">
+            <h4>K9 Handler & Specialist</h4>
+            <p>Specialized in canine operations, working alongside dedicated K9 partners in critical security missions.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <img src="https://via.placeholder.com/80x80/667eea/ffffff?text=Lead" alt="Leadership" class="timeline-photo"/>
+          <div class="timeline-content">
+            <h4>Leadership Recognition</h4>
+            <p>Received commendation for exceptional service during critical national security operations.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <img src="https://via.placeholder.com/80x80/f7931e/ffffff?text=2025" alt="Retirement" class="timeline-photo"/>
+          <div class="timeline-content">
+            <h4>Well-Deserved Retirement - 2025</h4>
+            <p>Concluding an exemplary career of service, leadership, and dedication to our nation's security.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rsvp-section">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px; font-size:2rem;">Please RSVP</h3>
+        <form class="rsvp-form" id="rsvpForm">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="organization">Department/Organization</label>
+            <input type="text" id="organization" name="organization" placeholder="e.g., DHS, CBP, TSA, etc."/>
+          </div>
+
+          <div class="form-group">
+            <label for="attending">Will you be attending? *</label>
+            <select id="attending" name="attending" required>
+              <option value="">Please select</option>
+              <option value="yes">Yes, I'll be there!</option>
+              <option value="no">Unfortunately, I cannot attend</option>
+              <option value="maybe">Not sure yet</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="guestGroup" style="display:none;">
+            <label for="guests">Number of guests (including yourself)</label>
+            <select id="guests" name="guests">
+              <option value="1">Just me</option>
+              <option value="2">2 people</option>
+              <option value="3">3 people</option>
+              <option value="4">4 people</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Share a memory or message (optional)</label>
+            <textarea id="message" name="message" rows="4" placeholder="Share a favorite memory, congratulations, or well wishes..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Submit RSVP</button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+          Thank you for your RSVP! We look forward to celebrating together.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RSVP LIST PAGE -->
+  <div id="rsvp-list-page" class="page">
+    <div class="container">
+      <div class="header">
+        <h1>RSVP Responses</h1>
+        <h2>Retirement Celebration</h2>
+        <div class="badge">Response Tracker</div>
+      </div>
+
+      <div class="rsvp-summary">
+        <h3 style="margin-bottom:20px;">📊 RSVP Summary</h3>
+        <div class="summary-stats" id="summaryStats">
+          <div class="stat-box">
+            <span class="stat-number" id="totalResponses">0</span>
+            <span>Total Responses</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="attendingCount">0</span>
+            <span>Attending</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="totalGuests">0</span>
+            <span>Total Guests</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="notAttendingCount">0</span>
+            <span>Can't Attend</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rsvp-list">
+        <h3 style="color:#1e3c72; margin-bottom:20px;">📋 All Responses</h3>
+        <div id="rsvpDetailsList">
+          <p style="text-align:center; color:#666; padding:40px;">No RSVPs received yet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for enlarged photos -->
+  <div id="photoModal" class="modal" onclick="closeModal()">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage" alt="Enlarged"/>
+  </div>
+
+  <script>
+    // In-memory RSVP list (persists only while the page is open)
+    let rsvpList = [];
+
+    // Show/hide guest number field based on attendance selection
+    const attendingSelect = document.getElementById('attending');
+    if (attendingSelect) {
+      attendingSelect.addEventListener('change', function () {
+        const guestGroup = document.getElementById('guestGroup');
+        guestGroup.style.display = (this.value === 'yes') ? 'block' : 'none';
+      });
+    }
+
+    // Handle form submission
+    const rsvpForm = document.getElementById('rsvpForm');
+    if (rsvpForm) {
+      rsvpForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const rsvp = {
+          name: formData.get('name'),
+          email: formData.get('email'),
+          organization: formData.get('organization'),
+          attending: formData.get('attending'),
+          guests: formData.get('guests') || '1',
+          message: formData.get('message'),
+          timestamp: new Date().toISOString()
+        };
+
+        rsvpList.push(rsvp);
+
+        const successMessage = document.getElementById('successMessage');
+        successMessage.style.display = 'block';
+
+        this.reset();
+        document.getElementById('guestGroup').style.display = 'none';
+
+        updateRSVPListPage();
+
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 5000);
+      });
+    }
+
+    function showPage(e, pageName) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      // Show selected page
+      document.getElementById(pageName + '-page').classList.add('active');
+      // Update nav buttons
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      if (e && e.target) e.target.classList.add('active');
+      // Update RSVP list if showing that page
+      if (pageName === 'rsvp-list') updateRSVPListPage();
+    }
+
+    function updateRSVPListPage() {
+      const attending = rsvpList.filter(r => r.attending === 'yes');
+      const notAttending = rsvpList.filter(r => r.attending === 'no');
+      const totalGuests = attending.reduce((sum, r) => sum + parseInt(r.guests, 10), 0);
+
+      document.getElementById('totalResponses').textContent = rsvpList.length;
+      document.getElementById('attendingCount').textContent = attending.length;
+      document.getElementById('totalGuests').textContent = totalGuests;
+      document.getElementById('notAttendingCount').textContent = notAttending.length;
+
+      const detailsList = document.getElementById('rsvpDetailsList');
+      if (rsvpList.length === 0) {
+        detailsList.innerHTML = '<p style="text-align:center; color:#666; padding:40px;">No RSVPs received yet.</p>';
+        return;
+      }
+
+      const order = { yes: 0, maybe: 1, no: 2 };
+      const sorted = [...rsvpList].sort((a, b) => order[a.attending] - order[b.attending]);
+
+      detailsList.innerHTML = sorted.map(rsvp => {
+        const statusClass = rsvp.attending === 'yes' ? 'attending' : rsvp.attending === 'no' ? 'not-attending' : 'maybe';
+        const statusText = rsvp.attending === 'yes' ? 'Attending' : rsvp.attending === 'no' ? 'Cannot Attend' : 'Maybe';
+        const statusBadgeClass = rsvp.attending === 'yes' ? 'status-yes' : rsvp.attending === 'no' ? 'status-no' : 'status-maybe';
+        const time = new Date(rsvp.timestamp).toLocaleString();
+
+        return `
+          <div class="rsvp-item ${statusClass}">
+            <div class="rsvp-header">
+              <span class="rsvp-name">${rsvp.name}</span>
+              <span class="rsvp-status ${statusBadgeClass}">${statusText}</span>
+            </div>
+            <div style="margin-bottom:10px;">
+              <strong>Email:</strong> ${rsvp.email}<br/>
+              <strong>Organization:</strong> ${rsvp.organization || 'Not specified'}
+              ${rsvp.attending === 'yes' ? `<br/><strong>Party Size:</strong> ${rsvp.guests} ${rsvp.guests === '1' ? 'person' : 'people'}` : ''}
+            </div>
+            ${rsvp.message ? `<div style="background: rgba(255,255,255,0.7); padding:10px; border-radius:5px; font-style:italic;">"${rsvp.message}"</div>` : ''}
+            <div style="margin-top:10px; font-size:.9rem; color:#666;">Submitted: ${time}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Simple modal view for gallery
+    function openModal(src) {
+      const modal = document.getElementById('photoModal');
+      const modalImg = document.getElementById('modalImage');
+      modalImg.src = src;
+      modal.style.display = 'block';
+    }
+    function closeModal() {
+      document.getElementById('photoModal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
