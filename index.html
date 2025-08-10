@@ -76,30 +76,39 @@
         </div>
       </div>
 
-      <!-- More Photos (new gallery block) -->
-<div class="photo-gallery" id="more-photos">
-  <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px;">📷 More Photos</h3>
-  <div class="gallery-grid">
-    <!-- Replace these file names with your real images inside /assets/photos/ -->
-    <div class="gallery-item" onclick="openModal('assets/photos/k9-award.jpg')">
-      <img src="assets/photos/k9-award.jpg" alt="K9 award" loading="lazy">
-      <div class="gallery-caption">K9 Award</div>
+     <!-- Scrolling Gallery (Carousel) -->
+<div class="photo-gallery" id="photo-reel">
+  <h3 style="text-align:center; color:#1e3c72; margin-bottom:16px;">📷 Photo Reel</h3>
+
+  <div class="scroll-gallery">
+    <button class="sg-btn sg-prev" aria-label="Previous" onclick="sgScroll(-1)">‹</button>
+
+    <div class="sg-track" id="sgTrack">
+      <!-- Replace these with your real files in assets/photos/... -->
+      <figure class="sg-item" onclick="openModal('assets/photos/k9-award.jpg')">
+        <img src="assets/photos/k9-award.jpg" alt="K9 award" loading="lazy">
+        <figcaption class="sg-cap">K9 Award</figcaption>
+      </figure>
+
+      <figure class="sg-item" onclick="openModal('assets/photos/team-briefing.jpg')">
+        <img src="assets/photos/team-briefing.jpg" alt="Team briefing" loading="lazy">
+        <figcaption class="sg-cap">Team Briefing</figcaption>
+      </figure>
+
+      <figure class="sg-item" onclick="openModal('assets/photos/training-day.jpg')">
+        <img src="assets/photos/training-day.jpg" alt="Training day" loading="lazy">
+        <figcaption class="sg-cap">Training Day</figcaption>
+      </figure>
+
+      <figure class="sg-item" onclick="openModal('assets/photos/retirement-ceremony.jpg')">
+        <img src="assets/photos/retirement-ceremony.jpg" alt="Retirement ceremony" loading="lazy">
+        <figcaption class="sg-cap">Retirement Ceremony</figcaption>
+      </figure>
+
+      <!-- add more <figure class="sg-item">...</figure> as needed -->
     </div>
 
-    <div class="gallery-item" onclick="openModal('assets/photos/team-briefing.jpg')">
-      <img src="assets/photos/team-briefing.jpg" alt="Team briefing" loading="lazy">
-      <div class="gallery-caption">Team Briefing</div>
-    </div>
-
-    <div class="gallery-item" onclick="openModal('assets/photos/training-day.jpg')">
-      <img src="assets/photos/training-day.jpg" alt="Training day" loading="lazy">
-      <div class="gallery-caption">Training Day</div>
-    </div>
-
-    <div class="gallery-item" onclick="openModal('assets/photos/retirement-ceremony.jpg')">
-      <img src="assets/photos/retirement-ceremony.jpg" alt="Retirement ceremony" loading="lazy">
-      <div class="gallery-caption">Retirement Ceremony</div>
-    </div>
+    <button class="sg-btn sg-next" aria-label="Next" onclick="sgScroll(1)">›</button>
   </div>
 </div>
      
