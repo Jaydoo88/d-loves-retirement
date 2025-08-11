@@ -176,23 +176,64 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,.1);
   border: 1px solid rgba(17,34,68,.06);
 }
+
+/* Each row: logo (left) + text (center, flex) + badge (right) */
 .timeline-item {
-  display: flex; align-items: center;
-  margin-bottom: 20px; padding: 15px;
-  background: #f5f7ff; /* very light blue */
+  display: flex;
+  align-items: center;
+  gap: 20px;                       /* use gap instead of manual margins */
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f5f7ff;            /* very light blue */
   border-radius: 10px;
   border-left: 6px solid var(--patriot-blue);
 }
+
+/* Left logo/emblem */
 .timeline-photo {
-  width: 80px; height: 80px;
-  border-radius: 50%;
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;              /* circular org logo */
   object-fit: cover;
   border: 3px solid var(--patriot-white);
   box-shadow: 0 3px 10px rgba(0,0,0,.18);
-  margin-right: 20px;
-  background:#fff;
+  background: #fff;
 }
-.timeline-content h4 { color: var(--patriot-blue); margin-bottom: 5px; }
+
+/* Middle text grows to fill space */
+.timeline-content {
+  flex: 1;
+  min-width: 0;                    /* prevents overflow in narrow layouts */
+}
+.timeline-content h4 {
+  color: var(--patriot-blue);
+  margin-bottom: 5px;
+}
+
+/* Right badge (officer/agency badge) */
+.timeline-badge {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;             /* rectangular badge; use 50% for round */
+  border: 3px solid #d4af37;       /* gold accent */
+  box-shadow: 0 3px 10px rgba(0,0,0,.18);
+  background: #fff;
+}
+
+/* Responsive stacking */
+@media (max-width: 768px) {
+  .timeline-item {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  .timeline-badge {
+    margin-top: 8px;               /* sits under the text on mobile */
+  }
+}
 
 /* RSVP: alternate white card with red accent */
 .rsvp-section {
