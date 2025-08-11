@@ -215,12 +215,15 @@ body {
 .timeline-badge {
   flex-shrink: 0;
   width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 12px;             /* change to 50% if you want round */
-  border: 3px solid var(--patriot-blue); /* matches left border color */
+  aspect-ratio: 1 / 1;        /* keep it square */
+  height: auto;               /* let aspect-ratio control height */
+  object-fit: contain;        /* show the whole badge (no crop) */
+  background: #fff;           /* behind transparent PNGs */
+  padding: 6px;               /* breathing room so it doesn’t touch border */
+  border: 3px solid var(--patriot-blue);
+  border-radius: 12px;        /* use 50% if you want a circle */
   box-shadow: 0 3px 10px rgba(0,0,0,.18);
-  background: #fff;
+  display: block;
 }
 
 /* Responsive stacking */
