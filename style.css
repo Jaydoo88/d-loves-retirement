@@ -419,13 +419,14 @@ body {
   object-fit: cover;
   display: block;
 }
-.sg-cap{
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  padding: 10px 12px;
-  font-size: .9rem;
-  color: #fff;
-  background: linear-gradient(transparent, rgba(0,0,0,.75));
+.sg-cap {
+  white-space: nowrap;       /* Prevents text from wrapping to a new line */
+  overflow: hidden;          /* Hides any overflow past the box width */
+  text-overflow: ellipsis;   /* Adds "..." if text is too long */
+  display: block;
+  text-align: center;
+  font-size: 0.85rem;        /* Adjust font size so it fits better */
+  width: 100%;               /* Matches the width of the image */
 }
 /* arrows */
 .sg-btn{
