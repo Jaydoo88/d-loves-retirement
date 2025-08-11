@@ -217,8 +217,8 @@ body {
   width: 80px;
   height: 80px;
   object-fit: cover;
-  border-radius: 12px;             /* rectangular badge; use 50% for round */
-  border: 3px solid #d4af37;       /* gold accent */
+  border-radius: 12px;             /* change to 50% if you want round */
+  border: 3px solid var(--patriot-blue); /* matches left border color */
   box-shadow: 0 3px 10px rgba(0,0,0,.18);
   background: #fff;
 }
