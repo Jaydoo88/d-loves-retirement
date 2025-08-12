@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Celebrating the Retirement of Officer Darren Johnson</title>
   <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* Small quality-of-life styles (safe if you already have these in style.css) */
+    .hidden{display:none!important;}
+    .tools-row{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 20px}
+    .tools-row .btn{padding:.55rem .9rem;border:1px solid #d0d5dd;border-radius:8px;background:#fff;cursor:pointer}
+    .tools-row .btn:disabled{opacity:.5;cursor:not-allowed}
+    .success-message{display:none;margin-top:10px;background:#e6fff2;color:#166534;padding:12px;border-radius:8px;border:1px solid #a7f3d0}
+    .error-message{display:none;margin-top:10px;background:#fff1f2;color:#9f1239;padding:12px;border-radius:8px;border:1px solid #fecdd3}
+    .status-yes{background:#dcfce7;color:#065f46;padding:2px 8px;border-radius:999px}
+    .status-no{background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:999px}
+    .status-maybe{background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:999px}
+    .countdown{margin-top:14px;font-weight:600;color:#1e3c72}
+    .small-note{font-size:.85rem;color:#666;margin-top:6px}
+  </style>
 </head>
 <body>
   <!-- Navigation buttons -->
@@ -17,7 +31,7 @@
   <div id="main-page" class="page active">
     <div class="container">
       <div class="header">
-        <h1>Celebrating the Retirement of Officer <p>Darren "D-Love" Johnson</p></h1>
+        <h1>Celebrating the Retirement of Officer <span style="display:block">Darren "D-Love" Johnson</span></h1>
         <h2>K9 Extraordinaire – A Legacy of Service</h2>
         
         <!-- HERO: rotates between two photos (beginning + later) -->
@@ -38,23 +52,25 @@
       <div class="content-grid">
         <div class="card event-details">
           <h3>🎉 Celebration Details</h3>
-          <div class="event-info">
-            <strong>📅 Date:</strong> [Date TBD]<br/>
-            <strong>⏰ Time:</strong> [Time TBD]<br/>
-            <strong>📍 Location:</strong> [Venue TBD]<br/>
+          <div class="event-info" id="eventInfoBox">
+            <strong>📅 Date:</strong> <span id="eventDateText">[Date TBD]</span><br/>
+            <strong>⏰ Time:</strong> <span id="eventTimeText">[Time TBD]</span><br/>
+            <strong>📍 Location:</strong> <span id="eventLocText">[Venue TBD]</span><br/>
             <strong>👔 Attire:</strong> Business Casual
           </div>
+          <div id="countdown" class="countdown hidden"></div>
+          <div id="calendarLinks" class="small-note hidden"></div>
           <p style="margin-top: 20px;">
             Come celebrate the remarkable achievements and lasting impact of a distinguished career in government service.
           </p>
         </div>
 
-  <div class="card">
-  <h3>🏆 A Legacy of Service</h3>
-  <p>
-    With 37 years and 10 months of dedicated government service — including a long tenure with U.S. Customs and Border Protection under the Department of Homeland Security — Darren Johnson has shown unwavering commitment to protecting the nation. His leadership and dedication have left a lasting impact on colleagues, communities, and the mission of securing America’s borders.
-  </p>
-</div>
+        <div class="card">
+          <h3>🏆 A Legacy of Service</h3>
+          <p>
+            With 37 years and 10 months of dedicated government service — including a long tenure with U.S. Customs and Border Protection under the Department of Homeland Security — Darren Johnson has shown unwavering commitment to protecting the nation. His leadership and dedication have left a lasting impact on colleagues, communities, and the mission of securing America’s borders.
+          </p>
+        </div>
       </div>
 
       <!-- Scrolling Gallery (Carousel) -->
@@ -66,195 +82,170 @@
 
           <div class="sg-track" id="sgTrack">
             <!-- Replace these with your real files in assets/photos/... -->
-          
             <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/486550387.jpg" alt="Loyalty, Service, Family, Forever." loading="lazy">
-  <figcaption class="sg-cap">Loyalty, Service, Family, Forever.</figcaption>
-</figure>
+              <img src="assets/photos/486550387.jpg" alt="Loyalty, Service, Family, Forever." loading="lazy">
+              <figcaption class="sg-cap">Loyalty, Service, Family, Forever.</figcaption>
+            </figure>
             <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/510537393.jpg" alt="K9 Partners Through the Years." loading="lazy">
-  <figcaption class="sg-cap">K9 Partners Through the Years.</figcaption>
-</figure>
-
+              <img src="assets/photos/510537393.jpg" alt="K9 Partners Through the Years." loading="lazy">
+              <figcaption class="sg-cap">K9 Partners Through the Years.</figcaption>
+            </figure>
             <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
               <img src="assets/photos/dloveK9.jpg" alt="The Badge & The Paw." loading="lazy">
               <figcaption class="sg-cap">The Badge & The Paw.</figcaption>
             </figure>
-
             <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
               <img src="assets/photos/dlovek9beginning.jpg" alt="A Lifetime of K9 Service." loading="lazy">
               <figcaption class="sg-cap">A Lifetime of K9 Service.</figcaption>
             </figure>
-
             <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
               <img src="assets/photos/K9CustomsDuo.jpg" alt="In sync, on duty, in trust." loading="lazy">
               <figcaption class="sg-cap">In sync, on duty, in trust.</figcaption>
             </figure>
-
             <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/115068542.jpg" alt="113K reasons to trust K9s." loading="lazy">
-  <figcaption class="sg-cap">113K reasons to trust K9s.</figcaption>
-</figure>
- 
+              <img src="assets/photos/115068542.jpg" alt="113K reasons to trust K9s." loading="lazy">
+              <figcaption class="sg-cap">113K reasons to trust K9s.</figcaption>
+            </figure>
             <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/120492968.jpg" alt="Two soldiers. One mission." loading="lazy">
-  <figcaption class="sg-cap">Two soldiers. One mission.</figcaption>
-</figure>
- 
-          <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/195665614.jpg" alt="Protecting power on the lawn." loading="lazy">
-  <figcaption class="sg-cap">Protecting power on the lawn.</figcaption>
-</figure>
-     
-          <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/279423943.jpg" alt="Proud to serve, side by side." loading="lazy">
-  <figcaption class="sg-cap">Proud to serve, side by side.</figcaption>
-</figure>
-      
-          <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/321043365.jpg" alt="Wash, rinse, serve." loading="lazy">
-  <figcaption class="sg-cap">Wash, rinse, serve.</figcaption>
-</figure>
-         
-          <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/334340318.jpg" alt="Calm before the call." loading="lazy">
-  <figcaption class="sg-cap">Calm before the call.</figcaption>
-</figure>
-        
+              <img src="assets/photos/120492968.jpg" alt="Two soldiers. One mission." loading="lazy">
+              <figcaption class="sg-cap">Two soldiers. One mission.</figcaption>
+            </figure>
             <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/450503025.jpg" alt="Roots of service run deep." loading="lazy">
-  <figcaption class="sg-cap">Roots of service run deep.</figcaption>
-</figure> 
-     
-          <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/508974118.jpg" alt="Package secured — K9 approved." loading="lazy">
-  <figcaption class="sg-cap">Package secured — K9 approved.</figcaption>
-</figure> 
-    
-          <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/568973144.jpg" alt="The nose never lies." loading="lazy">
-  <figcaption class="sg-cap">The nose never lies.</figcaption>
-</figure> 
-
-          <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/628255182.jpg" alt="Training for the real thing." loading="lazy">
-  <figcaption class="sg-cap">Training for the real thing.</figcaption>
-</figure> 
-  
-          <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/766138588.jpg" alt="Waiting for the signal." loading="lazy">
-  <figcaption class="sg-cap">Waiting for the signal.</figcaption>
-</figure> 
-       
-          <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/819413380.jpg" alt="No hiding from this nose." loading="lazy">
-  <figcaption class="sg-cap">No hiding from this nose.</figcaption>
-</figure> 
-       
-          <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-  <img src="assets/photos/902665314.jpg" alt="Where partners are made." loading="lazy">
-  <figcaption class="sg-cap">Where partners are made.</figcaption>
-</figure> 
+              <img src="assets/photos/195665614.jpg" alt="Protecting power on the lawn." loading="lazy">
+              <figcaption class="sg-cap">Protecting power on the lawn.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/279423943.jpg" alt="Proud to serve, side by side." loading="lazy">
+              <figcaption class="sg-cap">Proud to serve, side by side.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/321043365.jpg" alt="Wash, rinse, serve." loading="lazy">
+              <figcaption class="sg-cap">Wash, rinse, serve.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/334340318.jpg" alt="Calm before the call." loading="lazy">
+              <figcaption class="sg-cap">Calm before the call.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/450503025.jpg" alt="Roots of service run deep." loading="lazy">
+              <figcaption class="sg-cap">Roots of service run deep.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/508974118.jpg" alt="Package secured — K9 approved." loading="lazy">
+              <figcaption class="sg-cap">Package secured — K9 approved.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/568973144.jpg" alt="The nose never lies." loading="lazy">
+              <figcaption class="sg-cap">The nose never lies.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/628255182.jpg" alt="Training for the real thing." loading="lazy">
+              <figcaption class="sg-cap">Training for the real thing.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/766138588.jpg" alt="Waiting for the signal." loading="lazy">
+              <figcaption class="sg-cap">Waiting for the signal.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/819413380.jpg" alt="No hiding from this nose." loading="lazy">
+              <figcaption class="sg-cap">No hiding from this nose.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/902665314.jpg" alt="Where partners are made." loading="lazy">
+              <figcaption class="sg-cap">Where partners are made.</figcaption>
+            </figure>
           </div>
 
           <button class="sg-btn sg-next" aria-label="Next" onclick="sgScroll(1)">›</button>
         </div>
       </div>
 
-     <!-- Career Highlights -->
-<section class="career-highlights">
-  <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px;">📜 Career Highlights</h3>
+      <!-- Career Highlights -->
+      <section class="career-highlights">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px;">📜 Career Highlights</h3>
+        <div class="hl-grid">
+          <article class="hl-card">
+            <div class="hl-content">
+              <h4>Accomplishments & Awards</h4>
+              <ul>
+                <li>Distinguished/Expert firearms qualifications (1988–2026)</li>
+                <li>USAF Top Dog competitions: 1st (Base-wide, 1989); 2nd (USAFE, 1990)</li>
+                <li>USAF Performance & Achievement/Commendation medals (1992–1994)</li>
+                <li>Knights of Columbus “Blue Coat” Award (1994)</li>
+                <li>Good Conduct, Longevity & Outstanding Unit Awards (1988–1994)</li>
+                <li>U.S. Customs Millennium Tour of Duty (1999–2000)</li>
+                <li>Founding Member/Employee of DHS (2003)</li>
+                <li>CBP Blue Eagle Award (2014)</li>
+                <li>Unit Citation Awards ×5 (2008–2026)</li>
+              </ul>
+            </div>
+          </article>
 
-  <div class="hl-grid">
-    <!-- Accomplishments & Awards -->
-    <article class="hl-card">
-      <div class="hl-content">
-        <h4>Accomplishments & Awards</h4>
-        <ul>
-          <li>Distinguished/Expert firearms qualifications (1988–2026)</li>
-          <li>USAF Top Dog competitions: 1st (Base-wide, 1989); 2nd (USAFE, 1990)</li>
-          <li>USAF Performance & Achievement/Commendation medals (1992–1994)</li>
-          <li>Knights of Columbus “Blue Coat” Award (1994)</li>
-          <li>Good Conduct, Longevity & Outstanding Unit Awards (1988–1994)</li>
-          <li>U.S. Customs Millennium Tour of Duty (1999–2000)</li>
-          <li>Founding Member/Employee of DHS (2003)</li>
-          <li>CBP Blue Eagle Award (2014)</li>
-          <li>Unit Citation Awards ×5 (2008–2026)</li>
-        </ul>
-      </div>
-      </article>
-
-    <!-- Memberships -->
-    <article class="hl-card">
-      <div class="hl-content">
-        <h4>Memberships</h4>
-        <ul>
-          <li>Dogs Against Drugs & Crime; National L.E. K-9 Assoc. (2001)</li>
-          <li>American Legion (2008)</li>
-          <li>Veterans of Foreign Wars — Lifetime (since 2010)</li>
-          <li>Guns of Justice L.E. Motorcycle Club (2009)</li>
-          <li>German American Club (2025)</li>
-        </ul>
-      </div>
-      </article>
-  </div>
-</section>
+          <article class="hl-card">
+            <div class="hl-content">
+              <h4>Memberships</h4>
+              <ul>
+                <li>Dogs Against Drugs & Crime; National L.E. K-9 Assoc. (2001)</li>
+                <li>American Legion (2008)</li>
+                <li>Veterans of Foreign Wars — Lifetime (since 2010)</li>
+                <li>Guns of Justice L.E. Motorcycle Club (2009)</li>
+                <li>German American Club (2025)</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
       
- <!-- Career Timeline -->
-<section class="career-section">
-  <div class="career-timeline">
-    <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px;">🏆 Career Journey</h3>
+      <!-- Career Timeline -->
+      <section class="career-section">
+        <div class="career-timeline">
+          <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px;">🏆 Career Journey</h3>
 
-    <!-- USAF -->
-    <div class="timeline-item">
-      <!-- Left: Org logo -->
-      <img src="assets/airforce.png" alt="United States Air Force" class="timeline-photo" />
-      <!-- Middle: Text -->
-      <div class="timeline-content">
-        <h4>United States Air Force (USAF)</h4>
-        <p>1988 – 1994 · Built the foundation of service, discipline, and mission focus.</p>
-      </div>
-      <!-- Right: Badge -->
-      <img src="assets/security-police.png" alt="USAF Badge" class="timeline-badge" />
-    </div>
+          <div class="timeline-item">
+            <img src="assets/airforce.png" alt="United States Air Force" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>United States Air Force (USAF)</h4>
+              <p>1988 – 1994 · Built the foundation of service, discipline, and mission focus.</p>
+            </div>
+            <img src="assets/security-police.png" alt="USAF Badge" class="timeline-badge" />
+          </div>
 
-    <!-- U.S. Secret Service -->
-    <div class="timeline-item">
-      <img src="assets/secret-servicelogo.png" alt="U.S. Secret Service" class="timeline-photo" />
-      <div class="timeline-content">
-        <h4>U.S. Secret Service</h4>
-        <p>1995 – 1997 · Protection & investigations in support of national leadership.</p>
-      </div>
-      <img src="assets/secret-service.jpg" alt="Secret Service Badge" class="timeline-badge" />
-    </div>
+          <div class="timeline-item">
+            <img src="assets/secret-servicelogo.png" alt="U.S. Secret Service" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>U.S. Secret Service</h4>
+              <p>1995 – 1997 · Protection & investigations in support of national leadership.</p>
+            </div>
+            <img src="assets/secret-service.jpg" alt="Secret Service Badge" class="timeline-badge" />
+          </div>
 
-    <!-- U.S. Customs Service -->
-    <div class="timeline-item">
-      <img src="assets/us-customs-service.png" alt="U.S. Customs Service" class="timeline-photo" />
-      <div class="timeline-content">
-        <h4>U.S. Customs Service</h4>
-        <p>1997 – 2003 · Trade enforcement and border security—the legacy agency that later integrated into DHS.</p>
-      </div>
-      <img src="assets/us-customs-badge.png" alt="U.S. Customs Service Badge" class="timeline-badge" />
-    </div>
+          <div class="timeline-item">
+            <img src="assets/us-customs-service.png" alt="U.S. Customs Service" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>U.S. Customs Service</h4>
+              <p>1997 – 2003 · Trade enforcement and border security—the legacy agency that later integrated into DHS.</p>
+            </div>
+            <img src="assets/us-customs-badge.png" alt="U.S. Customs Service Badge" class="timeline-badge" />
+          </div>
 
-    <!-- U.S. Customs and Border Protection (CBP) -->
-    <div class="timeline-item">
-      <img src="assets/cbplogo.png" alt="U.S. Customs and Border Protection" class="timeline-photo" />
-      <div class="timeline-content">
-        <h4>U.S. Customs and Border Protection (CBP)</h4>
-        <p>2003 – 2026 · Frontline homeland security—K9 operations, leadership, and mentorship.</p>
-      </div>
-      <img src="assets/cbp.png" alt="CBP Badge" class="timeline-badge" />
-    </div>
-
-  </div>
-</section>
+          <div class="timeline-item">
+            <img src="assets/cbplogo.png" alt="U.S. Customs and Border Protection" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>U.S. Customs and Border Protection (CBP)</h4>
+              <p>2003 – 2026 · Frontline homeland security—K9 operations, leadership, and mentorship.</p>
+            </div>
+            <img src="assets/cbp.png" alt="CBP Badge" class="timeline-badge" />
+          </div>
+        </div>
+      </section>
       
-     <!-- RSVP --> 
+      <!-- RSVP --> 
       <div class="rsvp-section">
         <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px; font-size:2rem;">Please RSVP</h3>
-        <form class="rsvp-form" id="rsvpForm">
+        <form class="rsvp-form" id="rsvpForm" autocomplete="on" novalidate>
+          <!-- Honeypot -->
+          <input type="text" id="company" name="company" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
           <div class="form-group">
             <label for="name">Full Name *</label>
             <input type="text" id="name" name="name" required/>
@@ -295,12 +286,10 @@
             <textarea id="message" name="message" rows="4" placeholder="Share a favorite memory, congratulations, or well wishes..."></textarea>
           </div>
 
-          <button type="submit" class="submit-btn">Submit RSVP</button>
+          <button type="submit" class="submit-btn" id="submitBtn">Submit RSVP</button>
+          <div class="success-message" id="successMessage">Thank you for your RSVP! We look forward to celebrating together.</div>
+          <div class="error-message" id="errorMessage">We couldn't save your RSVP online, but it is saved locally. Try refreshing later to sync.</div>
         </form>
-
-        <div class="success-message" id="successMessage">
-          Thank you for your RSVP! We look forward to celebrating together.
-        </div>
       </div>
     </div>
   </div>
@@ -315,7 +304,12 @@
       </div>
 
       <div class="rsvp-summary">
-        <h3 style="margin-bottom:20px;">📊 RSVP Summary</h3>
+        <h3 style="margin-bottom:10px;">📊 RSVP Summary</h3>
+        <div class="tools-row">
+          <button class="btn" onclick="refreshFromServer()">🔄 Refresh</button>
+          <button class="btn" onclick="exportCSV()">⬇️ Export CSV</button>
+          <button class="btn" onclick="copyShare()">🔗 Copy Share Link</button>
+        </div>
         <div class="summary-stats" id="summaryStats">
           <div class="stat-box">
             <span class="stat-number" id="totalResponses">0</span>
@@ -352,73 +346,229 @@
   </div>
 
   <script>
-    // In-memory RSVP list (persists only while the page is open)
-    let rsvpList = [];
+    /************** CONFIG **************/
+    // Set your published Apps Script Web App URL here
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_lkqKUOWTrA81DcvtRCtU8U3WGt2ggIhzMEYDG_XhT_00UJvzL7cL01LW3wXhh79r8Q/exec';
 
-    // Show/hide guest number field based on attendance selection
-    const attendingSelect = document.getElementById('attending');
+    // Optional event datetime for countdown & calendar links:
+    // Use ISO like "2025-10-18T18:00:00-07:00"
+    const EVENT_START_ISO = ''; // e.g., "2025-10-18T18:00:00-07:00"
+    const EVENT_END_ISO   = ''; // e.g., "2025-10-18T21:00:00-07:00"
+    const EVENT_TITLE     = 'Officer Darren "D-Love" Johnson Retirement Celebration';
+    const EVENT_LOCATION  = ''; // e.g., "Ramstein Officers\' Club, Kaiserslautern, Germany"
+    const EVENT_DETAILS   = 'Join us to celebrate a legacy of service.';
+
+    /************** STATE **************/
+    let rsvpList = []; // unified in-memory list
+    const LS_KEY = 'rsvps_cache';
+
+    /************** UTIL **************/
+    const byId = (id)=>document.getElementById(id);
+    const show = (el)=>{el.classList.remove('hidden');};
+    const hide = (el)=>{el.classList.add('hidden');};
+
+    function toICS(startISO, endISO, title, desc, location){
+      const dtStart = startISO.replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+      const dtEnd   = (endISO||startISO).replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+      const uid = 'retirement-' + Date.now() + '@jaydoo';
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Jaydoo//Retirement//EN',
+        'BEGIN:VEVENT',
+        'UID:'+uid,
+        'DTSTAMP:' + dtStart,
+        'DTSTART:' + dtStart,
+        'DTEND:' + dtEnd,
+        'SUMMARY:' + (title||'Event'),
+        'DESCRIPTION:' + (desc||''),
+        'LOCATION:' + (location||''),
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+      return ics;
+    }
+
+    function downloadICS(){
+      if(!EVENT_START_ISO) return;
+      const blob = new Blob([toICS(EVENT_START_ISO, EVENT_END_ISO, EVENT_TITLE, EVENT_DETAILS, EVENT_LOCATION)], {type:'text/calendar'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'retirement-event.ics';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function googleCalendarLink(){
+      if(!EVENT_START_ISO) return '';
+      const fmt = (iso)=>iso.replace(/[-:]/g,'').split('.')[0];
+      const dates = fmt(EVENT_START_ISO) + '/' + fmt(EVENT_END_ISO||EVENT_START_ISO);
+      const params = new URLSearchParams({
+        action:'TEMPLATE',
+        text: EVENT_TITLE,
+        dates,
+        details: EVENT_DETAILS,
+        location: EVENT_LOCATION
+      });
+      return 'https://calendar.google.com/calendar/render?' + params.toString();
+    }
+
+    /************** NAV **************/
+    function showPage(e, pageName) {
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      byId(pageName + '-page').classList.add('active');
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      if (e && e.target) e.target.classList.add('active');
+      if (pageName === 'rsvp-list') updateRSVPListPage();
+      location.hash = pageName; // deep link
+    }
+
+    /************** FORM BEHAVIOR **************/
+    const attendingSelect = byId('attending');
     if (attendingSelect) {
       attendingSelect.addEventListener('change', function () {
-        const guestGroup = document.getElementById('guestGroup');
+        const guestGroup = byId('guestGroup');
         guestGroup.style.display = (this.value === 'yes') ? 'block' : 'none';
       });
     }
 
-    // Handle form submission
-    const rsvpForm = document.getElementById('rsvpForm');
+    const rsvpForm = byId('rsvpForm');
     if (rsvpForm) {
-      rsvpForm.addEventListener('submit', function (e) {
+      rsvpForm.addEventListener('submit', async function (e) {
         e.preventDefault();
+
+        // spam honeypot
+        if (byId('company').value) return;
+
         const formData = new FormData(this);
+        // quick validation
+        if(!formData.get('name') || !formData.get('email') || !formData.get('attending')){
+          alert('Please complete required fields.');
+          return;
+        }
+
         const rsvp = {
-          name: formData.get('name'),
-          email: formData.get('email'),
-          organization: formData.get('organization'),
+          name: formData.get('name').trim(),
+          email: formData.get('email').trim(),
+          organization: (formData.get('organization')||'').trim(),
           attending: formData.get('attending'),
           guests: formData.get('guests') || '1',
-          message: formData.get('message'),
+          message: (formData.get('message')||'').trim(),
           timestamp: new Date().toISOString()
         };
 
+        // optimistic local add
         rsvpList.push(rsvp);
-
-        const successMessage = document.getElementById('successMessage');
-        successMessage.style.display = 'block';
-
-        this.reset();
-        document.getElementById('guestGroup').style.display = 'none';
-
+        saveCache();
         updateRSVPListPage();
 
-        setTimeout(() => {
-          successMessage.style.display = 'none';
-        }, 5000);
+        // show success
+        const successMessage = byId('successMessage');
+        const errorMessage = byId('errorMessage');
+        successMessage.style.display = 'block';
+        errorMessage.style.display = 'none';
+
+        // calendar helpers after submit
+        if (EVENT_START_ISO){
+          const calBox = byId('calendarLinks');
+          calBox.innerHTML = `
+            📅 Add to calendar:
+            <a href="${googleCalendarLink()}" target="_blank" rel="noopener">Google Calendar</a>
+            &middot;
+            <a href="#" id="dlIcsLink">Download .ics</a>
+          `;
+          show(calBox);
+          const dl = byId('dlIcsLink');
+          if (dl) dl.addEventListener('click', (ev)=>{ev.preventDefault(); downloadICS();});
+        }
+
+        // reset form
+        this.reset();
+        byId('guestGroup').style.display = 'none';
+        setTimeout(() => { successMessage.style.display = 'none'; }, 5000);
+
+        // try to send to Google
+        try {
+          await sendToGoogle(rsvp);
+        } catch (err) {
+          // network error – already cached
+          console.warn('RSVP sync failed:', err);
+          errorMessage.style.display = 'block';
+          setTimeout(() => { errorMessage.style.display = 'none'; }, 7000);
+        }
       });
     }
 
-    function showPage(e, pageName) {
-      // Hide all pages
-      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-      // Show selected page
-      document.getElementById(pageName + '-page').classList.add('active');
-      // Update nav buttons
-      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-      if (e && e.target) e.target.classList.add('active');
-      // Update RSVP list if showing that page
-      if (pageName === 'rsvp-list') updateRSVPListPage();
+    /************** GOOGLE APPS SCRIPT I/O **************/
+    async function sendToGoogle(record){
+      // Adjust payload keys if your Apps Script expects different names.
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ action:'create', data: record })
+      });
+
+      // Some Apps Scripts are published no-cors; this will be "opaque".
+      // We'll treat non-OK as best-effort success unless it errors.
+      if (!res.ok && res.type !== 'opaque') {
+        throw new Error('Non-OK response');
+      }
+      return true;
     }
 
+    async function loadFromGoogle(){
+      // Expecting your Apps Script to support GET ?action=list and return JSON array of RSVPs
+      const url = APPS_SCRIPT_URL + '?action=list';
+      const res = await fetch(url, {method:'GET'});
+      if (!res.ok) throw new Error('Failed to load RSVPs');
+      const data = await res.json();
+      if (!Array.isArray(data)) throw new Error('Invalid RSVP payload');
+      return data;
+    }
+
+    async function refreshFromServer(){
+      try {
+        const serverData = await loadFromGoogle();
+        // merge (prefer server; simple replace is fine if server is source-of-truth)
+        rsvpList = serverData;
+        saveCache();
+        updateRSVPListPage();
+        alert('RSVPs refreshed.');
+      } catch (e){
+        console.warn(e);
+        alert('Could not refresh from server.');
+      }
+    }
+
+    /************** CACHE **************/
+    function saveCache(){
+      try{ localStorage.setItem(LS_KEY, JSON.stringify(rsvpList)); }catch(e){}
+    }
+    function loadCache(){
+      try{
+        const raw = localStorage.getItem(LS_KEY);
+        if (raw){
+          const arr = JSON.parse(raw);
+          if (Array.isArray(arr)) rsvpList = arr;
+        }
+      }catch(e){}
+    }
+
+    /************** LIST/UI **************/
     function updateRSVPListPage() {
       const attending = rsvpList.filter(r => r.attending === 'yes');
       const notAttending = rsvpList.filter(r => r.attending === 'no');
-      const totalGuests = attending.reduce((sum, r) => sum + parseInt(r.guests, 10), 0);
+      const totalGuests = attending.reduce((sum, r) => sum + parseInt(r.guests||'1', 10), 0);
 
-      document.getElementById('totalResponses').textContent = rsvpList.length;
-      document.getElementById('attendingCount').textContent = attending.length;
-      document.getElementById('totalGuests').textContent = totalGuests;
-      document.getElementById('notAttendingCount').textContent = notAttending.length;
+      byId('totalResponses').textContent = rsvpList.length;
+      byId('attendingCount').textContent = attending.length;
+      byId('totalGuests').textContent = totalGuests;
+      byId('notAttendingCount').textContent = notAttending.length;
 
-      const detailsList = document.getElementById('rsvpDetailsList');
+      const detailsList = byId('rsvpDetailsList');
       if (rsvpList.length === 0) {
         detailsList.innerHTML = '<p style="text-align:center; color:#666; padding:40px;">No RSVPs received yet.</p>';
         return;
@@ -436,76 +586,97 @@
         return `
           <div class="rsvp-item ${statusClass}">
             <div class="rsvp-header">
-              <span class="rsvp-name">${rsvp.name}</span>
+              <span class="rsvp-name">${escapeHTML(rsvp.name)}</span>
               <span class="rsvp-status ${statusBadgeClass}">${statusText}</span>
             </div>
             <div style="margin-bottom:10px;">
-              <strong>Email:</strong> ${rsvp.email}<br/>
-              <strong>Organization:</strong> ${rsvp.organization || 'Not specified'}
-              ${rsvp.attending === 'yes' ? `<br/><strong>Party Size:</strong> ${rsvp.guests} ${rsvp.guests === '1' ? 'person' : 'people'}` : ''}
+              <strong>Email:</strong> ${escapeHTML(rsvp.email)}<br/>
+              <strong>Organization:</strong> ${escapeHTML(rsvp.organization || 'Not specified')}
+              ${rsvp.attending === 'yes' ? `<br/><strong>Party Size:</strong> ${escapeHTML(rsvp.guests || '1')} ${(rsvp.guests === '1' || !rsvp.guests) ? 'person' : 'people'}` : ''}
             </div>
-            ${rsvp.message ? `<div style="background: rgba(255,255,255,0.7); padding:10px; border-radius:5px; font-style:italic;">"${rsvp.message}"</div>` : ''}
+            ${rsvp.message ? `<div style="background: rgba(255,255,255,0.7); padding:10px; border-radius:5px; font-style:italic;">"${escapeHTML(rsvp.message)}"</div>` : ''}
             <div style="margin-top:10px; font-size:.9rem; color:#666;">Submitted: ${time}</div>
           </div>
         `;
       }).join('');
     }
 
-    // Modal view for gallery
+    function escapeHTML(str=''){
+      return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+
+    function exportCSV(){
+      if (!rsvpList.length){ alert('No data to export.'); return; }
+      const headers = ['name','email','organization','attending','guests','message','timestamp'];
+      const rows = [headers.join(',')].concat(
+        rsvpList.map(r => headers.map(h => {
+          const val = (r[h] ?? '').toString().replace(/"/g,'""');
+          return `"${val}"`;
+        }).join(','))
+      );
+      const blob = new Blob([rows.join('\r\n')], {type:'text/csv'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'rsvps.csv';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function copyShare(){
+      const url = location.origin + location.pathname + '#rsvp-list';
+      navigator.clipboard.writeText(url).then(()=>alert('Share link copied!'));
+    }
+
+    /************** MODAL & GALLERY **************/
     function openModal(src) {
-      const modal = document.getElementById('photoModal');
-      const modalImg = document.getElementById('modalImage');
+      const modal = byId('photoModal');
+      const modalImg = byId('modalImage');
       modalImg.src = src;
       modal.style.display = 'block';
     }
-    function closeModal() {
-      document.getElementById('photoModal').style.display = 'none';
+    function closeModal() { byId('photoModal').style.display = 'none'; }
+
+    function sgScroll(dir){
+      const track = byId('sgTrack');
+      if(!track) return;
+      const cardWidth = track.querySelector('.sg-item')?.getBoundingClientRect().width || 300;
+      track.scrollBy({ left: dir * (cardWidth + 12), behavior: 'smooth' });
     }
 
-    // --- Scrollable Gallery Logic ---
-    document.addEventListener('DOMContentLoaded', function() {
+    /************** INIT **************/
+    document.addEventListener('DOMContentLoaded', async function() {
+      // Deep link routing
+      if (location.hash === '#rsvp-list') showPage({target:document.querySelectorAll('.nav-btn')[1]}, 'rsvp-list');
+
+      // Gallery drag-to-scroll
       const galleryTrack = document.querySelector('.sg-track');
       if (galleryTrack) {
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
+        let isDown = false, startX, scrollLeft;
         galleryTrack.addEventListener('mousedown', (e) => {
-          isDown = true;
-          galleryTrack.classList.add('active');
-          startX = e.pageX - galleryTrack.offsetLeft;
-          scrollLeft = galleryTrack.scrollLeft;
+          isDown = true; galleryTrack.classList.add('active');
+          startX = e.pageX - galleryTrack.offsetLeft; scrollLeft = galleryTrack.scrollLeft;
         });
-        galleryTrack.addEventListener('mouseleave', () => {
-          isDown = false;
-          galleryTrack.classList.remove('active');
-        });
-        galleryTrack.addEventListener('mouseup', () => {
-          isDown = false;
-          galleryTrack.classList.remove('active');
+        ['mouseleave','mouseup'].forEach(ev=>{
+          galleryTrack.addEventListener(ev, () => { isDown = false; galleryTrack.classList.remove('active'); });
         });
         galleryTrack.addEventListener('mousemove', (e) => {
           if (!isDown) return;
           e.preventDefault();
           const x = e.pageX - galleryTrack.offsetLeft;
-          const walk = (x - startX) * 2; // scroll speed
-          galleryTrack.scrollLeft = scrollLeft - walk;
+          galleryTrack.scrollLeft = scrollLeft - (x - startX) * 2;
         });
       }
 
-      // --- Hero two-image rotator ---
-      const heroImg = document.getElementById('retireePhoto');
-      const heroPhotos = [
-        'assets/dlovek9beginning.jpg', // beginning stage
-        'assets/dloveK9.jpg'           // later stage (current)
-      ];
-      // Preload images
+      // Hero two-image rotator
+      const heroImg = byId('retireePhoto');
+      const heroPhotos = ['assets/dlovek9beginning.jpg','assets/dloveK9.jpg'];
       heroPhotos.forEach(src => { const i = new Image(); i.src = src; });
-
       let heroIndex = 0;
       setInterval(() => {
         heroIndex = (heroIndex + 1) % heroPhotos.length;
-        // fade out, swap, fade in
         if (heroImg) {
           heroImg.style.opacity = 0;
           setTimeout(() => {
@@ -513,19 +684,68 @@
             heroImg.onload = () => { heroImg.style.opacity = 1; };
           }, 200);
         }
-      }, 4000); // change every 4s
+      }, 4000);
+
+      // Load cached RSVPs first
+      loadCache();
+      updateRSVPListPage();
+
+      // Then try server
+      try {
+        const server = await loadFromGoogle();
+        if (Array.isArray(server) && server.length){
+          rsvpList = server;
+          saveCache();
+          updateRSVPListPage();
+        }
+      } catch (e){ /* ignore if offline */ }
+
+      // Event info & countdown
+      hydrateEventInfo();
     });
 
-    // Scroll gallery button control
-    function sgScroll(dir){
-      const track = document.getElementById('sgTrack');
-      if(!track) return;
-      const cardWidth = track.querySelector('.sg-item')?.getBoundingClientRect().width || 300;
-      track.scrollBy({ left: dir * (cardWidth + 12), behavior: 'smooth' });
+    function hydrateEventInfo(){
+      if (EVENT_TITLE) document.title = EVENT_TITLE;
+      if (EVENT_LOCATION) byId('eventLocText').textContent = EVENT_LOCATION;
+
+      if (EVENT_START_ISO){
+        const start = new Date(EVENT_START_ISO);
+        const end = EVENT_END_ISO ? new Date(EVENT_END_ISO) : null;
+        byId('eventDateText').textContent = start.toLocaleDateString();
+        byId('eventTimeText').textContent = start.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+
+        // Countdown
+        const countdownEl = byId('countdown');
+        const tick = ()=>{
+          const now = new Date();
+          const diff = start - now;
+          if (diff <= 0){
+            countdownEl.textContent = 'Event is happening now or has passed.';
+            return;
+          }
+          const days = Math.floor(diff/86400000);
+          const hours = Math.floor((diff%86400000)/3600000);
+          const mins = Math.floor((diff%3600000)/60000);
+          countdownEl.textContent = `⏳ ${days}d ${hours}h ${mins}m until the celebration`;
+        };
+        tick(); show(countdownEl);
+        setInterval(tick, 60000);
+
+        // Calendar links block (also shown after submit)
+        const cal = byId('calendarLinks');
+        cal.innerHTML = `📅 Add to calendar:
+          <a href="${googleCalendarLink()}" target="_blank" rel="noopener">Google Calendar</a>
+          &middot;
+          <a href="#" id="dlIcsLinkTop">Download .ics</a>`;
+        show(cal);
+        const dlTop = byId('dlIcsLinkTop');
+        if (dlTop) dlTop.addEventListener('click', (ev)=>{ev.preventDefault(); downloadICS();});
+      }
     }
   </script>
-<footer style="background: var(--patriot-blue); color: var(--patriot-white); text-align: center; padding: 15px 0; font-size: 0.9rem; margin-top: 40px;">
-  &copy; 2025 Jaydoo Ramstein Productions. All rights reserved.
-</footer>
+
+  <footer style="background: var(--patriot-blue); color: var(--patriot-white); text-align: center; padding: 15px 0; font-size: 0.9rem; margin-top: 40px;">
+    &copy; 2025 Jaydoo Ramstein Productions. All rights reserved.
+  </footer>
 </body>
 </html>
