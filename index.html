@@ -351,11 +351,10 @@
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_lkqKUOWTrA81DcvtRCtU8U3WGt2ggIhzMEYDG_XhT_00UJvzL7cL01LW3wXhh79r8Q/exec';
 
     // Optional event datetime for countdown & calendar links:
-    // Use ISO like "2025-10-18T18:00:00-07:00"
     const EVENT_START_ISO = ''; // e.g., "2025-10-18T18:00:00-07:00"
     const EVENT_END_ISO   = ''; // e.g., "2025-10-18T21:00:00-07:00"
     const EVENT_TITLE     = 'Officer Darren "D-Love" Johnson Retirement Celebration';
-    const EVENT_LOCATION  = ''; // e.g., "Ramstein Officers\' Club, Kaiserslautern, Germany"
+    const EVENT_LOCATION  = '';
     const EVENT_DETAILS   = 'Join us to celebrate a legacy of service.';
 
     /************** STATE **************/
@@ -417,13 +416,31 @@
     }
 
     /************** NAV **************/
-    function showPage(e, pageName) {
+    async function showPage(e, pageName) {
+      // hide/show pages
       document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
       byId(pageName + '-page').classList.add('active');
+
+      // nav button state
       document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
       if (e && e.target) e.target.classList.add('active');
-      if (pageName === 'rsvp-list') updateRSVPListPage();
-      location.hash = pageName; // deep link
+
+      // deep link
+      location.hash = pageName;
+
+      // if opening RSVP list, pull live data first, then render
+      if (pageName === 'rsvp-list') {
+        try {
+          const server = await loadFromGoogle();
+          if (Array.isArray(server)) {
+            rsvpList = server;
+            saveCache();
+          }
+        } catch (_) {
+          // ignore network errors; cache will still show
+        }
+        updateRSVPListPage();
+      }
     }
 
     /************** FORM BEHAVIOR **************/
@@ -444,7 +461,6 @@
         if (byId('company').value) return;
 
         const formData = new FormData(this);
-        // quick validation
         if(!formData.get('name') || !formData.get('email') || !formData.get('attending')){
           alert('Please complete required fields.');
           return;
@@ -494,7 +510,6 @@
         try {
           await sendToGoogle(rsvp);
         } catch (err) {
-          // network error – already cached
           console.warn('RSVP sync failed:', err);
           errorMessage.style.display = 'block';
           setTimeout(() => { errorMessage.style.display = 'none'; }, 7000);
@@ -504,15 +519,12 @@
 
     /************** GOOGLE APPS SCRIPT I/O **************/
     async function sendToGoogle(record){
-      // Adjust payload keys if your Apps Script expects different names.
       const res = await fetch(APPS_SCRIPT_URL, {
         method:'POST',
-        headers:{'Content-Type':'application/json'},
+        mode:'cors',
+        headers:{ 'Content-Type':'application/json' },
         body: JSON.stringify({ action:'create', data: record })
       });
-
-      // Some Apps Scripts are published no-cors; this will be "opaque".
-      // We'll treat non-OK as best-effort success unless it errors.
       if (!res.ok && res.type !== 'opaque') {
         throw new Error('Non-OK response');
       }
@@ -520,9 +532,7 @@
     }
 
     async function loadFromGoogle(){
-      // Expecting your Apps Script to support GET ?action=list and return JSON array of RSVPs
-      const url = APPS_SCRIPT_URL + '?action=list';
-      const res = await fetch(url, {method:'GET'});
+      const res = await fetch(APPS_SCRIPT_URL, { method:'GET', mode:'cors' });
       if (!res.ok) throw new Error('Failed to load RSVPs');
       const data = await res.json();
       if (!Array.isArray(data)) throw new Error('Invalid RSVP payload');
@@ -532,7 +542,6 @@
     async function refreshFromServer(){
       try {
         const serverData = await loadFromGoogle();
-        // merge (prefer server; simple replace is fine if server is source-of-truth)
         rsvpList = serverData;
         saveCache();
         updateRSVPListPage();
@@ -578,30 +587,30 @@
       const sorted = [...rsvpList].sort((a, b) => order[a.attending] - order[b.attending]);
 
       detailsList.innerHTML = sorted.map(rsvp => {
-  const statusClass = rsvp.attending === 'yes' ? 'attending' : rsvp.attending === 'no' ? 'not-attending' : 'maybe';
-  const statusText = rsvp.attending === 'yes' ? 'Attending' : rsvp.attending === 'no' ? 'Cannot Attend' : 'Maybe';
-  const statusBadgeClass = rsvp.attending === 'yes' ? 'status-yes' : rsvp.attending === 'no' ? 'status-no' : 'status-maybe';
-  const time = new Date(rsvp.timestamp).toLocaleString();
+        const statusClass = rsvp.attending === 'yes' ? 'attending' : rsvp.attending === 'no' ? 'not-attending' : 'maybe';
+        const statusText = rsvp.attending === 'yes' ? 'Attending' : rsvp.attending === 'no' ? 'Cannot Attend' : 'Maybe';
+        const statusBadgeClass = rsvp.attending === 'yes' ? 'status-yes' : rsvp.attending === 'no' ? 'status-no' : 'status-maybe';
+        const time = new Date(rsvp.timestamp).toLocaleString();
 
-  return `
-    <div class="rsvp-item ${statusClass}">
-      <div class="rsvp-header">
-        <span class="rsvp-name">${escapeHTML(rsvp.name)}</span>
-        <span class="rsvp-status ${statusBadgeClass}">${statusText}</span>
-      </div>
-      <div style="margin-bottom:10px;">
-        <strong>Organization:</strong> ${escapeHTML(rsvp.organization || 'Not specified')}
-        ${rsvp.attending === 'yes'
-          ? `<br/><strong>Party Size:</strong> ${escapeHTML(rsvp.guests || '1')} ${(rsvp.guests === '1' || !rsvp.guests) ? 'person' : 'people'}`
-          : ''}
-      </div>
-      ${rsvp.message
-        ? `<div style="background: rgba(255,255,255,0.7); padding:10px; border-radius:5px; font-style:italic;">"${escapeHTML(rsvp.message)}"</div>`
-        : ''}
-      <div style="margin-top:10px; font-size:.9rem; color:#666;">Submitted: ${time}</div>
-    </div>
-  `;
-}).join('');
+        return `
+          <div class="rsvp-item ${statusClass}">
+            <div class="rsvp-header">
+              <span class="rsvp-name">${escapeHTML(rsvp.name)}</span>
+              <span class="rsvp-status ${statusBadgeClass}">${statusText}</span>
+            </div>
+            <div style="margin-bottom:10px;">
+              <strong>Organization:</strong> ${escapeHTML(rsvp.organization || 'Not specified')}
+              ${rsvp.attending === 'yes'
+                ? `<br/><strong>Party Size:</strong> ${escapeHTML(rsvp.guests || '1')} ${(rsvp.guests === '1' || !rsvp.guests) ? 'person' : 'people'}`
+                : ''}
+            </div>
+            ${rsvp.message
+              ? `<div style="background: rgba(255,255,255,0.7); padding:10px; border-radius:5px; font-style:italic;">"${escapeHTML(rsvp.message)}"</div>`
+              : ''}
+            <div style="margin-top:10px; font-size:.9rem; color:#666;">Submitted: ${time}</div>
+          </div>
+        `;
+      }).join('');
     }
 
     function escapeHTML(str=''){
@@ -717,7 +726,6 @@
         byId('eventDateText').textContent = start.toLocaleDateString();
         byId('eventTimeText').textContent = start.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
 
-        // Countdown
         const countdownEl = byId('countdown');
         const tick = ()=>{
           const now = new Date();
@@ -734,7 +742,6 @@
         tick(); show(countdownEl);
         setInterval(tick, 60000);
 
-        // Calendar links block (also shown after submit)
         const cal = byId('calendarLinks');
         cal.innerHTML = `📅 Add to calendar:
           <a href="${googleCalendarLink()}" target="_blank" rel="noopener">Google Calendar</a>
@@ -746,6 +753,437 @@
       }
     }
   </script>
+
+  <footer style="background: var(--patriot-blue); color: var(--patriot-white); text-align: center; padding: 15px 0; font-size: 0.9rem; margin-top: 40px;">
+    &copy; 2025 Jaydoo Ramstein Productions. All rights reserved.
+  </footer>
+</body>
+</html>
+If you want to also remove emails from the CSV export (so nothing public ever includes them), I can tweak that too—just say the word.
+
+
+
+
+
+
+
+You said:
+would it be better to create a js file in github because these html with js are getting longer?
+
+
+ChatGPT said:
+Yes — 100%.
+
+Right now, your HTML is doing double duty — it’s the markup and it’s carrying all your JavaScript logic. That’s fine for small demos, but for something like your RSVP app, moving the JS into its own file has big advantages:
+
+Why it’s better
+Cleaner HTML – Your HTML file becomes readable again because it’s just structure + styling hooks.
+
+Easier editing – You can work on your JS separately without scrolling through a giant HTML page.
+
+Version control friendly – GitHub will track changes in script.js cleanly instead of mixing HTML + JS diffs.
+
+Performance – Browsers can cache your JS file so it loads faster after the first visit.
+
+Easier collaboration – If someone else edits the site, they can work on HTML and you can work on JS without stepping on each other’s toes.
+
+How to move your JS to GitHub
+Create a new file in your GitHub repo called script.js.
+
+Move everything inside your <script> ... </script> tags into that script.js file.
+
+In your HTML, delete the old <script> block and add this just before </body>:
+
+html
+Copy
+Edit
+<script src="script.js"></script>
+Commit + push the changes to GitHub.
+
+If you’re using Vercel or GitHub Pages, redeploy as usual.
+
+Extra tip
+Since you’re also likely to want to separate your CSS, you can do the same:
+
+Create style.css
+
+Link it in <head>:
+
+html
+Copy
+Edit
+<link rel="stylesheet" href="style.css">
+If you want, I can split your current HTML into 3 files for you right now:
+
+index.html (just markup)
+
+style.css (styling)
+
+script.js (all the RSVP logic)
+
+That way you can just drop them into GitHub, and they’ll work exactly like your current single-file version.
+
+Do you want me to do that split for you?
+
+
+
+
+
+
+
+You said:
+ok created can you provide me with just the html then provide me with just the js please
+
+
+ChatGPT said:
+awesome—here you go. drop these two files in the same folder (along with your style.css and assets/), and you’re set.
+
+index.html (just the HTML)
+html
+Copy
+Edit
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Celebrating the Retirement of Officer Darren Johnson</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* tiny helpers; keep or move to style.css if you want */
+    .hidden{display:none!important;}
+    .tools-row{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 20px}
+    .tools-row .btn{padding:.55rem .9rem;border:1px solid #d0d5dd;border-radius:8px;background:#fff;cursor:pointer}
+    .tools-row .btn:disabled{opacity:.5;cursor:not-allowed}
+    .success-message{display:none;margin-top:10px;background:#e6fff2;color:#166534;padding:12px;border-radius:8px;border:1px solid #a7f3d0}
+    .error-message{display:none;margin-top:10px;background:#fff1f2;color:#9f1239;padding:12px;border-radius:8px;border:1px solid #fecdd3}
+    .status-yes{background:#dcfce7;color:#065f46;padding:2px 8px;border-radius:999px}
+    .status-no{background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:999px}
+    .status-maybe{background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:999px}
+    .countdown{margin-top:14px;font-weight:600;color:#1e3c72}
+    .small-note{font-size:.85rem;color:#666;margin-top:6px}
+  </style>
+</head>
+<body>
+  <!-- Navigation buttons -->
+  <div class="nav-buttons">
+    <button class="nav-btn active" onclick="showPage(event,'main')">Main Page</button>
+    <button class="nav-btn" onclick="showPage(event,'rsvp-list')">RSVP List</button>
+  </div>
+
+  <!-- MAIN PAGE -->
+  <div id="main-page" class="page active">
+    <div class="container">
+      <div class="header">
+        <h1>Celebrating the Retirement of Officer <span style="display:block">Darren "D-Love" Johnson</span></h1>
+        <h2>K9 Extraordinaire – A Legacy of Service</h2>
+
+        <img
+          id="retireePhoto"
+          src="assets/dlovek9beginning.jpg"
+          alt="Retiree with K9"
+          class="retiree-photo"
+          style="opacity:1; transition: opacity .6s ease"
+        >
+
+        <div class="badge">Retirement Celebration</div>
+        <p style="margin-top: 20px; font-size: 1.1rem; color: #555;">
+          Join us as we honor an exceptional career of protecting our nation and serving our communities.
+        </p>
+      </div>
+
+      <div class="content-grid">
+        <div class="card event-details">
+          <h3>🎉 Celebration Details</h3>
+          <div class="event-info" id="eventInfoBox">
+            <strong>📅 Date:</strong> <span id="eventDateText">[Date TBD]</span><br/>
+            <strong>⏰ Time:</strong> <span id="eventTimeText">[Time TBD]</span><br/>
+            <strong>📍 Location:</strong> <span id="eventLocText">[Venue TBD]</span><br/>
+            <strong>👔 Attire:</strong> Business Casual
+          </div>
+          <div id="countdown" class="countdown hidden"></div>
+          <div id="calendarLinks" class="small-note hidden"></div>
+          <p style="margin-top: 20px;">
+            Come celebrate the remarkable achievements and lasting impact of a distinguished career in government service.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>🏆 A Legacy of Service</h3>
+          <p>
+            With 37 years and 10 months of dedicated government service — including a long tenure with U.S. Customs and Border Protection under the Department of Homeland Security — Darren Johnson has shown unwavering commitment to protecting the nation. His leadership and dedication have left a lasting impact on colleagues, communities, and the mission of securing America’s borders.
+          </p>
+        </div>
+      </div>
+
+      <!-- Scrolling Gallery (Carousel) -->
+      <div class="photo-gallery" id="photo-reel">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:16px;">📷 Photo Reel</h3>
+        <div class="scroll-gallery">
+          <button class="sg-btn sg-prev" aria-label="Previous" onclick="sgScroll(-1)">‹</button>
+          <div class="sg-track" id="sgTrack">
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/486550387.jpg" alt="Loyalty, Service, Family, Forever." loading="lazy">
+              <figcaption class="sg-cap">Loyalty, Service, Family, Forever.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/510537393.jpg" alt="K9 Partners Through the Years." loading="lazy">
+              <figcaption class="sg-cap">K9 Partners Through the Years.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/dloveK9.jpg" alt="The Badge & The Paw." loading="lazy">
+              <figcaption class="sg-cap">The Badge & The Paw.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/dlovek9beginning.jpg" alt="A Lifetime of K9 Service." loading="lazy">
+              <figcaption class="sg-cap">A Lifetime of K9 Service.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/K9CustomsDuo.jpg" alt="In sync, on duty, in trust." loading="lazy">
+              <figcaption class="sg-cap">In sync, on duty, in trust.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/115068542.jpg" alt="113K reasons to trust K9s." loading="lazy">
+              <figcaption class="sg-cap">113K reasons to trust K9s.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/120492968.jpg" alt="Two soldiers. One mission." loading="lazy">
+              <figcaption class="sg-cap">Two soldiers. One mission.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/195665614.jpg" alt="Protecting power on the lawn." loading="lazy">
+              <figcaption class="sg-cap">Protecting power on the lawn.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/279423943.jpg" alt="Proud to serve, side by side." loading="lazy">
+              <figcaption class="sg-cap">Proud to serve, side by side.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/321043365.jpg" alt="Wash, rinse, serve." loading="lazy">
+              <figcaption class="sg-cap">Wash, rinse, serve.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/334340318.jpg" alt="Calm before the call." loading="lazy">
+              <figcaption class="sg-cap">Calm before the call.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/450503025.jpg" alt="Roots of service run deep." loading="lazy">
+              <figcaption class="sg-cap">Roots of service run deep.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/508974118.jpg" alt="Package secured — K9 approved." loading="lazy">
+              <figcaption class="sg-cap">Package secured — K9 approved.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/568973144.jpg" alt="The nose never lies." loading="lazy">
+              <figcaption class="sg-cap">The nose never lies.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/628255182.jpg" alt="Training for the real thing." loading="lazy">
+              <figcaption class="sg-cap">Training for the real thing.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/766138588.jpg" alt="Waiting for the signal." loading="lazy">
+              <figcaption class="sg-cap">Waiting for the signal.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/819413380.jpg" alt="No hiding from this nose." loading="lazy">
+              <figcaption class="sg-cap">No hiding from this nose.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/902665314.jpg" alt="Where partners are made." loading="lazy">
+              <figcaption class="sg-cap">Where partners are made.</figcaption>
+            </figure>
+          </div>
+          <button class="sg-btn sg-next" aria-label="Next" onclick="sgScroll(1)">›</button>
+        </div>
+      </div>
+
+      <!-- Career Highlights -->
+      <section class="career-highlights">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px;">📜 Career Highlights</h3>
+        <div class="hl-grid">
+          <article class="hl-card">
+            <div class="hl-content">
+              <h4>Accomplishments & Awards</h4>
+              <ul>
+                <li>Distinguished/Expert firearms qualifications (1988–2026)</li>
+                <li>USAF Top Dog competitions: 1st (Base-wide, 1989); 2nd (USAFE, 1990)</li>
+                <li>USAF Performance & Achievement/Commendation medals (1992–1994)</li>
+                <li>Knights of Columbus “Blue Coat” Award (1994)</li>
+                <li>Good Conduct, Longevity & Outstanding Unit Awards (1988–1994)</li>
+                <li>U.S. Customs Millennium Tour of Duty (1999–2000)</li>
+                <li>Founding Member/Employee of DHS (2003)</li>
+                <li>CBP Blue Eagle Award (2014)</li>
+                <li>Unit Citation Awards ×5 (2008–2026)</li>
+              </ul>
+            </div>
+          </article>
+          <article class="hl-card">
+            <div class="hl-content">
+              <h4>Memberships</h4>
+              <ul>
+                <li>Dogs Against Drugs & Crime; National L.E. K-9 Assoc. (2001)</li>
+                <li>American Legion (2008)</li>
+                <li>Veterans of Foreign Wars — Lifetime (since 2010)</li>
+                <li>Guns of Justice L.E. Motorcycle Club (2009)</li>
+                <li>German American Club (2025)</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Career Timeline -->
+      <section class="career-section">
+        <div class="career-timeline">
+          <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px;">🏆 Career Journey</h3>
+
+          <div class="timeline-item">
+            <img src="assets/airforce.png" alt="United States Air Force" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>United States Air Force (USAF)</h4>
+              <p>1988 – 1994 · Built the foundation of service, discipline, and mission focus.</p>
+            </div>
+            <img src="assets/security-police.png" alt="USAF Badge" class="timeline-badge" />
+          </div>
+
+          <div class="timeline-item">
+            <img src="assets/secret-servicelogo.png" alt="U.S. Secret Service" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>U.S. Secret Service</h4>
+              <p>1995 – 1997 · Protection & investigations in support of national leadership.</p>
+            </div>
+            <img src="assets/secret-service.jpg" alt="Secret Service Badge" class="timeline-badge" />
+          </div>
+
+          <div class="timeline-item">
+            <img src="assets/us-customs-service.png" alt="U.S. Customs Service" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>U.S. Customs Service</h4>
+              <p>1997 – 2003 · Trade enforcement and border security—the legacy agency that later integrated into DHS.</p>
+            </div>
+            <img src="assets/us-customs-badge.png" alt="U.S. Customs Service Badge" class="timeline-badge" />
+          </div>
+
+          <div class="timeline-item">
+            <img src="assets/cbplogo.png" alt="U.S. Customs and Border Protection" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>U.S. Customs and Border Protection (CBP)</h4>
+              <p>2003 – 2026 · Frontline homeland security—K9 operations, leadership, and mentorship.</p>
+            </div>
+            <img src="assets/cbp.png" alt="CBP Badge" class="timeline-badge" />
+          </div>
+        </div>
+      </section>
+
+      <!-- RSVP -->
+      <div class="rsvp-section">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px; font-size:2rem;">Please RSVP</h3>
+        <form class="rsvp-form" id="rsvpForm" autocomplete="on" novalidate>
+          <input type="text" id="company" name="company" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="organization">Department/Organization</label>
+            <input type="text" id="organization" name="organization" placeholder="e.g., DHS, CBP, TSA, etc."/>
+          </div>
+
+          <div class="form-group">
+            <label for="attending">Will you be attending? *</label>
+            <select id="attending" name="attending" required>
+              <option value="">Please select</option>
+              <option value="yes">Yes, I'll be there!</option>
+              <option value="no">Unfortunately, I cannot attend</option>
+              <option value="maybe">Not sure yet</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="guestGroup" style="display:none;">
+            <label for="guests">Number of guests (including yourself)</label>
+            <select id="guests" name="guests">
+              <option value="1">Just me</option>
+              <option value="2">2 people</option>
+              <option value="3">3 people</option>
+              <option value="4">4 people</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Share a memory or message (optional)</label>
+            <textarea id="message" name="message" rows="4" placeholder="Share a favorite memory, congratulations, or well wishes..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">Submit RSVP</button>
+          <div class="success-message" id="successMessage">Thank you for your RSVP! We look forward to celebrating together.</div>
+          <div class="error-message" id="errorMessage">We couldn't save your RSVP online, but it is saved locally. Try refreshing later to sync.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- RSVP LIST PAGE -->
+  <div id="rsvp-list-page" class="page">
+    <div class="container">
+      <div class="header">
+        <h1>RSVP Responses</h1>
+        <h2>Retirement Celebration</h2>
+        <div class="badge">Response Tracker</div>
+      </div>
+
+      <div class="rsvp-summary">
+        <h3 style="margin-bottom:10px;">📊 RSVP Summary</h3>
+        <div class="tools-row">
+          <button class="btn" onclick="refreshFromServer()">🔄 Refresh</button>
+          <button class="btn" onclick="exportCSV()">⬇️ Export CSV</button>
+          <button class="btn" onclick="copyShare()">🔗 Copy Share Link</button>
+        </div>
+        <div class="summary-stats" id="summaryStats">
+          <div class="stat-box">
+            <span class="stat-number" id="totalResponses">0</span>
+            <span>Total Responses</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="attendingCount">0</span>
+            <span>Attending</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="totalGuests">0</span>
+            <span>Total Guests</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="notAttendingCount">0</span>
+            <span>Can't Attend</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rsvp-list">
+        <h3 style="color:#1e3c72; margin-bottom:20px;">📋 All Responses</h3>
+        <div id="rsvpDetailsList">
+          <p style="text-align:center; color:#666; padding:40px;">No RSVPs received yet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for enlarged photos -->
+  <div id="photoModal" class="modal" onclick="closeModal()">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage" alt="Enlarged"/>
+  </div>
+
+  <!-- your JS bundle -->
+  <script src="script.js"></script>
 
   <footer style="background: var(--patriot-blue); color: var(--patriot-white); text-align: center; padding: 15px 0; font-size: 0.9rem; margin-top: 40px;">
     &copy; 2025 Jaydoo Ramstein Productions. All rights reserved.
