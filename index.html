@@ -578,27 +578,30 @@
       const sorted = [...rsvpList].sort((a, b) => order[a.attending] - order[b.attending]);
 
       detailsList.innerHTML = sorted.map(rsvp => {
-        const statusClass = rsvp.attending === 'yes' ? 'attending' : rsvp.attending === 'no' ? 'not-attending' : 'maybe';
-        const statusText = rsvp.attending === 'yes' ? 'Attending' : rsvp.attending === 'no' ? 'Cannot Attend' : 'Maybe';
-        const statusBadgeClass = rsvp.attending === 'yes' ? 'status-yes' : rsvp.attending === 'no' ? 'status-no' : 'status-maybe';
-        const time = new Date(rsvp.timestamp).toLocaleString();
+  const statusClass = rsvp.attending === 'yes' ? 'attending' : rsvp.attending === 'no' ? 'not-attending' : 'maybe';
+  const statusText = rsvp.attending === 'yes' ? 'Attending' : rsvp.attending === 'no' ? 'Cannot Attend' : 'Maybe';
+  const statusBadgeClass = rsvp.attending === 'yes' ? 'status-yes' : rsvp.attending === 'no' ? 'status-no' : 'status-maybe';
+  const time = new Date(rsvp.timestamp).toLocaleString();
 
-        return `
-          <div class="rsvp-item ${statusClass}">
-            <div class="rsvp-header">
-              <span class="rsvp-name">${escapeHTML(rsvp.name)}</span>
-              <span class="rsvp-status ${statusBadgeClass}">${statusText}</span>
-            </div>
-            <div style="margin-bottom:10px;">
-              <strong>Email:</strong> ${escapeHTML(rsvp.email)}<br/>
-              <strong>Organization:</strong> ${escapeHTML(rsvp.organization || 'Not specified')}
-              ${rsvp.attending === 'yes' ? `<br/><strong>Party Size:</strong> ${escapeHTML(rsvp.guests || '1')} ${(rsvp.guests === '1' || !rsvp.guests) ? 'person' : 'people'}` : ''}
-            </div>
-            ${rsvp.message ? `<div style="background: rgba(255,255,255,0.7); padding:10px; border-radius:5px; font-style:italic;">"${escapeHTML(rsvp.message)}"</div>` : ''}
-            <div style="margin-top:10px; font-size:.9rem; color:#666;">Submitted: ${time}</div>
-          </div>
-        `;
-      }).join('');
+  return `
+    <div class="rsvp-item ${statusClass}">
+      <div class="rsvp-header">
+        <span class="rsvp-name">${escapeHTML(rsvp.name)}</span>
+        <span class="rsvp-status ${statusBadgeClass}">${statusText}</span>
+      </div>
+      <div style="margin-bottom:10px;">
+        <strong>Organization:</strong> ${escapeHTML(rsvp.organization || 'Not specified')}
+        ${rsvp.attending === 'yes'
+          ? `<br/><strong>Party Size:</strong> ${escapeHTML(rsvp.guests || '1')} ${(rsvp.guests === '1' || !rsvp.guests) ? 'person' : 'people'}`
+          : ''}
+      </div>
+      ${rsvp.message
+        ? `<div style="background: rgba(255,255,255,0.7); padding:10px; border-radius:5px; font-style:italic;">"${escapeHTML(rsvp.message)}"</div>`
+        : ''}
+      <div style="margin-top:10px; font-size:.9rem; color:#666;">Submitted: ${time}</div>
+    </div>
+  `;
+}).join('');
     }
 
     function escapeHTML(str=''){
