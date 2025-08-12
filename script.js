@@ -118,11 +118,14 @@ if (rsvpForm) {
 /************** GOOGLE APPS SCRIPT I/O **************/
 async function sendToGoogle(record){
   const res = await fetch(APPS_SCRIPT_URL, {
-    method:'POST', mode:'cors',
-    headers:{ 'Content-Type':'application/json' },
-    body: JSON.stringify({ action:'create', data: record })
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify({ action: 'create', data: record }) // no headers
   });
-  if (!res.ok && res.type !== 'opaque') throw new Error('Non-OK response');
+  const text = await res.text();
+  if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}: ${text}`);
+  const data = JSON.parse(text);
+  if (!data.ok) throw new Error(data.error || 'Unknown server error');
   return true;
 }
 
