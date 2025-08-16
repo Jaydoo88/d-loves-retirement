@@ -524,3 +524,5 @@ body {
   object-fit: cover;
   display: block;
 }
+/* Optional: subtle green accent for golf items */
+.rsvp-item.golf { border-left-color: #1f7a1f; }
