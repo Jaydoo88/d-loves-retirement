@@ -524,5 +524,6 @@ body {
   object-fit: cover;
   display: block;
 }
-/* Optional: subtle green accent for golf items */
+
+/* --------- Golf Outing (optional accent) --------- */
 .rsvp-item.golf { border-left-color: #1f7a1f; }
