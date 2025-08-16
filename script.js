@@ -12,7 +12,7 @@ const GOLF_START_ISO = ''; // e.g., "2025-10-19T08:00:00-07:00"
 const GOLF_END_ISO   = '';
 const GOLF_TITLE     = 'D-Love Retirement Golf Outing';
 const GOLF_COURSE    = ''; // e.g., "Falcon Dunes Golf Course, 15100 W Northern Ave, Waddell, AZ"
-const GOLF_FORMAT    = 'Scramble'; // or Stroke Play, Best Ball, etc.
+const GOLF_FORMAT    = 'Scramble';
 const GOLF_DETAILS   = 'Join us for a round to celebrate Darren!';
 
 /************** STATE **************/
@@ -24,8 +24,8 @@ const GOLF_LS_KEY = 'golf_cache';
 
 /************** UTIL **************/
 const byId = (id)=>document.getElementById(id);
-const show = (el)=>{el.classList.remove('hidden');};
-const hide = (el)=>{el.classList.add('hidden');};
+const show = (el)=>{el?.classList.remove('hidden');};
+const hide = (el)=>{el?.classList.add('hidden');};
 
 function toICS(startISO, endISO, title, desc, location){
   const dtStart = startISO.replace(/[-:]/g,'').replace(/\.\d{3}/,'');
@@ -59,7 +59,7 @@ function googleCalendarLink(){
 /************** NAV **************/
 async function showPage(e, pageName) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  byId(pageName + '-page').classList.add('active');
+  byId(pageName + '-page')?.classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   if (e && e.target) e.target.classList.add('active');
   location.hash = pageName;
@@ -81,11 +81,12 @@ async function showPage(e, pageName) {
   }
 }
 
-/************** FORM BEHAVIOR **************/
+/************** FORM BEHAVIOR (RSVP) **************/
 const attendingSelect = byId('attending');
 if (attendingSelect) {
   attendingSelect.addEventListener('change', function () {
-    byId('guestGroup').style.display = (this.value === 'yes') ? 'block' : 'none';
+    const gg = byId('guestGroup');
+    if (gg) gg.style.display = (this.value === 'yes') ? 'block' : 'none';
   });
 }
 
@@ -93,7 +94,7 @@ const rsvpForm = byId('rsvpForm');
 if (rsvpForm) {
   rsvpForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    if (byId('company').value) return; // honeypot
+    if (byId('company')?.value) return; // honeypot
 
     const fd = new FormData(this);
     if(!fd.get('name') || !fd.get('email') || !fd.get('attending')){
@@ -101,8 +102,8 @@ if (rsvpForm) {
     }
 
     const rsvp = {
-      name: fd.get('name').trim(),
-      email: fd.get('email').trim(),
+      name: (fd.get('name')||'').trim(),
+      email: (fd.get('email')||'').trim(),
       organization: (fd.get('organization')||'').trim(),
       attending: fd.get('attending'),
       guests: fd.get('guests') || '1',
@@ -113,33 +114,35 @@ if (rsvpForm) {
     rsvpList.push(rsvp); saveCache(); updateRSVPListPage();
 
     const success = byId('successMessage'); const err = byId('errorMessage');
-    success.style.display = 'block'; err.style.display = 'none';
+    if (success && err) { success.style.display = 'block'; err.style.display = 'none'; }
 
     if (EVENT_START_ISO){
       const calBox = byId('calendarLinks');
-      calBox.innerHTML = `📅 Add to calendar:
-        <a href="${googleCalendarLink()}" target="_blank" rel="noopener">Google Calendar</a>
-        &middot; <a href="#" id="dlIcsLink">Download .ics</a>`;
-      show(calBox);
-      byId('dlIcsLink')?.addEventListener('click', (ev)=>{ev.preventDefault(); downloadICS();});
+      if (calBox){
+        calBox.innerHTML = `📅 Add to calendar:
+          <a href="${googleCalendarLink()}" target="_blank" rel="noopener">Google Calendar</a>
+          &middot; <a href="#" id="dlIcsLink">Download .ics</a>`;
+        show(calBox);
+        byId('dlIcsLink')?.addEventListener('click', (ev)=>{ev.preventDefault(); downloadICS();});
+      }
     }
 
-    this.reset(); byId('guestGroup').style.display = 'none';
-    setTimeout(() => { success.style.display = 'none'; }, 5000);
+    this.reset(); const gg = byId('guestGroup'); if (gg) gg.style.display = 'none';
+    setTimeout(() => { if (success) success.style.display = 'none'; }, 5000);
 
     try { await sendToGoogle(rsvp); }
     catch (e) { console.warn('RSVP sync failed:', e);
-      err.style.display = 'block'; setTimeout(()=>{err.style.display='none';},7000);
+      if (err){ err.style.display = 'block'; setTimeout(()=>{err.style.display='none';},7000); }
     }
   });
 }
 
-/************** GOLF FORM **************/
+/************** FORM BEHAVIOR (GOLF) **************/
 const golfForm = byId('golfForm');
 if (golfForm) {
   golfForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    if (byId('golfCompany').value) return; // honeypot
+    if (byId('golfCompany')?.value) return; // honeypot
 
     const fd = new FormData(this);
     const name  = (fd.get('name')||'').trim();
@@ -148,7 +151,7 @@ if (golfForm) {
 
     const record = {
       name,
-      email,
+      email, // stored, but NOT displayed publicly
       handicap: fd.get('handicap') || '',
       party_size: fd.get('party_size') || '1',
       pairing_pref: (fd.get('pairing_pref')||'').trim(),
@@ -157,38 +160,38 @@ if (golfForm) {
       type: 'golf'
     };
 
-    // optimistic update
     golfList.push(record); saveGolfCache(); updateGolfPage();
 
     const success = byId('golfSuccessMessage'); const err = byId('golfErrorMessage');
-    success.style.display = 'block'; err.style.display = 'none';
+    if (success && err) { success.style.display = 'block'; err.style.display = 'none'; }
     this.reset();
 
-    // calendar links/countdown visible if golf date set
     if (GOLF_START_ISO) {
       const links = byId('golfCalendarLinks');
-      links.innerHTML = `📅 Add to calendar:
-        <a href="${googleCalendarLinkGolf()}" target="_blank" rel="noopener">Google Calendar</a>
-        &middot; <a href="#" id="golfDlIcsLink">Download .ics</a>`;
-      links.style.display = 'block';
-      byId('golfDlIcsLink')?.addEventListener('click', (ev)=>{ev.preventDefault(); downloadGolfICS();});
+      if (links){
+        links.innerHTML = `📅 Add to calendar:
+          <a href="${googleCalendarLinkGolf()}" target="_blank" rel="noopener">Google Calendar</a>
+          &middot; <a href="#" id="golfDlIcsLink">Download .ics</a>`;
+        links.style.display = 'block';
+        byId('golfDlIcsLink')?.addEventListener('click', (ev)=>{ev.preventDefault(); downloadGolfICS();});
+      }
     }
 
-    setTimeout(()=>{ success.style.display = 'none'; }, 5000);
+    setTimeout(()=>{ if (success) success.style.display = 'none'; }, 5000);
 
     try { await sendGolfToGoogle(record); }
     catch (e) { console.warn('Golf sync failed:', e);
-      err.style.display = 'block'; setTimeout(()=>{err.style.display='none';},7000);
+      if (err){ err.style.display = 'block'; setTimeout(()=>{err.style.display='none';},7000); }
     }
   });
 }
 
-/************** GOOGLE APPS SCRIPT I/O **************/
+/************** GOOGLE APPS SCRIPT I/O (RSVP) **************/
 async function sendToGoogle(record){
   const res = await fetch(APPS_SCRIPT_URL, {
     method: 'POST',
     mode: 'cors',
-    body: JSON.stringify({ action: 'create', data: record }) // no headers
+    body: JSON.stringify({ action: 'create', data: record })
   });
   const text = await res.text();
   if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}: ${text}`);
@@ -221,7 +224,7 @@ async function refreshFromServer(){
   }
 }
 
-/************** GOLF: GOOGLE APPS SCRIPT I/O **************/
+/************** GOOGLE APPS SCRIPT I/O (GOLF) **************/
 async function sendGolfToGoogle(record){
   const res = await fetch(APPS_SCRIPT_URL, {
     method: 'POST',
@@ -236,16 +239,19 @@ async function sendGolfToGoogle(record){
 }
 
 async function loadGolfFromGoogle(){
-  // Prefer a type filter if your backend supports it:
   const url = APPS_SCRIPT_URL.includes('?') ? APPS_SCRIPT_URL + '&type=golf' : APPS_SCRIPT_URL + '?type=golf';
   const res = await fetch(url, { method:'GET', mode:'cors' });
   if (!res.ok) throw new Error('Failed to load golf sign-ups');
   const data = await res.json();
 
-  // Accept either an array or a composite payload { rsvps:[], golf:[] }
-  if (Array.isArray(data)) return data;
-  if (data && Array.isArray(data.golf)) return data.golf;
-  throw new Error('Invalid golf payload');
+  // Normalize to an array
+  let arr = [];
+  if (Array.isArray(data)) arr = data;
+  else if (data && Array.isArray(data.golf)) arr = data.golf;
+
+  // Keep only true golf rows (prevents phantom/test items)
+  const isGolf = (r)=> r && (r.type === 'golf' || 'handicap' in r || 'party_size' in r);
+  return (arr || []).filter(isGolf);
 }
 
 async function refreshGolfFromServer(){
@@ -272,7 +278,11 @@ function saveGolfCache(){ try{ localStorage.setItem(GOLF_LS_KEY, JSON.stringify(
 function loadGolfCache(){
   try{
     const raw = localStorage.getItem(GOLF_LS_KEY);
-    if (raw){ const arr = JSON.parse(raw); if (Array.isArray(arr)) golfList = arr; }
+    if (!raw) return;
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr)) return;
+    const isGolf = (r)=> r && (r.type === 'golf' || 'handicap' in r || 'party_size' in r);
+    golfList = arr.filter(isGolf);
   }catch(e){}
 }
 
@@ -282,13 +292,17 @@ function updateRSVPListPage() {
   const notAttending = rsvpList.filter(r => r.attending === 'no');
   const totalGuests = attending.reduce((s, r) => s + parseInt(r.guests||'1', 10), 0);
 
-  byId('totalResponses').textContent = rsvpList.length;
-  byId('attendingCount').textContent = attending.length;
-  byId('totalGuests').textContent = totalGuests;
-  byId('notAttendingCount').textContent = notAttending.length;
+  byId('totalResponses')?.replaceChildren(document.createTextNode(rsvpList.length));
+  byId('attendingCount')?.replaceChildren(document.createTextNode(attending.length));
+  byId('totalGuests')?.replaceChildren(document.createTextNode(totalGuests));
+  byId('notAttendingCount')?.replaceChildren(document.createTextNode(notAttending.length));
 
   const details = byId('rsvpDetailsList');
-  if (!rsvpList.length) { details.innerHTML = '<p style="text-align:center; color:#666; padding:40px;">No RSVPs received yet.</p>'; return; }
+  if (!details) return;
+  if (!rsvpList.length) {
+    details.innerHTML = '<p style="text-align:center; color:#666; padding:40px;">No RSVPs received yet.</p>';
+    return;
+  }
 
   const order = { yes: 0, maybe: 1, no: 2 };
   const sorted = [...rsvpList].sort((a,b)=> order[a.attending]-order[b.attending]);
@@ -323,8 +337,8 @@ function exportCSV(){
   const headers = ['name','email','organization','attending','guests','message','timestamp'];
   const rows = [headers.join(',')].concat(
     rsvpList.map(r => headers.map(h => {
-      const val = (r[h] ?? '').toString().replace(/"/g,'"');
-      return `"${val.replace(/"/g,'""')}"`;
+      const val = (r[h] ?? '').toString().replace(/"/g,'""');
+      return `"${val}"`;
     }).join(','))
   );
   const blob = new Blob([rows.join('\r\n')], {type:'text/csv'});
@@ -341,25 +355,23 @@ function copyShare(){
 
 /************** LIST/UI (GOLF) **************/
 function updateGolfPage(){
-  // Summary
   const totalSignups = golfList.length;
   const totalPlayers = golfList.reduce((s, r)=> s + parseInt(r.party_size||'1',10), 0);
   const foursomes = Math.floor(totalPlayers / 4);
   const remainder = totalPlayers % 4;
 
-  byId('golfTotalSignups').textContent = totalSignups;
-  byId('golfTotalPlayers').textContent = totalPlayers;
-  byId('golfFoursomes').textContent = foursomes;
-  byId('golfRemainder').textContent = remainder;
+  byId('golfTotalSignups')?.replaceChildren(document.createTextNode(totalSignups));
+  byId('golfTotalPlayers')?.replaceChildren(document.createTextNode(totalPlayers));
+  byId('golfFoursomes')?.replaceChildren(document.createTextNode(foursomes));
+  byId('golfRemainder')?.replaceChildren(document.createTextNode(remainder));
 
-  // List
   const details = byId('golfDetailsList');
+  if (!details) return;
   if (!golfList.length){
     details.innerHTML = '<p style="text-align:center; color:#666; padding:40px;">No golf sign-ups yet.</p>';
     return;
   }
 
-  // latest first
   const sorted = [...golfList].sort((a,b)=> new Date(b.timestamp) - new Date(a.timestamp));
   details.innerHTML = sorted.map(r => {
     const time = new Date(r.timestamp).toLocaleString();
@@ -370,12 +382,11 @@ function updateGolfPage(){
           <span class="rsvp-status status-yes">Registered</span>
         </div>
         <div style="margin-bottom:10px;">
-          <strong>Email:</strong> ${escapeHTML(r.email)}<br/>
           <strong>Handicap:</strong> ${escapeHTML(r.handicap || '—')}<br/>
           <strong>Party Size:</strong> ${escapeHTML(r.party_size || '1')}
         </div>
-        ${(r.pairing_pref) ? `<div style="background: rgba(255,255,255,0.7); padding:10px; border-radius:5px;"><strong>Pairing Pref:</strong> ${escapeHTML(r.pairing_pref)}</div>` : ''}
-        ${(r.notes) ? `<div style="background: rgba(255,255,255,0.7); padding:10px; border-radius:5px; margin-top:6px;"><strong>Notes:</strong> ${escapeHTML(r.notes)}</div>` : ''}
+        ${r.pairing_pref ? `<div style="background: rgba(255,255,255,0.7); padding:10px; border-radius:5px;"><strong>Pairing Pref:</strong> ${escapeHTML(r.pairing_pref)}</div>` : ''}
+        ${r.notes ? `<div style="background: rgba(255,255,255,0.7); padding:10px; border-radius:5px; margin-top:6px;"><strong>Notes:</strong> ${escapeHTML(r.notes)}</div>` : ''}
         <div style="margin-top:10px; font-size:.9rem; color:#666;">Submitted: ${time}</div>
       </div>`;
   }).join('');
@@ -386,8 +397,8 @@ function exportGolfCSV(){
   const headers = ['name','email','handicap','party_size','pairing_pref','notes','timestamp'];
   const rows = [headers.join(',')].concat(
     golfList.map(r => headers.map(h => {
-      const val = (r[h] ?? '').toString().replace(/"/g,'"');
-      return `"${val.replace(/"/g,'""')}"`;
+      const val = (r[h] ?? '').toString().replace(/"/g,'""');
+      return `"${val}"`;
     }).join(','))
   );
   const blob = new Blob([rows.join('\r\n')], {type:'text/csv'});
@@ -405,9 +416,10 @@ function copyGolfShare(){
 /************** MODAL & GALLERY **************/
 function openModal(src) {
   const modal = byId('photoModal'); const modalImg = byId('modalImage');
+  if (!modal || !modalImg) return;
   modalImg.src = src; modal.style.display = 'block';
 }
-function closeModal() { byId('photoModal').style.display = 'none'; }
+function closeModal() { const m=byId('photoModal'); if (m) m.style.display = 'none'; }
 
 function sgScroll(dir){
   const track = byId('sgTrack'); if(!track) return;
@@ -480,7 +492,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   loadCache();
   loadGolfCache();
   updateRSVPListPage();
-  updateGolfPage(); // safe even if golf page is hidden
+  updateGolfPage();
 
   try {
     const server = await loadFromGoogle();
@@ -502,45 +514,45 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 function hydrateEventInfo(){
   if (EVENT_TITLE) document.title = EVENT_TITLE;
-  if (EVENT_LOCATION) byId('eventLocText').textContent = EVENT_LOCATION;
+  if (EVENT_LOCATION) byId('eventLocText')?.replaceChildren(document.createTextNode(EVENT_LOCATION));
 
   if (EVENT_START_ISO){
     const start = new Date(EVENT_START_ISO);
-    const end = EVENT_END_ISO ? new Date(EVENT_END_ISO) : null;
-    byId('eventDateText').textContent = start.toLocaleDateString();
-    byId('eventTimeText').textContent = start.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    byId('eventDateText')?.replaceChildren(document.createTextNode(start.toLocaleDateString()));
+    byId('eventTimeText')?.replaceChildren(document.createTextNode(start.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})));
 
     const countdownEl = byId('countdown');
-    const tick = ()=>{
-      const now = new Date(); const diff = start - now;
-      if (diff <= 0){ countdownEl.textContent = 'Event is happening now or has passed.'; return; }
-      const days = Math.floor(diff/86400000);
-      const hours = Math.floor((diff%86400000)/3600000);
-      const mins = Math.floor((diff%3600000)/60000);
-      countdownEl.textContent = `⏳ ${days}d ${hours}h ${mins}m until the celebration`;
-    };
-    tick(); show(countdownEl); setInterval(tick, 60000);
+    if (countdownEl){
+      const tick = ()=>{
+        const now = new Date(); const diff = start - now;
+        if (diff <= 0){ countdownEl.textContent = 'Event is happening now or has passed.'; return; }
+        const days = Math.floor(diff/86400000);
+        const hours = Math.floor((diff%86400000)/3600000);
+        const mins = Math.floor((diff%3600000)/60000);
+        countdownEl.textContent = `⏳ ${days}d ${hours}h ${mins}m until the celebration`;
+      };
+      tick(); show(countdownEl); setInterval(tick, 60000);
+    }
 
     const cal = byId('calendarLinks');
-    cal.innerHTML = `📅 Add to calendar:
-      <a href="${googleCalendarLink()}" target="_blank" rel="noopener">Google Calendar</a>
-      &middot; <a href="#" id="dlIcsLinkTop">Download .ics</a>`;
-    show(cal);
-    byId('dlIcsLinkTop')?.addEventListener('click', (ev)=>{ev.preventDefault(); downloadICS();});
+    if (cal){
+      cal.innerHTML = `📅 Add to calendar:
+        <a href="${googleCalendarLink()}" target="_blank" rel="noopener">Google Calendar</a>
+        &middot; <a href="#" id="dlIcsLinkTop">Download .ics</a>`;
+      show(cal);
+      byId('dlIcsLinkTop')?.addEventListener('click', (ev)=>{ev.preventDefault(); downloadICS();});
+    }
   }
 }
 
 function hydrateGolfInfo(){
-  if (GOLF_COURSE) byId('golfCourseText').textContent = GOLF_COURSE;
-  if (GOLF_FORMAT) byId('golfFormatText').textContent = GOLF_FORMAT;
+  if (GOLF_COURSE) byId('golfCourseText')?.replaceChildren(document.createTextNode(GOLF_COURSE));
+  if (GOLF_FORMAT) byId('golfFormatText')?.replaceChildren(document.createTextNode(GOLF_FORMAT));
 
   if (GOLF_START_ISO){
     const start = new Date(GOLF_START_ISO);
-    const end = GOLF_END_ISO ? new Date(GOLF_END_ISO) : null;
-    const dateSpan = byId('golfDateText');
-    const timeSpan = byId('golfTimeText');
-    if (dateSpan) dateSpan.textContent = start.toLocaleDateString();
-    if (timeSpan) timeSpan.textContent = start.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    byId('golfDateText')?.replaceChildren(document.createTextNode(start.toLocaleDateString()));
+    byId('golfTimeText')?.replaceChildren(document.createTextNode(start.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})));
 
     const countdownEl = byId('golfCountdown');
     if (countdownEl){
@@ -564,4 +576,11 @@ function hydrateGolfInfo(){
       byId('golfDlIcsLinkTop')?.addEventListener('click', (ev)=>{ev.preventDefault(); downloadGolfICS();});
     }
   }
+}
+
+/************** OPTIONAL: Quick cache reset **************/
+function clearLocalCaches(){
+  try { localStorage.removeItem(LS_KEY); } catch(e){}
+  try { localStorage.removeItem(GOLF_LS_KEY); } catch(e){}
+  alert('Local caches cleared. Refresh the page.');
 }
