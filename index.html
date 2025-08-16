@@ -23,9 +23,10 @@
 <body>
   <!-- Navigation buttons -->
   <div class="nav-buttons">
-    <button class="nav-btn active" onclick="showPage(event,'main')">Main Page</button>
-    <button class="nav-btn" onclick="showPage(event,'rsvp-list')">RSVP List</button>
-  </div>
+  <button class="nav-btn active" onclick="showPage(event,'main')">Main Page</button>
+  <button class="nav-btn" onclick="showPage(event,'rsvp-list')">RSVP List</button>
+  <button class="nav-btn" onclick="showPage(event,'golf')">Golf Outing</button>
+</div>
 
   <!-- MAIN PAGE -->
   <div id="main-page" class="page active">
@@ -332,6 +333,120 @@
     </div>
   </div>
 
+ <!-- GOLF OUTING PAGE -->
+<div id="golf-page" class="page">
+  <div class="container">
+    <div class="header">
+      <h1>Golf Outing Sign-Up</h1>
+      <h2>Celebrate with a round of golf ⛳</h2>
+      <div class="badge">Golf Registration</div>
+      <div class="small-note" id="golfCalendarLinks" style="display:none;"></div>
+      <div id="golfCountdown" class="countdown hidden"></div>
+    </div>
+
+    <!-- Optional details card -->
+    <div class="card">
+      <h3>⛳ Outing Details</h3>
+      <p>
+        <strong>Course:</strong> <span id="golfCourseText">[Course TBD]</span><br/>
+        <strong>Date:</strong> <span id="golfDateText">[Date TBD]</span><br/>
+        <strong>Time:</strong> <span id="golfTimeText">[Time TBD]</span><br/>
+        <strong>Format:</strong> <span id="golfFormatText">[Format TBD]</span>
+      </p>
+      <p class="small-note" style="margin-top:.5rem">We’ll group into foursomes and follow up by email with pairings.</p>
+    </div>
+
+    <!-- Sign-up form -->
+    <div class="rsvp-section">
+      <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px; font-size:1.6rem;">Sign Up to Golf</h3>
+      <form class="rsvp-form" id="golfForm" autocomplete="on" novalidate>
+        <input type="text" id="golfCompany" name="company" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="form-group">
+          <label for="golfName">Full Name *</label>
+          <input type="text" id="golfName" name="name" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="golfEmail">Email Address *</label>
+          <input type="email" id="golfEmail" name="email" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="golfHandicap">Handicap / Skill Level</label>
+          <select id="golfHandicap" name="handicap">
+            <option value="">Prefer not to say</option>
+            <option value="0-9">0–9</option>
+            <option value="10-19">10–19</option>
+            <option value="20-29">20–29</option>
+            <option value="30+">30+</option>
+            <option value="Beginner">Beginner</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="golfPartySize">Players in Your Party</label>
+          <select id="golfPartySize" name="party_size">
+            <option value="1">Just me</option>
+            <option value="2">2 players</option>
+            <option value="3">3 players</option>
+            <option value="4">4 players (full foursome)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="golfPairingPref">Pairing Preference (optional)</label>
+          <input type="text" id="golfPairingPref" name="pairing_pref" placeholder="Pair me with…"/>
+        </div>
+
+        <div class="form-group">
+          <label for="golfNotes">Notes (optional)</label>
+          <textarea id="golfNotes" name="notes" rows="3" placeholder="Anything we should know?"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="golfSubmitBtn">Submit Golf Sign-Up</button>
+        <div class="success-message" id="golfSuccessMessage">Thanks! You’re on the golf list.</div>
+        <div class="error-message" id="golfErrorMessage">Couldn’t sync online, but your sign-up is saved locally. Try refreshing later.</div>
+      </form>
+    </div>
+
+    <!-- Summary -->
+    <div class="rsvp-summary">
+      <h3 style="margin-bottom:10px;">📊 Golf Summary</h3>
+      <div class="tools-row">
+        <button class="btn" onclick="refreshGolfFromServer()">🔄 Refresh</button>
+        <button class="btn" onclick="exportGolfCSV()">⬇️ Export CSV</button>
+        <button class="btn" onclick="copyGolfShare()">🔗 Copy Share Link</button>
+      </div>
+      <div class="summary-stats">
+        <div class="stat-box">
+          <span class="stat-number" id="golfTotalSignups">0</span>
+          <span>Total Sign-Ups</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" id="golfTotalPlayers">0</span>
+          <span>Total Players</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" id="golfFoursomes">0</span>
+          <span>Full Foursomes</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" id="golfRemainder">0</span>
+          <span>Remaining Players</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- List -->
+    <div class="rsvp-list">
+      <h3 style="color:#1e3c72; margin-bottom:20px;">📋 Golfers</h3>
+      <div id="golfDetailsList">
+        <p style="text-align:center; color:#666; padding:40px;">No golf sign-ups yet.</p>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- Modal for enlarged photos -->
   <div id="photoModal" class="modal" onclick="closeModal()">
     <span class="close" onclick="closeModal()">&times;</span>
