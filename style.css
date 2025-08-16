@@ -376,6 +376,49 @@ body {
 }
 .close:hover { opacity: .7; }
 
+/* Golf Outing Banner Card */
+.golf-banner {
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 24px;
+  margin: 30px 0;
+  box-shadow: 0 10px 25px rgba(0,0,0,.1);
+  border: 1px solid rgba(17,34,68,.06);
+  text-align: center;
+}
+
+.golf-banner h3 {
+  color: var(--patriot-blue);
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--patriot-red);
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+.golf-banner p {
+  margin: 10px 0 20px;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.golf-btn {
+  background: linear-gradient(45deg, var(--patriot-blue), #4c71c0);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,.15);
+}
+
+.golf-btn:hover {
+  background: linear-gradient(45deg, var(--patriot-red), #7a1e2b);
+  transform: translateY(-2px);
+}
+
 /* --- Scrolling gallery (carousel) --- */
 .scroll-gallery{
   position: relative;
