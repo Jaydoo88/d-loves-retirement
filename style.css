@@ -386,21 +386,25 @@ body {
   text-align: center;
 }
 
-.golf-banner {
-  background: url('golfoutingad.png') no-repeat center center;
-  background-size: contain;   /* keeps full image visible */
-  background-color: #1c6e2e;  /* fills empty space */
-  border-radius: 15px;
-  width: 100%;
-  height: 250px;              /* control size */
+/* Banner image inside the card */
+.golf-banner-img {
+  display: block;
+  width: 100%;          /* scale to card width */
+  height: auto;         /* keep proportions */
+  max-height: 260px;    /* adjust this value to shrink the banner */
+  margin: 0 auto;
+  object-fit: contain;  /* ensures no cropping */
+  border-radius: 15px 15px 0 0;
 }
 
+/* Footer area below the image */
 .golf-banner-footer {
   padding: 16px;
   background: #f8f9fc;
   border-radius: 0 0 15px 15px;
 }
 
+/* Sign Up button */
 .golf-btn {
   background: var(--patriot-red);
   color: #fff;
