@@ -387,11 +387,13 @@ body {
 }
 
 .golf-banner img {
-  width: 100%;        /* fits card width */
-  height: auto;       /* keeps proportions */
-  max-height: 300px;  /* shrink overall size */
-  object-fit: contain;
+  display: block;
+  max-width: 100%;     /* never wider than the card */
+  height: auto;        /* keeps proportions */
+  max-height: 250px;   /* shrink overall size */
+  margin: 0 auto;      /* center it */
   border-radius: 15px;
+  object-fit: contain; /* prevents cropping */
 }
 
 .golf-banner-footer {
