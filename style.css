@@ -377,7 +377,6 @@ body {
 .close:hover { opacity: .7; }
 
 /* Golf Outing Banner Card */
-/* Golf Outing Banner Card */
 .golf-banner-card {
   border-radius: 15px;
   overflow: hidden;
@@ -385,15 +384,16 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,.25);
   background: #fff;
   text-align: center;
-  max-width: 400px;     /* <-- adjust this to match your other cards */
+
+  /* Match other cards */
+  max-width: 550px;   /* adjust this to the exact width of the other two cards */
   width: 100%;
 }
 
 .golf-banner-img {
   display: block;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
+  width: 100%;        /* stretch to card width */
+  height: auto;       /* maintain proportions */
   border-radius: 15px 15px 0 0;
   object-fit: contain;
 }
