@@ -568,19 +568,23 @@ body {
   object-fit: cover;
   display: block;
 }
+/* Golf Detail Card */
 .golf-details-card {
   border-radius: 15px;
   overflow: hidden;
   margin: 30px auto;
   box-shadow: 0 10px 25px rgba(0,0,0,.25);
 
+  /* match other cards */
+  max-width: 700px;     /* <-- change this to whatever your other cards use */
+  width: 100%;
+
   /* background image */
   background: url('assets/golfouting.jpg') no-repeat center center;
-  background-size: cover;   /* fill the card */
+  background-size: cover;
   position: relative;
-  max-width: 550px;         /* match size of other cards */
-  min-height: 300px;        /* ensures it has height */
-  color: #fff;              /* white text */
+  min-height: 300px;
+  color: #fff;
 }
 
 /* overlay to make text readable */
