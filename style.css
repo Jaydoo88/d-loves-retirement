@@ -386,10 +386,12 @@ body {
   text-align: center;
 }
 
-.golf-banner-img {
-  width: 100%;
-  display: block;
-  border-radius: 15px 15px 0 0;
+.golf-banner img {
+  width: 100%;        /* fits card width */
+  height: auto;       /* keeps proportions */
+  max-height: 300px;  /* shrink overall size */
+  object-fit: contain;
+  border-radius: 15px;
 }
 
 .golf-banner-footer {
