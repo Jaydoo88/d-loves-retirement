@@ -377,32 +377,33 @@ body {
 .close:hover { opacity: .7; }
 
 /* Golf Outing Banner Card */
+/* Golf Outing Banner Card */
 .golf-banner-card {
   border-radius: 15px;
   overflow: hidden;
-  margin: 30px auto;        /* auto centers it */
+  margin: 30px auto;
   box-shadow: 0 10px 25px rgba(0,0,0,.25);
   background: #fff;
   text-align: center;
-  max-width: 1000px;        /* set how wide you want the card */
-  width: 90%;               /* makes it responsive */
+  max-width: 400px;     /* <-- adjust this to match your other cards */
+  width: 100%;
 }
 
 .golf-banner-img {
   display: block;
-  width: 100%;              /* image fills card width */
-  height: auto;             /* keeps proportions */
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
   border-radius: 15px 15px 0 0;
+  object-fit: contain;
 }
 
-/* Footer area below the image */
 .golf-banner-footer {
   padding: 16px;
   background: #f8f9fc;
   border-radius: 0 0 15px 15px;
 }
 
-/* Sign Up button */
 .golf-btn {
   background: var(--patriot-red);
   color: #fff;
@@ -418,6 +419,7 @@ body {
   background: #7a1e2b;
   transform: translateY(-2px);
 }
+
 /* --- Scrolling gallery (carousel) --- */
 .scroll-gallery{
   position: relative;
