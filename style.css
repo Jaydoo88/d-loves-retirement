@@ -564,6 +564,22 @@ body {
   object-fit: cover;
   display: block;
 }
+/* Venue Detail Card */
+.venue-details-card {
+  border-radius: 15px;
+  overflow: hidden;
+  margin: 30px auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,.25);
+
+  max-width: 1200px;
+  width: 100%;
+
+  background: url('assets/venuebanner.jpg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  min-height: 300px;
+  color: #fff;
+}
 /* Golf Detail Card */
 .golf-details-card {
   border-radius: 15px;
