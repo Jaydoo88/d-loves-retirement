@@ -391,7 +391,7 @@ body {
 }
 .golf-banner-img { 
    display: block; width: 100%; /* stretch to card width */ 
-   height: 250px; /* maintain proportions */ 
+   height: auto; /* maintain proportions */ 
    border-radius: 15px 15px 0 0; 
    object-fit: contain; 
 }
