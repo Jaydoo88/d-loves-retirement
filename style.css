@@ -613,5 +613,55 @@ body {
 .golf-details-overlay p {
   margin: 0 0 10px;
 }
+/* --- Mobile hamburger menu --- */
+.mobile-nav-toggle {
+  display: none;             /* hidden on desktop */
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 1100;
+  width: 42px;
+  height: 42px;
+  border: 2px solid var(--patriot-blue);
+  background: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,.12);
+}
+.mobile-nav-toggle .bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  margin: 5px auto;
+  background: var(--patriot-blue);
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+/* Slide-down panel */
+.mobile-nav {
+  display: none;             /* use [hidden] attribute by default */
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1099;
+  background: rgba(255,255,255,.98);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(17,34,68,.08);
+  padding: 68px 16px 16px;   /* top padding clears the toggle button area */
+  box-shadow: 0 8px 18px rgba(0,0,0,.12);
+}
+.mobile-nav .nav-btn {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  text-align: center;
+}
+
+/* Show hamburger / hide desktop chips on small screens */
+@media (max-width: 768px) {
+  .mobile-nav-toggle { display: block; }
+  .nav-buttons { display: none; }  /* hide desktop chip buttons */
+  .mobile-nav[aria-hidden="false"] { display: block; }
+}
+
 /* --------- Golf Outing (optional accent) --------- */
 .rsvp-item.golf { border-left-color: #1f7a1f; }
