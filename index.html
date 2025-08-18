@@ -18,48 +18,6 @@
     .status-maybe{background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:999px}
     .countdown{margin-top:14px;font-weight:600;color:#1e3c72}
     .small-note{font-size:.85rem;color:#666;margin-top:6px}
-
-    /* Scoped styles for the venue page ONLY */
-    .venue-page .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
-    .venue-page .venue-card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,.08); margin: 16px 0; }
-    .venue-page .venue-card h2 { margin-top: 0; }
-
-    .venue-page .venue-hero {
-      position: relative;
-      min-height: 320px;
-      border-radius: 0 0 24px 24px;
-      background: url('assets/gac-louisville-hero.jpg') center/cover no-repeat;
-    }
-    .venue-page .venue-hero__overlay {
-      backdrop-filter: blur(2px);
-      background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.35));
-      color: #fff; padding: 48px 24px; min-height: 320px;
-      display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-    }
-    .venue-page .venue-hero h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 44px); }
-    .venue-page .venue-hero p { margin: 0 0 16px; font-size: clamp(14px, 2.2vw, 18px); opacity: .95; }
-
-    .venue-page .btn { display: inline-block; padding: 10px 16px; border-radius: 999px; text-decoration: none; font-weight: 600; }
-    .venue-page .btn-primary { background: #1e6f5c; color: #fff; }
-    .venue-page .btn-outline { border: 2px solid #1e6f5c; color: #1e6f5c; background: transparent; }
-    .venue-page .btn:hover { transform: translateY(-1px); }
-
-    .venue-page .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-    .venue-page .facts-grid h3 { margin: 0 0 6px; font-size: 0.95rem; color: #1e6f5c; }
-
-    .venue-page .timeline { list-style: none; padding: 0; margin: 0; }
-    .venue-page .timeline li { display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px dashed #e6e6e6; }
-    .venue-page .timeline li:last-child { border-bottom: 0; }
-    .venue-page .timeline .time { font-weight: 700; color: #1e6f5c; }
-
-    .venue-page .checklist { margin: 10px 0 0 0; padding-left: 1.2rem; }
-    .venue-page .checklist li { margin: 6px 0; }
-
-    .venue-page .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 10px; }
-    .venue-page .gallery-item { background: #f3f5f7 url('assets/placeholder-venue.jpg') center/cover no-repeat; border-radius: 12px; height: 160px; }
-    .venue-page .caption { font-size: .9rem; color: #666; margin-top: 8px; }
-
-    .venue-page .cta { text-align: center; }
   </style>
 </head>
 <body>
@@ -143,7 +101,7 @@
       <a href="#golf" class="golf-btn" onclick="showPage(event, 'golf')">View &amp; Sign Up</a>
     </div>
   </div>
-
+     
   <!-- Scrolling Gallery (Carousel) -->
   <div class="photo-gallery" id="photo-reel">
     <h3 style="text-align:center; color:#1e3c72; margin-bottom:16px;">📷 Photo Reel</h3>
@@ -524,19 +482,39 @@
         <a class="btn btn-primary" href="https://www.gaclouisville.org/" target="_blank" rel="noopener">Visit Venue Website</a>
       </div>
     </div>
+
     <div class="container">
       <div class="venue-card">
         <h2>Event Overview</h2>
         <div class="facts-grid">
-          <div><h3>Date</h3><p>Saturday, <strong>May 23, 2026</strong></p></div>
-          <div><h3>Times</h3><p>Cocktail Hour: 1600–1700<br>Ceremony: 1700<br>Celebration until 2000</p></div>
-          <div><h3>Dress Code</h3><p>Casual; <em>ceremony is formal</em></p></div>
-          <div><h3>Protocol</h3><p>Honor Guard will present the Colors; VIP party on stage.</p></div>
+          <div>
+            <h3>Date</h3>
+            <p>Saturday, <strong>May 23, 2026</strong></p>
+          </div>
+          <div>
+            <h3>Times</h3>
+            <p>
+              Cocktail Hour: 1600–1700<br>
+              Ceremony: 1700<br>
+              Celebration until 2000
+            </p>
+          </div>
+          <div>
+            <h3>Dress Code</h3>
+            <p>Casual; <em>ceremony is formal</em></p>
+          </div>
+          <div>
+            <h3>Protocol</h3>
+            <p>Honor Guard will present the Colors; VIP party on stage.</p>
+          </div>
         </div>
       </div>
+
       <div class="venue-card">
         <h2>About the Venue</h2>
-        <p>The German American Club offers a banquet hall for the ceremony, an outdoor beer garden for mingling, and on-site bar service with German and domestic selections.</p>
+        <p>
+          The German American Club offers a banquet hall for the ceremony, an outdoor beer garden for mingling, and on-site bar service with German and domestic selections.
+        </p>
         <ul class="checklist">
           <li>Banquet Hall seating and ceremony space</li>
           <li>Outdoor patio/beer garden</li>
@@ -544,11 +522,17 @@
           <li>Free on-site parking</li>
         </ul>
       </div>
+
       <div class="venue-card">
         <h2>Directions & Parking</h2>
         <p>Easy access from I-65 and I-264. Free parking on-site. Rideshare drop-off at the main entrance.</p>
-        <p><a class="btn btn-outline" href="https://www.google.com/maps/place/German+American+Club/@38.214847,-85.719941,15z" target="_blank" rel="noopener">Open in Google Maps</a></p>
+        <p>
+          <a class="btn btn-outline" href="https://www.google.com/maps/place/German+American+Club/@38.214847,-85.719941,15z" target="_blank" rel="noopener">
+            Open in Google Maps
+          </a>
+        </p>
       </div>
+
       <div class="venue-card">
         <h2>Venue Photos</h2>
         <div class="gallery">
@@ -558,6 +542,7 @@
         </div>
         <p class="caption">Representative photos—final setup will be arranged for the event.</p>
       </div>
+
       <div class="venue-card cta">
         <h2>RSVP & Updates</h2>
         <p>Head back to the main event page for RSVP details and updates as we approach May 23, 2026.</p>
