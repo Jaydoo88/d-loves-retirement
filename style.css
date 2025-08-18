@@ -386,7 +386,7 @@ body {
   text-align: center;
 
   /* Match other cards */
-  
+  max-width: 550px;
   width: 100%;
 }
 .golf-banner-img { 
