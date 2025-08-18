@@ -393,7 +393,7 @@ body {
    display: block; width: 100%; /* stretch to card width */ 
    height: auto; /* maintain proportions */ 
    border-radius: 15px 15px 0 0; 
-   object-fit: contain; 
+   object-fit: cover; 
 }
 .golf-banner-footer {
   padding: 16px;
