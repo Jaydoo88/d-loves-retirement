@@ -119,6 +119,22 @@ body {
   padding-bottom: 10px;
 }
 
+/* Row for golf + venue banner cards */
+.banner-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px; /* space between the two cards */
+  margin: 30px auto;
+  max-width: 1200px;
+}
+
+/* Responsive: stack on mobile */
+@media (max-width: 768px) {
+  .banner-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* EVENT DETAILS: blue panel with thin red top border */
 .event-details {
   background: linear-gradient(135deg, #496eb9 0%, var(--patriot-blue) 100%);
