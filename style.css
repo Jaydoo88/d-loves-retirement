@@ -391,11 +391,11 @@ body {
 }
 
 .golf-banner-img {
-  display: block;
-  width: 100%;        /* stretch to card width */
-  height: auto;       /* maintain proportions */
+  width: 100%;
+  aspect-ratio: 16 / 9;   /* or 21/9 if you want extra wide */
+  object-fit: cover;      /* fill the space without stretching */
   border-radius: 15px 15px 0 0;
-  object-fit: contain;
+  display: block;
 }
 
 .golf-banner-footer {
