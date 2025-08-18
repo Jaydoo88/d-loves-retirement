@@ -578,6 +578,42 @@ function hydrateGolfInfo(){
   }
 }
 
+(function () {
+  const btn = document.getElementById('mobileMenuBtn');
+  const panel = document.getElementById('mobileNav');
+  if (!btn || !panel) return;
+
+  function open() {
+    panel.hidden = false;
+    panel.setAttribute('aria-hidden', 'false');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+  function close() {
+    panel.setAttribute('aria-hidden', 'true');
+    btn.setAttribute('aria-expanded', 'false');
+    // use a tiny timeout so attribute change is applied before hiding
+    setTimeout(() => { panel.hidden = true; }, 0);
+  }
+  window.closeMobileNav = close;
+
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    expanded ? close() : open();
+  });
+
+  // close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+      if (btn.getAttribute('aria-expanded') === 'true') close();
+    }
+  });
+
+  // close on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') close();
+  });
+})();
+
 /************** OPTIONAL: Quick cache reset **************/
 function clearLocalCaches(){
   try { localStorage.removeItem(LS_KEY); } catch(e){}
