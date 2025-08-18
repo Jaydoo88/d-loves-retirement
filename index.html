@@ -23,11 +23,10 @@
 <body>
   <!-- Navigation buttons -->
   <div class="nav-buttons">
-    <button class="nav-btn active" onclick="showPage(event,'main')">Main Page</button>
-    <button class="nav-btn" onclick="showPage(event,'rsvp-list')">RSVP List</button>
-    <button class="nav-btn" onclick="showPage(event,'golf')">Golf Outing</button>
-    <button class="nav-btn" onclick="showPage(event,'venue')">Venue</button>
-  </div>
+  <button class="nav-btn active" onclick="showPage(event,'main')">Main Page</button>
+  <button class="nav-btn" onclick="showPage(event,'rsvp-list')">RSVP List</button>
+  <button class="nav-btn" onclick="showPage(event,'golf')">Golf Outing</button>
+</div>
 
   <!-- MAIN PAGE -->
   <div id="main-page" class="page active">
@@ -54,265 +53,247 @@
         <div class="card event-details">
           <h3>🎉 Celebration Details</h3>
           <div class="event-info" id="eventInfoBox">
-            <strong>📅 Date:</strong>
-            <span id="eventDateText">Saturday, May 23, 2026</span><br/>
+            <strong>📅 Date:</strong> <span id="eventDateText">[Date TBD]</span><br/>
+            <strong>⏰ Time:</strong> <span id="eventTimeText">[Time TBD]</span><br/>
+            <strong>📍 Location:</strong> <span id="eventLocText">[Venue TBD]</span><br/>
+            <strong>👔 Attire:</strong> Business Casual
+          </div>
+          <div id="countdown" class="countdown hidden"></div>
+          <div id="calendarLinks" class="small-note hidden"></div>
+          <p style="margin-top: 20px;">
+            Come celebrate the remarkable achievements and lasting impact of a distinguished career in government service.
+          </p>
+        </div>
 
-            <strong>⏰ Time:</strong>
-            <span id="eventTimeText">
-              1600–2000 (4:00–8:00 PM)<br/>
-              • Cocktail Hour: 1600–1700 (4:00–5:00 PM)<br/>
-              • Ceremony: 1700 (5:00 PM)
-            </span><br/>
+        <div class="card">
+          <h3>🏆 A Legacy of Service</h3>
+          <p>
+            With 37 years and 10 months of dedicated government service — including a long tenure with U.S. Customs and Border Protection under the Department of Homeland Security — Darren Johnson has shown unwavering commitment to protecting the nation. His leadership and dedication have left a lasting impact on colleagues, communities, and the mission of securing America’s borders.
+          </p>
+        </div>
+      </div>
 
-            <strong>📍 Location:</strong>
-            <span id="eventLocText">
-              German American Club of Louisville — 1840 Lincoln Ave, Louisville, KY 40213
-              <a href="https://www.google.com/maps/place/German+American+Club/@38.214847,-85.719941,15z" target="_blank" rel="noopener">(Map)</a>
-            </span><br/>
+<!-- Golf Outing Banner Card with Image -->
+<div class="golf-banner-card">
+  <img src="assets/golfoutingad.png" alt="Golf Outing Banner" class="golf-banner-img">
+  <div class="golf-banner-footer">
+    <a href="#golf" class="golf-btn" onclick="showPage(event, 'golf')">View &amp; Sign Up</a>
+  </div>
+</div>
+     
+      <!-- Scrolling Gallery (Carousel) -->
+      <div class="photo-gallery" id="photo-reel">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:16px;">📷 Photo Reel</h3>
+        <div class="scroll-gallery">
+          <button class="sg-btn sg-prev" aria-label="Previous" onclick="sgScroll(-1)">‹</button>
+          <div class="sg-track" id="sgTrack">
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/486550387.jpg" alt="Loyalty, Service, Family, Forever." loading="lazy">
+              <figcaption class="sg-cap">Loyalty, Service, Family, Forever.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/510537393.jpg" alt="K9 Partners Through the Years." loading="lazy">
+              <figcaption class="sg-cap">K9 Partners Through the Years.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/dloveK9.jpg" alt="The Badge & The Paw." loading="lazy">
+              <figcaption class="sg-cap">The Badge & The Paw.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/dlovek9beginning.jpg" alt="A Lifetime of K9 Service." loading="lazy">
+              <figcaption class="sg-cap">A Lifetime of K9 Service.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/K9CustomsDuo.jpg" alt="In sync, on duty, in trust." loading="lazy">
+              <figcaption class="sg-cap">In sync, on duty, in trust.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/115068542.jpg" alt="113K reasons to trust K9s." loading="lazy">
+              <figcaption class="sg-cap">113K reasons to trust K9s.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/120492968.jpg" alt="Two soldiers. One mission." loading="lazy">
+              <figcaption class="sg-cap">Two soldiers. One mission.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/195665614.jpg" alt="Protecting power on the lawn." loading="lazy">
+              <figcaption class="sg-cap">Protecting power on the lawn.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/279423943.jpg" alt="Proud to serve, side by side." loading="lazy">
+              <figcaption class="sg-cap">Proud to serve, side by side.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/321043365.jpg" alt="Wash, rinse, serve." loading="lazy">
+              <figcaption class="sg-cap">Wash, rinse, serve.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/334340318.jpg" alt="Calm before the call." loading="lazy">
+              <figcaption class="sg-cap">Calm before the call.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/450503025.jpg" alt="Roots of service run deep." loading="lazy">
+              <figcaption class="sg-cap">Roots of service run deep.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/508974118.jpg" alt="Package secured — K9 approved." loading="lazy">
+              <figcaption class="sg-cap">Package secured — K9 approved.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/568973144.jpg" alt="The nose never lies." loading="lazy">
+              <figcaption class="sg-cap">The nose never lies.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/628255182.jpg" alt="Training for the real thing." loading="lazy">
+              <figcaption class="sg-cap">Training for the real thing.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/766138588.jpg" alt="Waiting for the signal." loading="lazy">
+              <figcaption class="sg-cap">Waiting for the signal.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/819413380.jpg" alt="No hiding from this nose." loading="lazy">
+              <figcaption class="sg-cap">No hiding from this nose.</figcaption>
+            </figure>
+            <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
+              <img src="assets/photos/902665314.jpg" alt="Where partners are made." loading="lazy">
+              <figcaption class="sg-cap">Where partners are made.</figcaption>
+            </figure>
+          </div>
+          <button class="sg-btn sg-next" aria-label="Next" onclick="sgScroll(1)">›</button>
+        </div>
+      </div>
 
-            <strong>👔 Attire:</strong>
-            <span id="eventAttireText">Casual; <em>ceremony is formal</em></span><br/>
+      <!-- Career Highlights -->
+      <section class="career-highlights">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px;">📜 Career Highlights</h3>
+        <div class="hl-grid">
+          <article class="hl-card">
+            <div class="hl-content">
+              <h4>Accomplishments & Awards</h4>
+              <ul>
+                <li>Distinguished/Expert firearms qualifications (1988–2026)</li>
+                <li>USAF Top Dog competitions: 1st (Base-wide, 1989); 2nd (USAFE, 1990)</li>
+                <li>USAF Performance & Achievement/Commendation medals (1992–1994)</li>
+                <li>Knights of Columbus “Blue Coat” Award (1994)</li>
+                <li>Good Conduct, Longevity & Outstanding Unit Awards (1988–1994)</li>
+                <li>U.S. Customs Millennium Tour of Duty (1999–2000)</li>
+                <li>Founding Member/Employee of DHS (2003)</li>
+                <li>CBP Blue Eagle Award (2014)</li>
+                <li>Unit Citation Awards ×5 (2008–2026)</li>
+              </ul>
+            </div>
+          </article>
+          <article class="hl-card">
+            <div class="hl-content">
+              <h4>Memberships</h4>
+              <ul>
+                <li>Dogs Against Drugs & Crime; National L.E. K-9 Assoc. (2001)</li>
+                <li>American Legion (2008)</li>
+                <li>Veterans of Foreign Wars — Lifetime (since 2010)</li>
+                <li>Guns of Justice L.E. Motorcycle Club (2009)</li>
+                <li>German American Club (2025)</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
 
-            <strong>🎖 Protocol:</strong>
-            <span id="eventProtocolText">Honor Guard will present the Colors; VIP party on stage.</span>
+      <!-- Career Timeline -->
+      <section class="career-section">
+        <div class="career-timeline">
+          <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px;">🏆 Career Journey</h3>
+
+          <div class="timeline-item">
+            <img src="assets/airforce.png" alt="United States Air Force" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>United States Air Force (USAF)</h4>
+              <p>1988 – 1994 · Built the foundation of service, discipline, and mission focus.</p>
+            </div>
+            <img src="assets/security-police.png" alt="USAF Badge" class="timeline-badge" />
+          </div>
+
+          <div class="timeline-item">
+            <img src="assets/secret-servicelogo.png" alt="U.S. Secret Service" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>U.S. Secret Service</h4>
+              <p>1995 – 1997 · Protection & investigations in support of national leadership.</p>
+            </div>
+            <img src="assets/secret-service.jpg" alt="Secret Service Badge" class="timeline-badge" />
+          </div>
+
+          <div class="timeline-item">
+            <img src="assets/us-customs-service.png" alt="U.S. Customs Service" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>U.S. Customs Service</h4>
+              <p>1997 – 2003 · Trade enforcement and border security—the legacy agency that later integrated into DHS.</p>
+            </div>
+            <img src="assets/us-customs-badge.png" alt="U.S. Customs Service Badge" class="timeline-badge" />
+          </div>
+
+          <div class="timeline-item">
+            <img src="assets/cbplogo.png" alt="U.S. Customs and Border Protection" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>U.S. Customs and Border Protection (CBP)</h4>
+              <p>2003 – 2026 · Frontline homeland security—K9 operations, leadership, and mentorship.</p>
+            </div>
+            <img src="assets/cbp.png" alt="CBP Badge" class="timeline-badge" />
           </div>
         </div>
-      </div>
+      </section>
 
-      <div id="countdown" class="countdown hidden"></div>
-      <div id="calendarLinks" class="small-note hidden"></div>
-      <p style="margin-top: 20px;">
-        Come celebrate the remarkable achievements and lasting impact of a distinguished career in government service.
-      </p>
-    </div>
+      <!-- RSVP -->
+      <div class="rsvp-section">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px; font-size:2rem;">Please RSVP</h3>
+        <form class="rsvp-form" id="rsvpForm" autocomplete="on" novalidate>
+          <input type="text" id="company" name="company" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-    <div class="card">
-      <h3>🏆 A Legacy of Service</h3>
-      <p>
-        With 37 years and 10 months of dedicated government service — including a long tenure with U.S. Customs and Border Protection under the Department of Homeland Security — Darren Johnson has shown unwavering commitment to protecting the nation. His leadership and dedication have left a lasting impact on colleagues, communities, and the mission of securing America’s borders.
-      </p>
-    </div>
-  </div>
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" required/>
+          </div>
 
-  <!-- Golf Outing Banner Card with Image -->
-  <div class="golf-banner-card">
-    <img src="assets/golfoutingad.png" alt="Golf Outing Banner" class="golf-banner-img">
-    <div class="golf-banner-footer">
-      <a href="#golf" class="golf-btn" onclick="showPage(event, 'golf')">View &amp; Sign Up</a>
-    </div>
-  </div>
-     
-  <!-- Scrolling Gallery (Carousel) -->
-  <div class="photo-gallery" id="photo-reel">
-    <h3 style="text-align:center; color:#1e3c72; margin-bottom:16px;">📷 Photo Reel</h3>
-    <div class="scroll-gallery">
-      <button class="sg-btn sg-prev" aria-label="Previous" onclick="sgScroll(-1)">‹</button>
-      <div class="sg-track" id="sgTrack">
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/486550387.jpg" alt="Loyalty, Service, Family, Forever." loading="lazy">
-          <figcaption class="sg-cap">Loyalty, Service, Family, Forever.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/510537393.jpg" alt="K9 Partners Through the Years." loading="lazy">
-          <figcaption class="sg-cap">K9 Partners Through the Years.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/dloveK9.jpg" alt="The Badge & The Paw." loading="lazy">
-          <figcaption class="sg-cap">The Badge & The Paw.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/dlovek9beginning.jpg" alt="A Lifetime of K9 Service." loading="lazy">
-          <figcaption class="sg-cap">A Lifetime of K9 Service.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/K9CustomsDuo.jpg" alt="In sync, on duty, in trust." loading="lazy">
-          <figcaption class="sg-cap">In sync, on duty, in trust.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/115068542.jpg" alt="113K reasons to trust K9s." loading="lazy">
-          <figcaption class="sg-cap">113K reasons to trust K9s.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/120492968.jpg" alt="Two soldiers. One mission." loading="lazy">
-          <figcaption class="sg-cap">Two soldiers. One mission.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/195665614.jpg" alt="Protecting power on the lawn." loading="lazy">
-          <figcaption class="sg-cap">Protecting power on the lawn.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/279423943.jpg" alt="Proud to serve, side by side." loading="lazy">
-          <figcaption class="sg-cap">Proud to serve, side by side.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/321043365.jpg" alt="Wash, rinse, serve." loading="lazy">
-          <figcaption class="sg-cap">Wash, rinse, serve.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/334340318.jpg" alt="Calm before the call." loading="lazy">
-          <figcaption class="sg-cap">Calm before the call.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/450503025.jpg" alt="Roots of service run deep." loading="lazy">
-          <figcaption class="sg-cap">Roots of service run deep.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/508974118.jpg" alt="Package secured — K9 approved." loading="lazy">
-          <figcaption class="sg-cap">Package secured — K9 approved.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/568973144.jpg" alt="The nose never lies." loading="lazy">
-          <figcaption class="sg-cap">The nose never lies.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/628255182.jpg" alt="Training for the real thing." loading="lazy">
-          <figcaption class="sg-cap">Training for the real thing.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/766138588.jpg" alt="Waiting for the signal." loading="lazy">
-          <figcaption class="sg-cap">Waiting for the signal.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/819413380.jpg" alt="No hiding from this nose." loading="lazy">
-          <figcaption class="sg-cap">No hiding from this nose.</figcaption>
-        </figure>
-        <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/photos/902665314.jpg" alt="Where partners are made." loading="lazy">
-          <figcaption class="sg-cap">Where partners are made.</figcaption>
-        </figure>
-      </div>
-      <button class="sg-btn sg-next" aria-label="Next" onclick="sgScroll(1)">›</button>
-    </div>
-  </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required/>
+          </div>
 
-  <!-- Career Highlights -->
-  <section class="career-highlights">
-    <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px;">📜 Career Highlights</h3>
-    <div class="hl-grid">
-      <article class="hl-card">
-        <div class="hl-content">
-          <h4>Accomplishments & Awards</h4>
-          <ul>
-            <li>Distinguished/Expert firearms qualifications (1988–2026)</li>
-            <li>USAF Top Dog competitions: 1st (Base-wide, 1989); 2nd (USAFE, 1990)</li>
-            <li>USAF Performance & Achievement/Commendation medals (1992–1994)</li>
-            <li>Knights of Columbus “Blue Coat” Award (1994)</li>
-            <li>Good Conduct, Longevity & Outstanding Unit Awards (1988–1994)</li>
-            <li>U.S. Customs Millennium Tour of Duty (1999–2000)</li>
-            <li>Founding Member/Employee of DHS (2003)</li>
-            <li>CBP Blue Eagle Award (2014)</li>
-            <li>Unit Citation Awards ×5 (2008–2026)</li>
-          </ul>
-        </div>
-      </article>
-      <article class="hl-card">
-        <div class="hl-content">
-          <h4>Memberships</h4>
-          <ul>
-            <li>Dogs Against Drugs & Crime; National L.E. K-9 Assoc. (2001)</li>
-            <li>American Legion (2008)</li>
-            <li>Veterans of Foreign Wars — Lifetime (since 2010)</li>
-            <li>Guns of Justice L.E. Motorcycle Club (2009)</li>
-            <li>German American Club (2025)</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-  </section>
+          <div class="form-group">
+            <label for="organization">Department/Organization</label>
+            <input type="text" id="organization" name="organization" placeholder="e.g., DHS, CBP, TSA, etc."/>
+          </div>
 
-  <!-- Career Timeline -->
-  <section class="career-section">
-    <div class="career-timeline">
-      <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px;">🏆 Career Journey</h3>
+          <div class="form-group">
+            <label for="attending">Will you be attending? *</label>
+            <select id="attending" name="attending" required>
+              <option value="">Please select</option>
+              <option value="yes">Yes, I'll be there!</option>
+              <option value="no">Unfortunately, I cannot attend</option>
+              <option value="maybe">Not sure yet</option>
+            </select>
+          </div>
 
-      <div class="timeline-item">
-        <img src="assets/airforce.png" alt="United States Air Force" class="timeline-photo" />
-        <div class="timeline-content">
-          <h4>United States Air Force (USAF)</h4>
-          <p>1988 – 1994 · Built the foundation of service, discipline, and mission focus.</p>
-        </div>
-        <img src="assets/security-police.png" alt="USAF Badge" class="timeline-badge" />
-      </div>
+          <div class="form-group" id="guestGroup" style="display:none;">
+            <label for="guests">Number of guests (including yourself)</label>
+            <select id="guests" name="guests">
+              <option value="1">Just me</option>
+              <option value="2">2 people</option>
+              <option value="3">3 people</option>
+              <option value="4">4 people</option>
+            </select>
+          </div>
 
-      <div class="timeline-item">
-        <img src="assets/secret-servicelogo.png" alt="U.S. Secret Service" class="timeline-photo" />
-        <div class="timeline-content">
-          <h4>U.S. Secret Service</h4>
-          <p>1995 – 1997 · Protection & investigations in support of national leadership.</p>
-        </div>
-        <img src="assets/secret-service.jpg" alt="Secret Service Badge" class="timeline-badge" />
-      </div>
+          <div class="form-group">
+            <label for="message">Share a memory or message (optional)</label>
+            <textarea id="message" name="message" rows="4" placeholder="Share a favorite memory, congratulations, or well wishes..."></textarea>
+          </div>
 
-      <div class="timeline-item">
-        <img src="assets/us-customs-service.png" alt="U.S. Customs Service" class="timeline-photo" />
-        <div class="timeline-content">
-          <h4>U.S. Customs Service</h4>
-          <p>1997 – 2003 · Trade enforcement and border security—the legacy agency that later integrated into DHS.</p>
-        </div>
-        <img src="assets/us-customs-badge.png" alt="U.S. Customs Service Badge" class="timeline-badge" />
-      </div>
-
-      <div class="timeline-item">
-        <img src="assets/cbplogo.png" alt="U.S. Customs and Border Protection" class="timeline-photo" />
-        <div class="timeline-content">
-          <h4>U.S. Customs and Border Protection (CBP)</h4>
-          <p>2003 – 2026 · Frontline homeland security—K9 operations, leadership, and mentorship.</p>
-        </div>
-        <img src="assets/cbp.png" alt="CBP Badge" class="timeline-badge" />
+          <button type="submit" class="submit-btn" id="submitBtn">Submit RSVP</button>
+          <div class="success-message" id="successMessage">Thank you for your RSVP! We look forward to celebrating together.</div>
+          <div class="error-message" id="errorMessage">We couldn't save your RSVP online, but it is saved locally. Try refreshing later to sync.</div>
+        </form>
       </div>
     </div>
-  </section>
-
-  <!-- RSVP -->
-  <div class="rsvp-section">
-    <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px; font-size:2rem;">Please RSVP</h3>
-    <form class="rsvp-form" id="rsvpForm" autocomplete="on" novalidate>
-      <input type="text" id="company" name="company" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
-
-      <div class="form-group">
-        <label for="name">Full Name *</label>
-        <input type="text" id="name" name="name" required/>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email Address *</label>
-        <input type="email" id="email" name="email" required/>
-      </div>
-
-      <div class="form-group">
-        <label for="organization">Department/Organization</label>
-        <input type="text" id="organization" name="organization" placeholder="e.g., DHS, CBP, TSA, etc."/>
-      </div>
-
-      <div class="form-group">
-        <label for="attending">Will you be attending? *</label>
-        <select id="attending" name="attending" required>
-          <option value="">Please select</option>
-          <option value="yes">Yes, I'll be there!</option>
-          <option value="no">Unfortunately, I cannot attend</option>
-          <option value="maybe">Not sure yet</option>
-        </select>
-      </div>
-
-      <div class="form-group" id="guestGroup" style="display:none;">
-        <label for="guests">Number of guests (including yourself)</label>
-        <select id="guests" name="guests">
-          <option value="1">Just me</option>
-          <option value="2">2 people</option>
-          <option value="3">3 people</option>
-          <option value="4">4 people</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="message">Share a memory or message (optional)</label>
-        <textarea id="message" name="message" rows="4" placeholder="Share a favorite memory, congratulations, or well wishes..."></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn" id="submitBtn">Submit RSVP</button>
-      <div class="success-message" id="successMessage">Thank you for your RSVP! We look forward to celebrating together.</div>
-      <div class="error-message" id="errorMessage">We couldn't save your RSVP online, but it is saved locally. Try refreshing later to sync.</div>
-    </form>
   </div>
 
   <!-- RSVP LIST PAGE -->
@@ -360,197 +341,118 @@
     </div>
   </div>
 
-  <!-- GOLF OUTING PAGE -->
-  <div id="golf-page" class="page">
-    <div class="container">
-      <div class="header">
-        <h1>Golf Outing Sign-Up</h1>
-        <h2>Celebrate with a round of golf ⛳</h2>
-        <div class="badge">Golf Registration</div>
-        <div class="small-note" id="golfCalendarLinks" style="display:none;"></div>
-        <div id="golfCountdown" class="countdown hidden"></div>
-      </div>
+ <!-- GOLF OUTING PAGE -->
+<div id="golf-page" class="page">
+  <div class="container">
+    <div class="header">
+      <h1>Golf Outing Sign-Up</h1>
+      <h2>Celebrate with a round of golf ⛳</h2>
+      <div class="badge">Golf Registration</div>
+      <div class="small-note" id="golfCalendarLinks" style="display:none;"></div>
+      <div id="golfCountdown" class="countdown hidden"></div>
+    </div>
 
-      <div class="golf-details-card">
-        <div class="golf-details-overlay">
-          <h3>🏌️ Golf Outing Details</h3>
-          <p><strong>Date:</strong> [Date TBD]</p>
-          <p><strong>Time:</strong> [Time TBD]</p>
-          <p><strong>Location:</strong> [Venue TBD]</p>
-          <p><strong>Attire:</strong> Golf Casual</p>
+    <div class="golf-details-card">
+  <div class="golf-details-overlay">
+    <h3>🏌️ Golf Outing Details</h3>
+    <p><strong>Date:</strong> [Date TBD]</p>
+    <p><strong>Time:</strong> [Time TBD]</p>
+    <p><strong>Location:</strong> [Venue TBD]</p>
+    <p><strong>Attire:</strong> Golf Casual</p>
+  </div>
+</div>
+
+    <!-- Sign-up form -->
+    <div class="rsvp-section">
+      <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px; font-size:1.6rem;">Sign Up to Golf</h3>
+      <form class="rsvp-form" id="golfForm" autocomplete="on" novalidate>
+        <input type="text" id="golfCompany" name="company" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="form-group">
+          <label for="golfName">Full Name *</label>
+          <input type="text" id="golfName" name="name" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="golfEmail">Email Address *</label>
+          <input type="email" id="golfEmail" name="email" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="golfHandicap">Handicap / Skill Level</label>
+          <select id="golfHandicap" name="handicap">
+            <option value="">Prefer not to say</option>
+            <option value="0-9">0–9</option>
+            <option value="10-19">10–19</option>
+            <option value="20-29">20–29</option>
+            <option value="30+">30+</option>
+            <option value="Beginner">Beginner</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="golfPartySize">Players in Your Party</label>
+          <select id="golfPartySize" name="party_size">
+            <option value="1">Just me</option>
+            <option value="2">2 players</option>
+            <option value="3">3 players</option>
+            <option value="4">4 players (full foursome)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="golfPairingPref">Pairing Preference (optional)</label>
+          <input type="text" id="golfPairingPref" name="pairing_pref" placeholder="Pair me with…"/>
+        </div>
+
+        <div class="form-group">
+          <label for="golfNotes">Notes (optional)</label>
+          <textarea id="golfNotes" name="notes" rows="3" placeholder="Anything we should know?"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="golfSubmitBtn">Submit Golf Sign-Up</button>
+        <div class="success-message" id="golfSuccessMessage">Thanks! You’re on the golf list.</div>
+        <div class="error-message" id="golfErrorMessage">Couldn’t sync online, but your sign-up is saved locally. Try refreshing later.</div>
+      </form>
+    </div>
+
+    <!-- Summary -->
+    <div class="rsvp-summary">
+      <h3 style="margin-bottom:10px;">📊 Golf Summary</h3>
+      <div class="tools-row">
+        <button class="btn" onclick="refreshGolfFromServer()">🔄 Refresh</button>
+        <button class="btn" onclick="exportGolfCSV()">⬇️ Export CSV</button>
+        <button class="btn" onclick="copyGolfShare()">🔗 Copy Share Link</button>
+      </div>
+      <div class="summary-stats">
+        <div class="stat-box">
+          <span class="stat-number" id="golfTotalSignups">0</span>
+          <span>Total Sign-Ups</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" id="golfTotalPlayers">0</span>
+          <span>Total Players</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" id="golfFoursomes">0</span>
+          <span>Full Foursomes</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" id="golfRemainder">0</span>
+          <span>Remaining Players</span>
         </div>
       </div>
+    </div>
 
-      <!-- Sign-up form -->
-      <div class="rsvp-section">
-        <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px; font-size:1.6rem;">Sign Up to Golf</h3>
-        <form class="rsvp-form" id="golfForm" autocomplete="on" novalidate>
-          <input type="text" id="golfCompany" name="company" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
-
-          <div class="form-group">
-            <label for="golfName">Full Name *</label>
-            <input type="text" id="golfName" name="name" required/>
-          </div>
-
-          <div class="form-group">
-            <label for="golfEmail">Email Address *</label>
-            <input type="email" id="golfEmail" name="email" required/>
-          </div>
-
-          <div class="form-group">
-            <label for="golfHandicap">Handicap / Skill Level</label>
-            <select id="golfHandicap" name="handicap">
-              <option value="">Prefer not to say</option>
-              <option value="0-9">0–9</option>
-              <option value="10-19">10–19</option>
-              <option value="20-29">20–29</option>
-              <option value="30+">30+</option>
-              <option value="Beginner">Beginner</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="golfPartySize">Players in Your Party</label>
-            <select id="golfPartySize" name="party_size">
-              <option value="1">Just me</option>
-              <option value="2">2 players</option>
-              <option value="3">3 players</option>
-              <option value="4">4 players (full foursome)</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="golfPairingPref">Pairing Preference (optional)</label>
-            <input type="text" id="golfPairingPref" name="pairing_pref" placeholder="Pair me with…"/>
-          </div>
-
-          <div class="form-group">
-            <label for="golfNotes">Notes (optional)</label>
-            <textarea id="golfNotes" name="notes" rows="3" placeholder="Anything we should know?"></textarea>
-          </div>
-
-          <button type="submit" class="submit-btn" id="golfSubmitBtn">Submit Golf Sign-Up</button>
-          <div class="success-message" id="golfSuccessMessage">Thanks! You’re on the golf list.</div>
-          <div class="error-message" id="golfErrorMessage">Couldn’t sync online, but your sign-up is saved locally. Try refreshing later.</div>
-        </form>
-      </div>
-
-      <!-- Summary -->
-      <div class="rsvp-summary">
-        <h3 style="margin-bottom:10px;">📊 Golf Summary</h3>
-        <div class="tools-row">
-          <button class="btn" onclick="refreshGolfFromServer()">🔄 Refresh</button>
-          <button class="btn" onclick="exportGolfCSV()">⬇️ Export CSV</button>
-          <button class="btn" onclick="copyGolfShare()">🔗 Copy Share Link</button>
-        </div>
-        <div class="summary-stats">
-          <div class="stat-box">
-            <span class="stat-number" id="golfTotalSignups">0</span>
-            <span>Total Sign-Ups</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-number" id="golfTotalPlayers">0</span>
-            <span>Total Players</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-number" id="golfFoursomes">0</span>
-            <span>Full Foursomes</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-number" id="golfRemainder">0</span>
-            <span>Remaining Players</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- List -->
-      <div class="rsvp-list">
-        <h3 style="color:#1e3c72; margin-bottom:20px;">📋 Golfers</h3>
-        <div id="golfDetailsList">
-          <p style="text-align:center; color:#666; padding:40px;">No golf sign-ups yet.</p>
-        </div>
+    <!-- List -->
+    <div class="rsvp-list">
+      <h3 style="color:#1e3c72; margin-bottom:20px;">📋 Golfers</h3>
+      <div id="golfDetailsList">
+        <p style="text-align:center; color:#666; padding:40px;">No golf sign-ups yet.</p>
       </div>
     </div>
   </div>
-
-  <!-- VENUE PAGE (NEW) -->
-  <div id="venue-page" class="page venue-page">
-    <div class="venue-hero">
-      <div class="venue-hero__overlay">
-        <h1>Venue: German American Club of Louisville</h1>
-        <p>1840 Lincoln Avenue, Louisville, KY 40213</p>
-        <a class="btn btn-primary" href="https://www.gaclouisville.org/" target="_blank" rel="noopener">Visit Venue Website</a>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="venue-card">
-        <h2>Event Overview</h2>
-        <div class="facts-grid">
-          <div>
-            <h3>Date</h3>
-            <p>Saturday, <strong>May 23, 2026</strong></p>
-          </div>
-          <div>
-            <h3>Times</h3>
-            <p>
-              Cocktail Hour: 1600–1700<br>
-              Ceremony: 1700<br>
-              Celebration until 2000
-            </p>
-          </div>
-          <div>
-            <h3>Dress Code</h3>
-            <p>Casual; <em>ceremony is formal</em></p>
-          </div>
-          <div>
-            <h3>Protocol</h3>
-            <p>Honor Guard will present the Colors; VIP party on stage.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="venue-card">
-        <h2>About the Venue</h2>
-        <p>
-          The German American Club offers a banquet hall for the ceremony, an outdoor beer garden for mingling, and on-site bar service with German and domestic selections.
-        </p>
-        <ul class="checklist">
-          <li>Banquet Hall seating and ceremony space</li>
-          <li>Outdoor patio/beer garden</li>
-          <li>Full-service bar</li>
-          <li>Free on-site parking</li>
-        </ul>
-      </div>
-
-      <div class="venue-card">
-        <h2>Directions & Parking</h2>
-        <p>Easy access from I-65 and I-264. Free parking on-site. Rideshare drop-off at the main entrance.</p>
-        <p>
-          <a class="btn btn-outline" href="https://www.google.com/maps/place/German+American+Club/@38.214847,-85.719941,15z" target="_blank" rel="noopener">
-            Open in Google Maps
-          </a>
-        </p>
-      </div>
-
-      <div class="venue-card">
-        <h2>Venue Photos</h2>
-        <div class="gallery">
-          <div class="gallery-item" aria-label="Exterior"></div>
-          <div class="gallery-item" aria-label="Banquet Hall"></div>
-          <div class="gallery-item" aria-label="Beer Garden"></div>
-        </div>
-        <p class="caption">Representative photos—final setup will be arranged for the event.</p>
-      </div>
-
-      <div class="venue-card cta">
-        <h2>RSVP & Updates</h2>
-        <p>Head back to the main event page for RSVP details and updates as we approach May 23, 2026.</p>
-        <a class="btn btn-primary" href="#" onclick="showPage(event,'main')">Go to Event Details</a>
-      </div>
-    </div>
-  </div>
-
+</div>
   <!-- Modal for enlarged photos -->
   <div id="photoModal" class="modal" onclick="closeModal()">
     <span class="close" onclick="closeModal()">&times;</span>
