@@ -647,21 +647,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Click-to-enlarge for the 3D ring
+/************** LIGHTBOX (3D ring) **************/
 document.addEventListener('DOMContentLoaded', () => {
-  const wrap = document.getElementById('venueRing');
-  if (!wrap) return;
+  const lb = document.getElementById('ringLightbox');
+  const lbImg = document.getElementById('ringLbi');
+  const btnClose = lb ? lb.querySelector('.ring-lb-close') : null;
+  let pausedRing = null;
 
-  const ring = wrap.querySelector('.ring');
-  const cards = [...ring.querySelectorAll('img')];
-  // ...rest of your layout code here
-});
+  // If markup isn't present, no-op safely
+  if (!lb || !lbImg || !btnClose) return;
 
   function openLB(imgEl){
-    const full = imgEl.dataset.full || imgEl.src; // support data-full if you have bigger files
+    const full = imgEl.dataset.full || imgEl.src; // supports data-full
     lbImg.src = full;
     lb.setAttribute('aria-hidden', 'false');
     document.documentElement.style.overflow = 'hidden';
+
     pausedRing = imgEl.closest('.ring');
     if (pausedRing) pausedRing.style.animationPlayState = 'paused';
   }
@@ -674,7 +675,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pausedRing = null;
   }
 
-  // Open when clicking any image inside a .ring
+  // Open when clicking any image inside a .ring (works with your Venue ring)
   document.addEventListener('click', (e) => {
     const img = e.target.closest('.ring img');
     if (img) openLB(img);
@@ -682,7 +683,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Close controls
   btnClose.addEventListener('click', closeLB);
-  // click on backdrop (not the image) closes
+  // click on backdrop (but not the image) closes
   lb.addEventListener('click', (e) => { if (e.target === lb) closeLB(); });
   // ESC closes
   document.addEventListener('keydown', (e) => {
@@ -690,6 +691,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') closeLB();
   });
 });
+
 /************** OPTIONAL: Quick cache reset **************/
 function clearLocalCaches(){
   try { localStorage.removeItem(LS_KEY); } catch(e){}
