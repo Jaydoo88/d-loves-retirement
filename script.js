@@ -649,10 +649,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Click-to-enlarge for the 3D ring
 document.addEventListener('DOMContentLoaded', () => {
-  const lb = document.getElementById('ringLightbox');
-  const lbImg = document.getElementById('ringLbi');
-  const btnClose = lb.querySelector('.ring-lb-close');
-  let pausedRing = null;
+  const wrap = document.getElementById('venueRing');
+  if (!wrap) return;
+
+  const ring = wrap.querySelector('.ring');
+  const cards = [...ring.querySelectorAll('img')];
+  // ...rest of your layout code here
+});
 
   function openLB(imgEl){
     const full = imgEl.dataset.full || imgEl.src; // support data-full if you have bigger files
