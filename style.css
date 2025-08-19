@@ -119,22 +119,6 @@ body {
   padding-bottom: 10px;
 }
 
-/* Row for golf + venue banner cards */
-.banner-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px; /* space between the two cards */
-  margin: 30px auto;
-  max-width: 1200px;
-}
-
-/* Responsive: stack on mobile */
-@media (max-width: 768px) {
-  .banner-row {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* EVENT DETAILS: blue panel with thin red top border */
 .event-details {
   background: linear-gradient(135deg, #496eb9 0%, var(--patriot-blue) 100%);
@@ -373,9 +357,10 @@ body {
 .rsvp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .rsvp-name { font-size: 1.2rem; font-weight: bold; color: var(--patriot-blue); }
 .rsvp-status { padding: 5px 15px; border-radius: 20px; font-size: .9rem; font-weight: bold; }
-.status-yes { background: #2e7d32; color: #fff; }
-.status-no { background: #b22234; color: #fff; }
-.status-maybe { background: #e0a800; color: #212529; }
+/* Scope pill colors to the status element so they don't override other chips */
+.rsvp-status.status-yes   { background: #2e7d32; color: #fff; }
+.rsvp-status.status-no    { background: #b22234; color: #fff; }
+.rsvp-status.status-maybe { background: #e0a800; color: #212529; }
 
 /* MODAL */
 .modal {
@@ -392,7 +377,7 @@ body {
 }
 .close:hover { opacity: .7; }
 
-/* Golf Outing Banner Card */
+/* Golf Outing Banner Card (single source of truth) */
 .golf-banner-card {
   border-radius: 15px;
   overflow: hidden;
@@ -400,16 +385,15 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,.25);
   background: #fff;
   text-align: center;
-
-  /* Match other cards */
   max-width: 550px;
   width: 100%;
 }
 .golf-banner-img { 
-   display: block; width: 100%; /* stretch to card width */ 
-   height: auto; /* maintain proportions */ 
+   display: block; width: 100%;
+   height: auto; 
    border-radius: 15px 15px 0 0; 
-   object-fit: cover; 
+   object-fit: contain;
+   background: #f8f9fc;
 }
 .golf-banner-footer {
   padding: 16px;
@@ -426,7 +410,6 @@ body {
   transition: background .2s ease, transform .2s ease;
   box-shadow: 0 6px 14px rgba(0,0,0,.25);
 }
-
 .golf-btn:hover {
   background: #7a1e2b;
   transform: translateY(-2px);
@@ -476,13 +459,13 @@ body {
   display: block;
 }
 .sg-cap {
-  white-space: nowrap;       /* Prevents text from wrapping to a new line */
-  overflow: hidden;          /* Hides any overflow past the box width */
-  text-overflow: ellipsis;   /* Adds "..." if text is too long */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   display: block;
   text-align: center;
-  font-size: 0.85rem;        /* Adjust font size so it fits better */
-  width: 100%;               /* Matches the width of the image */
+  font-size: 0.85rem;
+  width: 100%;
 }
 /* arrows */
 .sg-btn{
@@ -511,6 +494,7 @@ body {
   .timeline-item { flex-direction: column; text-align: center; }
   .timeline-photo { margin-right: 0; margin-bottom: 15px; }
 }
+
 /* Career Highlights layout */
 .career-highlights{
   background: rgba(255,255,255,.98);
@@ -580,16 +564,15 @@ body {
   object-fit: cover;
   display: block;
 }
+
 /* Venue Detail Card */
 .venue-details-card {
   border-radius: 15px;
   overflow: hidden;
   margin: 30px auto;
   box-shadow: 0 10px 25px rgba(0,0,0,.25);
-
   max-width: 1200px;
   width: 100%;
-
   background: url('assets/venuebanner.jpg') no-repeat center center;
   background-size: cover;
   position: relative;
@@ -600,9 +583,9 @@ body {
 /* 3D Ring */
 .ring-wrap{
   width:min(100%, 900px);
-  aspect-ratio: 16/9;             /* keeps the ring nicely framed */
+  aspect-ratio: 16/9;
   margin:auto;
-  perspective: 1200px;            /* depth */
+  perspective: 1200px;
   position: relative;
 }
 .ring{
@@ -617,7 +600,7 @@ body {
 
 .ring img{
   position:absolute; top:50%; left:50%;
-  width:240px; height:320px;      /* card size — adjust as needed */
+  width:240px; height:320px;
   object-fit: cover;
   border-radius:14px;
   box-shadow: 0 12px 28px rgba(0,0,0,.28);
@@ -665,18 +648,17 @@ body {
 }
 .ring-lb-close:hover{ background: rgba(255,255,255,.12); }
 
+/* Optionally hide the ring on the Golf page (leave if you ever add a ring there) */
+#golf-page .ring-wrap { display: none !important; }
+
 /* Golf Detail Card */
 .golf-details-card {
   border-radius: 15px;
   overflow: hidden;
   margin: 30px auto;
   box-shadow: 0 10px 25px rgba(0,0,0,.25);
-
-  /* match other cards */
-  max-width: 1200px;     /* <-- change this to whatever your other cards use */
+  max-width: 1200px;
   width: 100%;
-
-  /* background image */
   background: url('assets/golfouting.jpg') no-repeat center center;
   background-size: cover;
   position: relative;
@@ -686,18 +668,16 @@ body {
 
 /* overlay to make text readable */
 .golf-details-overlay {
-  background: rgba(0,0,0,0.45);  /* dark tint */
+  background: rgba(0,0,0,0.45);
   padding: 24px;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-
 .golf-details-overlay h3,
-.golf-details-overlay p {
-  margin: 0 0 10px;
-}
+.golf-details-overlay p { margin: 0 0 10px; }
+
 /* --- Mobile hamburger menu --- */
 .mobile-nav-toggle {
   display: none;             /* hidden on desktop */
@@ -746,8 +726,10 @@ body {
   .mobile-nav-toggle { display: block; }
   .nav-buttons { display: none; }  /* hide desktop chip buttons */
   .mobile-nav[aria-hidden="false"] { display: block; }
+  .mobile-nav:not([hidden]) { display: block; } /* also show if 'hidden' removed */
 }
-/* --- Banner pair: golf + venue side-by-side and aligned --- */
+
+/* --- Banner pair: golf + venue side-by-side and aligned (single version) --- */
 .banner-row{
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -755,55 +737,19 @@ body {
   margin: 30px auto;
   max-width: 1200px;
 }
-
-/* Make each card a two-row layout: image (flexible) + footer (auto) */
-.banner-row .golf-banner-card{
-  display: grid;
-  grid-template-rows: 1fr auto;
-  max-width: none;      /* let them expand equally */
-}
-
-/* Force both images to fill their area the same way */
-.banner-row .golf-banner-img{
-  width: 100%;
-  height: 280px;        /* consistent visual height */
-  object-fit: cover;    /* fill like your celebration card */
-  display: block;
-  border-radius: 15px 15px 0 0;
-}
-
-/* Keep footer heights consistent so buttons line up */
-.banner-row .golf-banner-footer{
-  padding: 16px;
-  background: #f8f9fc;
-  min-height: 68px;     /* ensures same footer height across both */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@media (max-width: 768px){
-  .banner-row{ grid-template-columns: 1fr; }
-  .banner-row .golf-banner-img{ height: 220px; }
-  .banner-row .golf-banner-footer{ min-height: 60px; }
-}
-/* Show the entire image in the banner cards (no cropping) */
-.banner-row .golf-banner-img{
-  width: 100%;
-  height: 280px;               /* keep the same visual height you liked */
-  object-fit: contain;         /* <-- show full image, no cut off */
-  background: #f8f9fc;         /* subtle backdrop behind letterboxing */
-  display: block;
-  border-radius: 15px 15px 0 0;
-}
-
-/* Keep footers aligned */
 .banner-row .golf-banner-card{
   display: grid;
   grid-template-rows: 1fr auto;
   max-width: none;
 }
-
+.banner-row .golf-banner-img{
+  width: 100%;
+  height: 280px;               /* keep the same visual height */
+  object-fit: contain;         /* show full image, no cut off */
+  background: #f8f9fc;         /* subtle backdrop behind letterboxing */
+  display: block;
+  border-radius: 15px 15px 0 0;
+}
 .banner-row .golf-banner-footer{
   padding: 16px;
   background: #f8f9fc;
@@ -812,8 +758,8 @@ body {
   align-items: center;
   justify-content: center;
 }
-
 @media (max-width: 768px){
+  .banner-row{ grid-template-columns: 1fr; }
   .banner-row .golf-banner-img{ height: 220px; }
   .banner-row .golf-banner-footer{ min-height: 60px; }
 }
