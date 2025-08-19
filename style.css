@@ -641,6 +641,30 @@ body {
   .ring img{ width:160px; height:220px; }
 }
 
+/* Minimal lightbox */
+.ring-lb{
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.86);
+  opacity: 0; pointer-events: none; transition: opacity .2s ease;
+  z-index: 9999;
+}
+.ring-lb[aria-hidden="false"]{ opacity: 1; pointer-events: auto; }
+
+.ring-lb img{
+  max-width: 92vw; max-height: 90vh;
+  border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.4);
+  background: #0b0f1a;
+}
+
+.ring-lb-close{
+  position: absolute; top: 16px; right: 16px;
+  background: rgba(0,0,0,.4); color: #fff;
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 999px; padding: .45rem .65rem; cursor: pointer;
+}
+.ring-lb-close:hover{ background: rgba(255,255,255,.12); }
+
 /* Golf Detail Card */
 .golf-details-card {
   border-radius: 15px;
