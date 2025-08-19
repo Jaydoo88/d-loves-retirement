@@ -614,6 +614,39 @@ function hydrateGolfInfo(){
   });
 })();
 
+// 3D Ring init — paste into your main JS file
+document.addEventListener('DOMContentLoaded', () => {
+  const wraps = document.querySelectorAll('.ring-wrap');
+
+  wraps.forEach((wrap) => {
+    if (wrap.dataset.ringInit) return; // avoid double init
+    const ring = wrap.querySelector('.ring') || wrap;
+    const cards = [...ring.querySelectorAll('img')];
+    if (!cards.length) return;
+
+    function radiusFromWrap(){
+      const w = wrap.getBoundingClientRect().width || 900;
+      return Math.max(220, Math.min(520, Math.round(w / 2.2)));
+    }
+
+    function layout(){
+      const n = Math.max(1, cards.length);
+      const radius = radiusFromWrap();
+      cards.forEach((el, i) => {
+        const angle = (360 / n) * i;
+        el.style.setProperty('--ry', angle + 'deg');
+        el.style.setProperty('--tz', radius + 'px');
+        el.style.transform =
+          `translate(-50%,-50%) rotateY(${angle}deg) translateZ(${radius}px)`;
+      });
+    }
+
+    layout();
+    window.addEventListener('resize', layout);
+    wrap.dataset.ringInit = '1';
+  });
+});
+
 /************** OPTIONAL: Quick cache reset **************/
 function clearLocalCaches(){
   try { localStorage.removeItem(LS_KEY); } catch(e){}
