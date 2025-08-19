@@ -665,6 +665,9 @@ body {
 }
 .ring-lb-close:hover{ background: rgba(255,255,255,.12); }
 
+/* Hide the ring on the Golf page/section */
+#golf .ring-wrap { display: none !important; }
+
 /* Golf Detail Card */
 .golf-details-card {
   border-radius: 15px;
