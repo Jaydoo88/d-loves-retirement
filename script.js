@@ -647,6 +647,46 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Click-to-enlarge for the 3D ring
+document.addEventListener('DOMContentLoaded', () => {
+  const lb = document.getElementById('ringLightbox');
+  const lbImg = document.getElementById('ringLbi');
+  const btnClose = lb.querySelector('.ring-lb-close');
+  let pausedRing = null;
+
+  function openLB(imgEl){
+    const full = imgEl.dataset.full || imgEl.src; // support data-full if you have bigger files
+    lbImg.src = full;
+    lb.setAttribute('aria-hidden', 'false');
+    document.documentElement.style.overflow = 'hidden';
+    pausedRing = imgEl.closest('.ring');
+    if (pausedRing) pausedRing.style.animationPlayState = 'paused';
+  }
+
+  function closeLB(){
+    lb.setAttribute('aria-hidden','true');
+    lbImg.src = '';
+    document.documentElement.style.overflow = '';
+    if (pausedRing) pausedRing.style.animationPlayState = '';
+    pausedRing = null;
+  }
+
+  // Open when clicking any image inside a .ring
+  document.addEventListener('click', (e) => {
+    const img = e.target.closest('.ring img');
+    if (img) openLB(img);
+  });
+
+  // Close controls
+  btnClose.addEventListener('click', closeLB);
+  // click on backdrop (not the image) closes
+  lb.addEventListener('click', (e) => { if (e.target === lb) closeLB(); });
+  // ESC closes
+  document.addEventListener('keydown', (e) => {
+    if (lb.getAttribute('aria-hidden') === 'true') return;
+    if (e.key === 'Escape') closeLB();
+  });
+});
 /************** OPTIONAL: Quick cache reset **************/
 function clearLocalCaches(){
   try { localStorage.removeItem(LS_KEY); } catch(e){}
