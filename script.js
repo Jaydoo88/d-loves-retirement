@@ -384,5 +384,35 @@ function init3DRing() {
   });
 }
 
-// Initialize on page load
+// Initialize 3D ring when page loads
 document.addEventListener('DOMContentLoaded', init3DRing);
+
+
+/************** 3D RING LIGHTBOX **************/
+function initRingLightbox() {
+  const ring = document.getElementById('newsletterRing');
+  const lb = document.getElementById('ringLightbox');
+  const lbImg = lb?.querySelector('img');
+  const closeBtn = lb?.querySelector('.ring-lb-close');
+  if (!ring || !lb || !lbImg || !closeBtn) return;
+
+  // Open image in lightbox
+  ring.querySelectorAll('img').forEach(img => {
+    img.addEventListener('click', () => {
+      lbImg.src = img.src;
+      lb.setAttribute('aria-hidden', 'false');
+    });
+  });
+
+  // Close lightbox (via X, background, or ESC)
+  closeBtn.addEventListener('click', () => lb.setAttribute('aria-hidden', 'true'));
+  lb.addEventListener('click', e => {
+    if (e.target === lb) lb.setAttribute('aria-hidden', 'true');
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') lb.setAttribute('aria-hidden', 'true');
+  });
+}
+
+// Initialize lightbox on page load
+document.addEventListener('DOMContentLoaded', initRingLightbox);
