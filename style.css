@@ -764,5 +764,37 @@ body {
   .banner-row .golf-banner-footer{ min-height: 60px; }
 }
 
+/* Gradient Glow Callout */
+.callout-gradient{
+  --blue: var(--patriot-blue, #1e3c72);
+  --gold: #ffd54d;
+  display:flex; align-items:center; justify-content:center; gap:12px;
+  padding:10px 14px; margin:16px 0 8px; border-radius:12px;
+  background: linear-gradient(90deg, var(--blue) 0%, #29528f 40%, var(--gold) 100%);
+  color: var(--patriot-white, #fff);
+  box-shadow: 0 6px 22px rgba(0,0,0,.12), 0 0 24px rgba(255,213,77,.25);
+  position: relative;
+  opacity: 0; transform: translateY(-4px);
+  animation: calloutFade .5s ease forwards;
+}
+@keyframes calloutFade { to { opacity:1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce){
+  .callout-gradient{ animation:none; opacity:1; transform:none; }
+}
+.callout-text{ font-weight:600; letter-spacing:.2px; text-align:center; }
+.callout-cta{
+  border:0; border-radius:999px; padding:.45rem .9rem; cursor:pointer;
+  font-weight:700;
+  color:#1a1a2e; background: #ffe88a;
+  box-shadow: 0 2px 0 rgba(0,0,0,.1);
+}
+.callout-cta:hover{ filter: brightness(1.05); transform: translateY(-1px); }
+.callout-close{
+  position:absolute; right:8px; top:50%; transform: translateY(-50%);
+  background: transparent; color: inherit; border:0; font-size:18px; cursor:pointer;
+  opacity:.85;
+}
+.callout-close:hover{ opacity:1; }
+
 /* --------- Golf Outing (optional accent) --------- */
 .rsvp-item.golf { border-left-color: #1f7a1f; }
