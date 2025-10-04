@@ -1,24 +1,23 @@
 /************** CONFIG **************/
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_lkqKUOWTrA81DcvtRCtU8U3WGt2ggIhzMEYDG_XhT_00UJvzL7cL01LW3wXhh79r8Q/exec';
 
-const EVENT_START_ISO = ''; // e.g., "2025-10-18T18:00:00-07:00"
+const EVENT_START_ISO = '';
 const EVENT_END_ISO   = '';
 const EVENT_TITLE     = 'Officer Darren "D-Love" Johnson Retirement Celebration';
 const EVENT_LOCATION  = '';
 const EVENT_DETAILS   = 'Join us to celebrate a legacy of service.';
 
 /************** GOLF CONFIG **************/
-const GOLF_START_ISO = ''; // e.g., "2025-10-19T08:00:00-07:00"
+const GOLF_START_ISO = '';
 const GOLF_END_ISO   = '';
 const GOLF_TITLE     = 'D-Love Retirement Golf Outing';
-const GOLF_COURSE    = ''; // e.g., "Falcon Dunes Golf Course, 15100 W Northern Ave, Waddell, AZ"
+const GOLF_COURSE    = '';
 const GOLF_FORMAT    = 'Scramble';
 const GOLF_DETAILS   = 'Join us for a round to celebrate Darren!';
 
 /************** STATE **************/
 let rsvpList = [];
 const LS_KEY = 'rsvps_cache';
-
 let golfList = [];
 const GOLF_LS_KEY = 'golf_cache';
 
@@ -68,7 +67,7 @@ async function showPage(e, pageName) {
     try {
       const server = await loadFromGoogle();
       if (Array.isArray(server)) { rsvpList = server; saveCache(); }
-    } catch (_) { /* fall back to cache */ }
+    } catch (_) {}
     updateRSVPListPage();
   }
 
@@ -76,9 +75,12 @@ async function showPage(e, pageName) {
     try {
       const server = await loadGolfFromGoogle();
       if (Array.isArray(server)) { golfList = server; saveGolfCache(); }
-    } catch (_) { /* fallback to cache */ }
+    } catch (_) {}
     updateGolfPage();
   }
+
+  // Always scroll to top when switching pages
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 /************** FORM BEHAVIOR (RSVP) **************/
@@ -94,7 +96,7 @@ const rsvpForm = byId('rsvpForm');
 if (rsvpForm) {
   rsvpForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    if (byId('company')?.value) return; // honeypot
+    if (byId('company')?.value) return;
 
     const fd = new FormData(this);
     if(!fd.get('name') || !fd.get('email') || !fd.get('attending')){
@@ -131,7 +133,8 @@ if (rsvpForm) {
     setTimeout(() => { if (success) success.style.display = 'none'; }, 5000);
 
     try { await sendToGoogle(rsvp); }
-    catch (e) { console.warn('RSVP sync failed:', e);
+    catch (e) {
+      console.warn('RSVP sync failed:', e);
       if (err){ err.style.display = 'block'; setTimeout(()=>{err.style.display='none';},7000); }
     }
   });
@@ -142,7 +145,7 @@ const golfForm = byId('golfForm');
 if (golfForm) {
   golfForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    if (byId('golfCompany')?.value) return; // honeypot
+    if (byId('golfCompany')?.value) return;
 
     const fd = new FormData(this);
     const name  = (fd.get('name')||'').trim();
@@ -151,7 +154,7 @@ if (golfForm) {
 
     const record = {
       name,
-      email, // stored, but NOT displayed publicly
+      email,
       handicap: fd.get('handicap') || '',
       party_size: fd.get('party_size') || '1',
       pairing_pref: (fd.get('pairing_pref')||'').trim(),
@@ -166,27 +169,17 @@ if (golfForm) {
     if (success && err) { success.style.display = 'block'; err.style.display = 'none'; }
     this.reset();
 
-    if (GOLF_START_ISO) {
-      const links = byId('golfCalendarLinks');
-      if (links){
-        links.innerHTML = `📅 Add to calendar:
-          <a href="${googleCalendarLinkGolf()}" target="_blank" rel="noopener">Google Calendar</a>
-          &middot; <a href="#" id="golfDlIcsLink">Download .ics</a>`;
-        links.style.display = 'block';
-        byId('golfDlIcsLink')?.addEventListener('click', (ev)=>{ev.preventDefault(); downloadGolfICS();});
-      }
-    }
-
     setTimeout(()=>{ if (success) success.style.display = 'none'; }, 5000);
 
     try { await sendGolfToGoogle(record); }
-    catch (e) { console.warn('Golf sync failed:', e);
+    catch (e) {
+      console.warn('Golf sync failed:', e);
       if (err){ err.style.display = 'block'; setTimeout(()=>{err.style.display='none';},7000); }
     }
   });
 }
 
-/************** GOOGLE APPS SCRIPT I/O (RSVP) **************/
+/************** GOOGLE APPS SCRIPT I/O **************/
 async function sendToGoogle(record){
   const res = await fetch(APPS_SCRIPT_URL, {
     method: 'POST',
@@ -208,23 +201,6 @@ async function loadFromGoogle(){
   return data;
 }
 
-async function refreshFromServer(){
-  try {
-    const res = await fetch(APPS_SCRIPT_URL, { method:'GET', mode:'cors' });
-    if (!res.ok) {
-      const t = await res.text().catch(()=> ''); throw new Error(`HTTP ${res.status} ${res.statusText} — ${t.slice(0,200)}`);
-    }
-    const data = await res.json();
-    if (!Array.isArray(data)) throw new Error('Response was not an array');
-    rsvpList = data; saveCache(); updateRSVPListPage();
-    alert('RSVPs refreshed.');
-  } catch (e){
-    console.warn('Refresh error:', e);
-    alert(`Could not refresh from server.\n${String(e).slice(0,200)}`);
-  }
-}
-
-/************** GOOGLE APPS SCRIPT I/O (GOLF) **************/
 async function sendGolfToGoogle(record){
   const res = await fetch(APPS_SCRIPT_URL, {
     method: 'POST',
@@ -243,50 +219,18 @@ async function loadGolfFromGoogle(){
   const res = await fetch(url, { method:'GET', mode:'cors' });
   if (!res.ok) throw new Error('Failed to load golf sign-ups');
   const data = await res.json();
-
-  // Normalize to an array
   let arr = [];
   if (Array.isArray(data)) arr = data;
   else if (data && Array.isArray(data.golf)) arr = data.golf;
-
-  // Keep only true golf rows (prevents phantom/test items)
   const isGolf = (r)=> r && (r.type === 'golf' || 'handicap' in r || 'party_size' in r);
   return (arr || []).filter(isGolf);
 }
 
-async function refreshGolfFromServer(){
-  try {
-    const data = await loadGolfFromGoogle();
-    golfList = data; saveGolfCache(); updateGolfPage();
-    alert('Golf sign-ups refreshed.');
-  } catch (e){
-    console.warn('Golf refresh error:', e);
-    alert(`Could not refresh from server.\n${String(e).slice(0,200)}`);
-  }
-}
-
 /************** CACHE **************/
 function saveCache(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(rsvpList)); }catch(e){} }
-function loadCache(){
-  try{
-    const raw = localStorage.getItem(LS_KEY);
-    if (raw){ const arr = JSON.parse(raw); if (Array.isArray(arr)) rsvpList = arr; }
-  }catch(e){}
-}
-
 function saveGolfCache(){ try{ localStorage.setItem(GOLF_LS_KEY, JSON.stringify(golfList)); }catch(e){} }
-function loadGolfCache(){
-  try{
-    const raw = localStorage.getItem(GOLF_LS_KEY);
-    if (!raw) return;
-    const arr = JSON.parse(raw);
-    if (!Array.isArray(arr)) return;
-    const isGolf = (r)=> r && (r.type === 'golf' || 'handicap' in r || 'party_size' in r);
-    golfList = arr.filter(isGolf);
-  }catch(e){}
-}
 
-/************** LIST/UI (RSVP) **************/
+/************** LIST/UI (RSVP & GOLF) **************/
 function updateRSVPListPage() {
   const attending = rsvpList.filter(r => r.attending === 'yes');
   const notAttending = rsvpList.filter(r => r.attending === 'no');
@@ -320,7 +264,7 @@ function updateRSVPListPage() {
         </div>
         <div style="margin-bottom:10px;">
           <strong>Organization:</strong> ${escapeHTML(r.organization || 'Not specified')}
-          ${r.attending === 'yes' ? `<br/><strong>Party Size:</strong> ${escapeHTML(r.guests || '1')} ${(r.guests === '1' || !r.guests) ? 'person' : 'people'}` : ''}
+          ${r.attending === 'yes' ? `<br/><strong>Party Size:</strong> ${escapeHTML(r.guests || '1')}` : ''}
         </div>
         ${r.message ? `<div style="background: rgba(255,255,255,0.7); padding:10px; border-radius:5px; font-style:italic;">"${escapeHTML(r.message)}"</div>` : ''}
         <div style="margin-top:10px; font-size:.9rem; color:#666;">Submitted: ${time}</div>
@@ -332,28 +276,6 @@ function escapeHTML(str=''){
   return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 
-function exportCSV(){
-  if (!rsvpList.length){ alert('No data to export.'); return; }
-  const headers = ['name','email','organization','attending','guests','message','timestamp'];
-  const rows = [headers.join(',')].concat(
-    rsvpList.map(r => headers.map(h => {
-      const val = (r[h] ?? '').toString().replace(/"/g,'""');
-      return `"${val}"`;
-    }).join(','))
-  );
-  const blob = new Blob([rows.join('\r\n')], {type:'text/csv'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'rsvps.csv';
-  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-}
-
-function copyShare(){
-  const url = location.origin + location.pathname + '#rsvp-list';
-  navigator.clipboard.writeText(url).then(()=>alert('Share link copied!'));
-}
-
-/************** LIST/UI (GOLF) **************/
 function updateGolfPage(){
   const totalSignups = golfList.length;
   const totalPlayers = golfList.reduce((s, r)=> s + parseInt(r.party_size||'1',10), 0);
@@ -392,37 +314,13 @@ function updateGolfPage(){
   }).join('');
 }
 
-function exportGolfCSV(){
-  if (!golfList.length){ alert('No data to export.'); return; }
-  const headers = ['name','email','handicap','party_size','pairing_pref','notes','timestamp'];
-  const rows = [headers.join(',')].concat(
-    golfList.map(r => headers.map(h => {
-      const val = (r[h] ?? '').toString().replace(/"/g,'""');
-      return `"${val}"`;
-    }).join(','))
-  );
-  const blob = new Blob([rows.join('\r\n')], {type:'text/csv'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'golf_signups.csv';
-  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-}
-
-function copyGolfShare(){
-  const url = location.origin + location.pathname + '#golf';
-  navigator.clipboard.writeText(url).then(()=>alert('Golf share link copied!'));
-}
-
-// Hotels Gradient Callout (dismiss + remember)
+/************** HOTELS CALLOUT (dismiss + remember) **************/
 document.addEventListener('DOMContentLoaded', () => {
   const KEY = 'hotels_callout_dismissed';
   const bar = document.getElementById('hotelsCallout');
   if (!bar) return;
 
-  // Hide if previously dismissed
   try { if (localStorage.getItem(KEY) === '1') { bar.style.display = 'none'; return; } } catch(e){}
-
-  // Close handler
   const closeBtn = bar.querySelector('.callout-close');
   if (closeBtn){
     closeBtn.addEventListener('click', () => {
@@ -430,4 +328,35 @@ document.addEventListener('DOMContentLoaded', () => {
       try { localStorage.setItem(KEY, '1'); } catch(e){}
     });
   }
+});
+
+/************** MOBILE NAV TOGGLE **************/
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById('mobileMenuBtn');
+  const mobileNav = document.getElementById('mobileNav');
+
+  if (!toggleBtn || !mobileNav) return;
+
+  toggleBtn.addEventListener('click', () => {
+    const isHidden =
+      mobileNav.getAttribute('aria-hidden') === 'true' ||
+      mobileNav.hasAttribute('hidden');
+
+    if (isHidden) {
+      mobileNav.setAttribute('aria-hidden', 'false');
+      mobileNav.removeAttribute('hidden');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+    } else {
+      mobileNav.setAttribute('aria-hidden', 'true');
+      mobileNav.setAttribute('hidden', '');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // closes menu after navigation
+  window.closeMobileNav = function () {
+    mobileNav.setAttribute('aria-hidden', 'true');
+    mobileNav.setAttribute('hidden', '');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+  };
 });
