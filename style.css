@@ -804,5 +804,20 @@ body {
   margin-top: 0 !important;      /* remove extra gap above */
   margin-bottom: 12px;           /* match the space below before the photo reel */
 }
+/* 1) No extra space below the banner row */
+.banner-row { 
+  margin-bottom: 0 !important; 
+}
+
+/* 2) Let the callout own the spacing equally (adjust 12px to taste) */
+#hotelsCallout.callout-gradient { 
+  margin: 12px 0 !important; 
+}
+
+/* 3) No extra space above the Photo Reel */
+.photo-gallery { 
+  margin-top: 0 !important; 
+}
+
 /* --------- Golf Outing (optional accent) --------- */
 .rsvp-item.golf { border-left-color: #1f7a1f; }
