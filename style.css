@@ -796,28 +796,38 @@ body {
 }
 .callout-close:hover{ opacity:1; }
 
-.banner-row {
-  margin-bottom: 12px !important; /* tighten space below banners */
-}
-
-#hotelsCallout.callout-gradient {
-  margin-top: 0 !important;      /* remove extra gap above */
-  margin-bottom: 12px;           /* match the space below before the photo reel */
-}
-/* 1) No extra space below the banner row */
-.banner-row { 
-  margin-bottom: 0 !important; 
-}
-
-/* 2) Let the callout own the spacing equally (adjust 12px to taste) */
-#hotelsCallout.callout-gradient { 
-  margin: 12px 0 !important; 
-}
-
-/* 3) No extra space above the Photo Reel */
-.photo-gallery { 
-  margin-top: 0 !important; 
-}
-
 /* --------- Golf Outing (optional accent) --------- */
 .rsvp-item.golf { border-left-color: #1f7a1f; }
+
+/* =========================================================
+   COMPACT, CONSISTENT VERTICAL RHYTHM (site-wide spacing)
+   Change --vr-gap once to tune all section gaps.
+   ========================================================= */
+:root { --vr-gap: 16px; }
+
+/* Let major blocks share one consistent outer spacing */
+.content-grid,
+.banner-row,
+#hotelsCallout.callout-gradient,
+.photo-gallery,
+.career-highlights,
+.career-timeline,
+.rsvp-section,
+.rsvp-summary,
+.rsvp-list,
+.venue-details-card,
+.golf-details-card,
+.ring-wrap {
+  margin-top: var(--vr-gap) !important;
+  margin-bottom: var(--vr-gap) !important;
+}
+
+/* Ensure the banner row’s inner cards don’t add extra space */
+.banner-row .golf-banner-card { margin: 0 !important; }
+
+/* Keep the callout evenly spaced between banners and the photo reel */
+.banner-row + #hotelsCallout.callout-gradient { margin-top: var(--vr-gap) !important; }
+#hotelsCallout.callout-gradient + .photo-gallery { margin-top: var(--vr-gap) !important; }
+
+/* Optional: make the header gap align with the rhythm (slightly larger is fine) */
+.header { margin-bottom: calc(var(--vr-gap) * 1.5) !important; }
