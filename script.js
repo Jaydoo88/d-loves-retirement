@@ -81,6 +81,11 @@ async function showPage(e, pageName) {
 
   // Always scroll to top when switching pages
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Re-init ring if switching to venue page
+  if (pageName === 'venue') {
+    setTimeout(init3DRing, 400);
+  }
 }
 
 /************** FORM BEHAVIOR (RSVP) **************/
@@ -360,3 +365,24 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleBtn.setAttribute('aria-expanded', 'false');
   };
 });
+
+/************** 3D RING INITIALIZATION **************/
+function init3DRing() {
+  const ring = document.getElementById('newsletterRing');
+  if (!ring) return;
+
+  const imgs = ring.querySelectorAll('img');
+  const total = imgs.length;
+  const radius = 430; // distance from center
+  const degStep = 360 / total;
+
+  imgs.forEach((img, i) => {
+    const ry = degStep * i;
+    img.style.setProperty('--ry', ry + 'deg');
+    img.style.setProperty('--tz', radius + 'px');
+    img.style.transform = `translate(-50%,-50%) rotateY(${ry}deg) translateZ(${radius}px)`;
+  });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', init3DRing);
