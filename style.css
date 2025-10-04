@@ -841,3 +841,48 @@ body {
 
 /* Optional: make the header gap align with the rhythm (slightly larger is fine) */
 .header { margin-bottom: calc(var(--vr-gap) * 1.5) !important; }
+
+/* === Universal Lightbox (for Photo Reel, shared sitewide) === */
+.universal-lb {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.88);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 9999;
+}
+
+.universal-lb[aria-hidden="false"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.universal-lb img {
+  max-width: 92vw;
+  max-height: 90vh;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  background: #0b0f1a;
+}
+
+.universal-lb-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  padding: 0.45rem 0.65rem;
+  cursor: pointer;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.universal-lb-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
