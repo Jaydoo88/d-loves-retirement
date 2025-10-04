@@ -113,7 +113,9 @@
       <!-- Hotels Callout (Gradient Glow Bar) -->
 <div id="hotelsCallout" class="callout-gradient" role="region" aria-label="Hotels information">
   <span class="callout-text">✨ Explore lodging options for May 23 weekend</span>
-  <button class="callout-cta" onclick="showPage(event,'hotels')">View Hotels</button>
+  <button class="callout-cta" onclick="showPage(event,'hotels'); window.scrollTo({ top: 0, behavior: 'smooth' });">
+  View Hotels
+</button>
   <button class="callout-close" aria-label="Dismiss">×</button>
 </div>    
 
