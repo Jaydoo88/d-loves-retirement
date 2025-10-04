@@ -22,14 +22,20 @@
 </head>
 <body>
   <!-- Mobile hamburger (shown only on small screens) -->
-<button class="mobile-nav-toggle" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+<button
+  class="mobile-nav-toggle"
+  id="mobileMenuBtn"
+  aria-label="Open menu"
+  aria-expanded="false"
+  aria-controls="mobileNav"
+  type="button">          <!-- add this -->
   <span class="bar"></span>
   <span class="bar"></span>
   <span class="bar"></span>
 </button>
 
 <!-- Mobile menu (hidden by default) -->
-<div class="mobile-nav" id="mobileNav" hidden>
+<div class="mobile-nav" id="mobileNav" hidden aria-hidden="true">  <!-- add this -->
   <button class="nav-btn" onclick="showPage(event,'main'); closeMobileNav()">Main Page</button>
   <button class="nav-btn" onclick="showPage(event,'rsvp-list'); closeMobileNav()">RSVP List</button>
   <button class="nav-btn" onclick="showPage(event,'golf'); closeMobileNav()">Golf Outing</button>
