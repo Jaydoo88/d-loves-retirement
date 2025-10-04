@@ -412,3 +412,22 @@ function copyGolfShare(){
   const url = location.origin + location.pathname + '#golf';
   navigator.clipboard.writeText(url).then(()=>alert('Golf share link copied!'));
 }
+
+// Hotels Gradient Callout (dismiss + remember)
+document.addEventListener('DOMContentLoaded', () => {
+  const KEY = 'hotels_callout_dismissed';
+  const bar = document.getElementById('hotelsCallout');
+  if (!bar) return;
+
+  // Hide if previously dismissed
+  try { if (localStorage.getItem(KEY) === '1') { bar.style.display = 'none'; return; } } catch(e){}
+
+  // Close handler
+  const closeBtn = bar.querySelector('.callout-close');
+  if (closeBtn){
+    closeBtn.addEventListener('click', () => {
+      bar.style.display = 'none';
+      try { localStorage.setItem(KEY, '1'); } catch(e){}
+    });
+  }
+});
