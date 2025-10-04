@@ -796,5 +796,13 @@ body {
 }
 .callout-close:hover{ opacity:1; }
 
+.banner-row {
+  margin-bottom: 12px !important; /* tighten space below banners */
+}
+
+#hotelsCallout.callout-gradient {
+  margin-top: 0 !important;      /* remove extra gap above */
+  margin-bottom: 12px;           /* match the space below before the photo reel */
+}
 /* --------- Golf Outing (optional accent) --------- */
 .rsvp-item.golf { border-left-color: #1f7a1f; }
