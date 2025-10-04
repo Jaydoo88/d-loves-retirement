@@ -416,3 +416,42 @@ function initRingLightbox() {
 
 // Initialize lightbox on page load
 document.addEventListener('DOMContentLoaded', initRingLightbox);
+
+/************** UNIVERSAL LIGHTBOX (Photo Reel + other images) **************/
+document.addEventListener('DOMContentLoaded', () => {
+  // Create the lightbox element once on page load
+  let lb = document.createElement('div');
+  lb.className = 'universal-lb';
+  lb.id = 'universalLightbox';
+  lb.setAttribute('aria-hidden', 'true');
+  lb.innerHTML = `
+    <button class="universal-lb-close" aria-label="Close">&times;</button>
+    <img src="" alt="Expanded image">
+  `;
+  document.body.appendChild(lb);
+
+  const img = lb.querySelector('img');
+  const closeBtn = lb.querySelector('.universal-lb-close');
+
+  // Global openModal() function — works for photo reel, ring, etc.
+  window.openModal = function (src) {
+    img.src = src;
+    lb.setAttribute('aria-hidden', 'false');
+  };
+
+  // Close logic
+  function closeModal() {
+    lb.setAttribute('aria-hidden', 'true');
+    img.src = '';
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  lb.addEventListener('click', (e) => {
+    if (e.target === lb) closeModal(); // click outside image closes
+  });
+
+  // Close on ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+});
