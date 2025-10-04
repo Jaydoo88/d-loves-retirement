@@ -822,6 +822,11 @@ body {
   margin-bottom: var(--vr-gap) !important;
 }
 
+/* Ensure JS toggle overrides the base display:none */
+.mobile-nav[aria-hidden="false"],
+.mobile-nav:not([hidden]) {
+  display: block !important;
+}
 /* Ensure the banner row’s inner cards don’t add extra space */
 .banner-row .golf-banner-card { margin: 0 !important; }
 
