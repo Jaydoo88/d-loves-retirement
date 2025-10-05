@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -22,34 +22,34 @@
 </head>
 <body>
   <!-- Mobile hamburger (shown only on small screens) -->
-<button
-  class="mobile-nav-toggle"
-  id="mobileMenuBtn"
-  aria-label="Open menu"
-  aria-expanded="false"
-  aria-controls="mobileNav"
-  type="button">          <!-- add this -->
-  <span class="bar"></span>
-  <span class="bar"></span>
-  <span class="bar"></span>
-</button>
+  <button
+    class="mobile-nav-toggle"
+    id="mobileMenuBtn"
+    aria-label="Open menu"
+    aria-expanded="false"
+    aria-controls="mobileNav"
+    type="button">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
 
-<!-- Mobile menu (hidden by default) -->
-<div class="mobile-nav" id="mobileNav" hidden aria-hidden="true">  <!-- add this -->
-  <button class="nav-btn" onclick="showPage(event,'main'); closeMobileNav()">Main Page</button>
-  <button class="nav-btn" onclick="showPage(event,'rsvp-list'); closeMobileNav()">RSVP List</button>
-  <button class="nav-btn" onclick="showPage(event,'golf'); closeMobileNav()">Golf Outing</button>
-  <button class="nav-btn" onclick="showPage(event,'venue'); closeMobileNav()">Venue</button>
-  <button class="nav-btn" onclick="showPage(event,'hotels'); closeMobileNav()">Hotels</button>
-</div>
-  
+  <!-- Mobile menu (hidden by default) -->
+  <div class="mobile-nav" id="mobileNav" hidden aria-hidden="true">
+    <button class="nav-btn" onclick="showPage(event,'main'); closeMobileNav()">Main Page</button>
+    <button class="nav-btn" onclick="showPage(event,'rsvp-list'); closeMobileNav()">RSVP List</button>
+    <button class="nav-btn" onclick="showPage(event,'golf'); closeMobileNav()">Golf Outing</button>
+    <button class="nav-btn" onclick="showPage(event,'venue'); closeMobileNav()">Venue</button>
+    <button class="nav-btn" onclick="showPage(event,'hotels'); closeMobileNav()">Hotels</button>
+  </div>
+
   <!-- Navigation buttons -->
   <div class="nav-buttons">
-  <button class="nav-btn active" onclick="showPage(event,'main')">Main Page</button>
-  <button class="nav-btn" onclick="showPage(event,'rsvp-list')">RSVP List</button>
-  <button class="nav-btn" onclick="showPage(event,'golf')">Golf Outing</button>
-  <button class="nav-btn" onclick="showPage(event,'venue')">Venue</button>
-  <button class="nav-btn" onclick="showPage(event,'hotels')">Hotels</button>
+    <button class="nav-btn active" onclick="showPage(event,'main')">Main Page</button>
+    <button class="nav-btn" onclick="showPage(event,'rsvp-list')">RSVP List</button>
+    <button class="nav-btn" onclick="showPage(event,'golf')">Golf Outing</button>
+    <button class="nav-btn" onclick="showPage(event,'venue')">Venue</button>
+    <button class="nav-btn" onclick="showPage(event,'hotels')">Hotels</button>
   </div>
 
   <!-- MAIN PAGE -->
@@ -59,9 +59,10 @@
         <h1>Celebrating the Retirement of Officer <span style="display:block">Darren "D-Love" Johnson</span></h1>
         <h2>K9 Extraordinaire – A Legacy of Service</h2>
 
+        <!-- FIXED PATH to photos folder -->
         <img
           id="retireePhoto"
-          src="assets/dlovek9beginning.jpg"
+          src="assets/photos/dlovek9beginning.jpg"
           alt="Retiree with K9"
           class="retiree-photo"
           style="opacity:1; transition: opacity .6s ease"
@@ -73,7 +74,7 @@
         </p>
       </div>
 
-   <div class="content-grid">
+      <div class="content-grid">
         <div class="card event-details">
           <h3>🎉 Celebration Details</h3>
           <div class="event-info" id="eventInfoBox">
@@ -97,33 +98,33 @@
         </div>
       </div>
 
-<!-- Banner Cards Row -->
-<div class="banner-row">
-  <!-- Golf Outing Banner Card -->
-  <div class="golf-banner-card">
-    <img src="assets/golfoutingad.png" alt="Golf Outing Banner" class="golf-banner-img">
-    <div class="golf-banner-footer">
-      <a href="#golf-page" class="golf-btn" onclick="showPage(event, 'golf')">View &amp; Sign Up</a>
-    </div>
-  </div>
+      <!-- Banner Cards Row -->
+      <div class="banner-row">
+        <!-- Golf Outing Banner Card -->
+        <div class="golf-banner-card">
+          <img src="assets/golfoutingad.png" alt="Golf Outing Banner" class="golf-banner-img">
+          <div class="golf-banner-footer">
+            <a href="#golf-page" class="golf-btn" onclick="showPage(event, 'golf')">View &amp; Sign Up</a>
+          </div>
+        </div>
 
-  <!-- Venue Banner Card -->
-  <div class="golf-banner-card">
-    <img src="assets/venuebanner.png" alt="Venue Banner" class="golf-banner-img">
-    <div class="golf-banner-footer">
-      <a href="javascript:void(0)" onclick="showPage(event,'venue')" class="golf-btn">The Venue</a>
-    </div>
-  </div>
-</div>
-  
+        <!-- Venue Banner Card -->
+        <div class="golf-banner-card">
+          <img src="assets/venuebanner.png" alt="Venue Banner" class="golf-banner-img">
+          <div class="golf-banner-footer">
+            <a href="javascript:void(0)" onclick="showPage(event,'venue')" class="golf-btn">The Venue</a>
+          </div>
+        </div>
+      </div>
+
       <!-- Hotels Callout (Gradient Glow Bar) -->
-<div id="hotelsCallout" class="callout-gradient" role="region" aria-label="Hotels information">
-  <span class="callout-text">✨ Explore lodging options for May 23 weekend</span>
-  <button class="callout-cta" onclick="showPage(event,'hotels'); window.scrollTo({ top: 0, behavior: 'smooth' });">
-  View Hotels
-</button>
-  <button class="callout-close" aria-label="Dismiss">×</button>
-</div>    
+      <div id="hotelsCallout" class="callout-gradient" role="region" aria-label="Hotels information">
+        <span class="callout-text">✨ Explore lodging options for May 23 weekend</span>
+        <button class="callout-cta" onclick="showPage(event,'hotels'); window.scrollTo({ top: 0, behavior: 'smooth' });">
+          View Hotels
+        </button>
+        <button class="callout-close" aria-label="Dismiss">×</button>
+      </div>
 
       <!-- Scrolling Gallery (Carousel) -->
       <div class="photo-gallery" id="photo-reel">
@@ -208,141 +209,7 @@
         </div>
       </div>
 
-      <!-- Universal Lightbox -->
-<div class="universal-lb" id="universalLightbox" aria-hidden="true">
-  <button class="universal-lb-close" aria-label="Close">×</button>
-  <img src="" alt="Expanded photo">
-</div>
-      
-      <!-- Career Highlights -->
-      <section class="career-highlights">
-        <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px;">📜 Career Highlights</h3>
-        <div class="hl-grid">
-          <article class="hl-card">
-            <div class="hl-content">
-              <h4>Accomplishments & Awards</h4>
-              <ul>
-                <li>Distinguished/Expert firearms qualifications (1988–2026)</li>
-                <li>USAF Top Dog competitions: 1st (Base-wide, 1989); 2nd (USAFE, 1990)</li>
-                <li>USAF Performance & Achievement/Commendation medals (1992–1994)</li>
-                <li>Knights of Columbus “Blue Coat” Award (1994)</li>
-                <li>Good Conduct, Longevity & Outstanding Unit Awards (1988–1994)</li>
-                <li>U.S. Customs Millennium Tour of Duty (1999–2000)</li>
-                <li>Founding Member/Employee of DHS (2003)</li>
-                <li>CBP Blue Eagle Award (2014)</li>
-                <li>Unit Citation Awards ×5 (2008–2026)</li>
-              </ul>
-            </div>
-          </article>
-          <article class="hl-card">
-            <div class="hl-content">
-              <h4>Memberships</h4>
-              <ul>
-                <li>Dogs Against Drugs & Crime; National L.E. K-9 Assoc. (2001)</li>
-                <li>American Legion (2008)</li>
-                <li>Veterans of Foreign Wars — Lifetime (since 2010)</li>
-                <li>Guns of Justice L.E. Motorcycle Club (2009)</li>
-                <li>German American Club (2025)</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Career Timeline -->
-      <section class="career-section">
-        <div class="career-timeline">
-          <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px;">🏆 Career Journey</h3>
-
-          <div class="timeline-item">
-            <img src="assets/airforce.png" alt="United States Air Force" class="timeline-photo" />
-            <div class="timeline-content">
-              <h4>United States Air Force (USAF)</h4>
-              <p>1988 – 1994 · Built the foundation of service, discipline, and mission focus.</p>
-            </div>
-            <img src="assets/security-police.png" alt="USAF Badge" class="timeline-badge" />
-          </div>
-
-          <div class="timeline-item">
-            <img src="assets/secret-servicelogo.png" alt="U.S. Secret Service" class="timeline-photo" />
-            <div class="timeline-content">
-              <h4>U.S. Secret Service</h4>
-              <p>1995 – 1997 · Protection & investigations in support of national leadership.</p>
-            </div>
-            <img src="assets/secret-service.jpg" alt="Secret Service Badge" class="timeline-badge" />
-          </div>
-
-          <div class="timeline-item">
-            <img src="assets/us-customs-service.png" alt="U.S. Customs Service" class="timeline-photo" />
-            <div class="timeline-content">
-              <h4>U.S. Customs Service</h4>
-              <p>1997 – 2003 · Trade enforcement and border security—the legacy agency that later integrated into DHS.</p>
-            </div>
-            <img src="assets/us-customs-badge.png" alt="U.S. Customs Service Badge" class="timeline-badge" />
-          </div>
-
-          <div class="timeline-item">
-            <img src="assets/cbplogo.png" alt="U.S. Customs and Border Protection" class="timeline-photo" />
-            <div class="timeline-content">
-              <h4>U.S. Customs and Border Protection (CBP)</h4>
-              <p>2003 – 2026 · Frontline homeland security—K9 operations, leadership, and mentorship.</p>
-            </div>
-            <img src="assets/cbp.png" alt="CBP Badge" class="timeline-badge" />
-          </div>
-        </div>
-      </section>
-
-      <!-- RSVP -->
-      <div class="rsvp-section">
-        <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px; font-size:2rem;">Please RSVP</h3>
-        <form class="rsvp-form" id="rsvpForm" autocomplete="on" novalidate>
-          <input type="text" id="company" name="company" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
-
-          <div class="form-group">
-            <label for="name">Full Name *</label>
-            <input type="text" id="name" name="name" required/>
-          </div>
-
-          <div class="form-group">
-            <label for="email">Email Address *</label>
-            <input type="email" id="email" name="email" required/>
-          </div>
-
-          <div class="form-group">
-            <label for="organization">Department/Organization</label>
-            <input type="text" id="organization" name="organization" placeholder="e.g., DHS, CBP, TSA, etc."/>
-          </div>
-
-          <div class="form-group">
-            <label for="attending">Will you be attending? *</label>
-            <select id="attending" name="attending" required>
-              <option value="">Please select</option>
-              <option value="yes">Yes, I'll be there!</option>
-              <option value="no">Unfortunately, I cannot attend</option>
-              <option value="maybe">Not sure yet</option>
-            </select>
-          </div>
-
-          <div class="form-group" id="guestGroup" style="display:none;">
-            <label for="guests">Number of guests (including yourself)</label>
-            <select id="guests" name="guests">
-              <option value="1">Just me</option>
-              <option value="2">2 people</option>
-              <option value="3">3 people</option>
-              <option value="4">4 people</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="message">Share a memory or message (optional)</label>
-            <textarea id="message" name="message" rows="4" placeholder="Share a favorite memory, congratulations, or well wishes..."></textarea>
-          </div>
-
-          <button type="submit" class="submit-btn" id="submitBtn">Submit RSVP</button>
-          <div class="success-message" id="successMessage">Thank you for your RSVP! We look forward to celebrating together.</div>
-          <div class="error-message" id="errorMessage">We couldn't save your RSVP online, but it is saved locally. Try refreshing later to sync.</div>
-        </form>
-      </div>
+      <!-- (Removed hard-coded Universal Lightbox; JS will create it) -->
     </div>
   </div>
 
@@ -391,244 +258,235 @@
     </div>
   </div>
 
-<!-- VENUE PAGE (new) -->
-<div id="venue-page" class="page">
-  <div class="container">
-    <div class="header">
-      <h1>Venue</h1>
-      <h2>German American Club of Louisville</h2>
-      <div class="badge">Event Location</div>
-    </div>
+  <!-- VENUE PAGE -->
+  <div id="venue-page" class="page">
+    <div class="container">
+      <div class="header">
+        <h1>Venue</h1>
+        <h2>German American Club of Louisville</h2>
+        <div class="badge">Event Location</div>
+      </div>
 
-    <!-- Hero-style card (reuses golf outing look) -->
-    <div class="venue-details-card">
-      <div class="golf-details-overlay">
-        <h3>📍 German American Club</h3>
-        <p><strong>Address:</strong> 1840 Lincoln Ave, Louisville, KY 40213</p>
-        <p><strong>Website:</strong>
-          <a href="https://www.gaclouisville.org/" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;">
-            gaclouisville.org
-          </a>
+      <!-- Hero-style card -->
+      <div class="venue-details-card">
+        <div class="golf-details-overlay">
+          <h3>📍 German American Club</h3>
+          <p><strong>Address:</strong> 1840 Lincoln Ave, Louisville, KY 40213</p>
+          <p><strong>Website:</strong>
+            <a href="https://www.gaclouisville.org/" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;">
+              gaclouisville.org
+            </a>
+          </p>
+          <p><strong>Map:</strong>
+            <a href="https://www.google.com/maps/place/German+American+Club/@38.210312,-85.7161913,15z"
+               target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;">
+              Open in Google Maps
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <!-- About Section -->
+      <div class="rsvp-section">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px;">About the Venue</h3>
+        <p>
+          The German American Club offers a welcoming banquet hall, an outdoor beer garden, and on-site bar service—perfect for the ceremony and the celebration that follows.
         </p>
-        <p><strong>Map:</strong>
-          <a href="https://www.google.com/maps/place/German+American+Club/@38.210312,-85.7161913,15z"
-             target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;">
-            Open in Google Maps
-          </a>
+        <ul style="margin-left:18px;">
+          <li>Banquet Hall & stage</li>
+          <li>Outdoor patio/beer garden</li>
+          <li>Full-service bar</li>
+          <li>Free on-site parking</li>
+        </ul>
+        <p style="margin-top:14px;">
+          Need directions? Use the Google Maps link above, or rideshare to the main entrance for easy drop-off.
         </p>
       </div>
-    </div>
 
-    <!-- About Section -->
-    <div class="rsvp-section">
-      <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px;">About the Venue</h3>
-      <p>
-        The German American Club offers a welcoming banquet hall, an outdoor beer garden, and on-site bar service—perfect for the ceremony and the celebration that follows.
-      </p>
-      <ul style="margin-left:18px;">
-        <li>Banquet Hall & stage</li>
-        <li>Outdoor patio/beer garden</li>
-        <li>Full-service bar</li>
-        <li>Free on-site parking</li>
-      </ul>
-      <p style="margin-top:14px;">
-        Need directions? Use the Google Maps link above, or rideshare to the main entrance for easy drop-off.
-      </p>
-    </div>
-
-    <!-- 3D Rotating Ring -->
-<div class="ring-wrap" id="venueRingWrap">
-  <div class="ring" id="newsletterRing">
-    <img src="assets/893231474.jpg" alt="Willkommen">
-    <img src="assets/143013195.jpg" alt="Celebrating German Traditions">
-    <img src="assets/145983079.jpg" alt="Biergarten Gathering Place">
-    <img src="assets/166420673.jpg" alt="Biergarten Entrance Veranda">
-    <img src="assets/200280508.jpg" alt="Biergarten Seating Awaits">
-    <img src="assets/261887266.jpg" alt="Biergarten Courtyard View">
-    <img src="assets/276011749.jpg" alt="Celebrating Culture Inside">
-    <img src="assets/297562832.jpg" alt="Honoring German Heritage">
-    <img src="assets/502184555.jpg" alt="Never Forget Our Heritage">
-    <img src="assets/984707041.jpg" alt="Biergarten Taps Await">
-  </div>
-</div>
-
-<!-- Lightbox (can safely live right after the ring) -->
-<div class="ring-lb" id="ringLightbox" aria-hidden="true">
-  <button class="ring-lb-close" aria-label="Close">×</button>
-  <img src="" alt="Expanded venue photo">
-</div>
-  
-  <!-- HOTELS PAGE (new) -->
-<div id="hotels-page" class="page">
-  <div class="container">
-    <div class="header">
-      <h1>Hotels & Lodging</h1>
-      <h2>Stay near the celebration</h2>
-      <div class="badge">Recommended Stays</div>
-    </div>
-
-    <div class="rsvp-section">
-      <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px;">Nearby Hotels</h3>
-
-      <div class="card" style="margin-bottom:12px;">
-        <h3>Wingate by Wyndham Louisville Fair and Expo</h3>
-        <p>3200 Kemmons Drive, Louisville, KY • ~6 min to venue</p>
-        <p class="small-note">Free breakfast • Pet Freindly • Group-friendly</p>
-        <div class="tools-row" style="margin-top:8px;">
-          <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Wingate+by+Wyndham+Louisville+Fair+and+Expo+3200+Kemmons+Drive+Louisville+KY">View on Maps</a>
-          <a class="btn" target="_blank" rel="noopener" href="https://www.wyndhamhotels.com/wingate/louisville-kentucky/wingate-by-wyndham-louisville-fair-and-expo/overview">Book / Group Code</a>
+      <!-- 3D Rotating Ring -->
+      <div class="ring-wrap" id="venueRingWrap">
+        <div class="ring" id="newsletterRing">
+          <img src="assets/893231474.jpg" alt="Willkommen">
+          <img src="assets/143013195.jpg" alt="Celebrating German Traditions">
+          <img src="assets/145983079.jpg" alt="Biergarten Gathering Place">
+          <img src="assets/166420673.jpg" alt="Biergarten Entrance Veranda">
+          <img src="assets/200280508.jpg" alt="Biergarten Seating Awaits">
+          <img src="assets/261887266.jpg" alt="Biergarten Courtyard View">
+          <img src="assets/276011749.jpg" alt="Celebrating Culture Inside">
+          <img src="assets/297562832.jpg" alt="Honoring German Heritage">
+          <img src="assets/502184555.jpg" alt="Never Forget Our Heritage">
+          <img src="assets/984707041.jpg" alt="Biergarten Taps Await">
         </div>
       </div>
 
-      <div class="card" style="margin-bottom:12px;">
-        <h3>Candlewood Suites Louisville Airport</h3>
-        <p>1367 Gardiner Lane, Louisville, KY • ~5 min to venue</p>
-        <p class="small-note">Kitchenette • Laundry facilities • Market</p>
-        <div class="tools-row" style="margin-top:8px;">
-          <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Candlewood+Suites+Louisville+Airport+1367+Gardiner+Lane+Louisville+KY">View on Maps</a>
-          <a class="btn" target="_blank" rel="noopener" href="https://www.ihg.com/candlewood/hotels/us/en/louisville/sdfgl/hoteldetail">Book / Group Code</a>
-        </div>
+      <!-- Ring Lightbox (keep this one) -->
+      <div class="ring-lb" id="ringLightbox" aria-hidden="true">
+        <button class="ring-lb-close" aria-label="Close">×</button>
+        <img src="" alt="Expanded venue photo">
       </div>
-
-      <div class="card" style="margin-bottom:12px;">
-        <h3>Holiday Inn Express Louisville Airport Expo</h3>
-        <p>1921 Bishop Lane, Louisville, KY • ~6 min to venue</p>
-        <p class="small-note">Pool • Fitness Center • 1 on-site restaurant</p>
-        <div class="tools-row" style="margin-top:8px;">
-          <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Holiday+Inn+Express+Louisville+Airport+Expo+1921+Bishop+Lane+Louisville+KY">View on Maps</a>
-          <a class="btn" target="_blank" rel="noopener" href="https://www.ihg.com/holidayinn/hotels/us/en/louisville/sdfcd/hoteldetail">Book / Group Code</a>
-        </div>
-      </div>
-
-      <p class="small-note" style="margin-top:10px;">Need more options or a group block? Contact us and we’ll add details here.</p>
     </div>
-  </div>
-</div>
+  </div> <!-- END VENUE PAGE -->
+
+  <!-- HOTELS PAGE -->
+  <div id="hotels-page" class="page">
+    <div class="container">
+      <div class="header">
+        <h1>Hotels & Lodging</h1>
+        <h2>Stay near the celebration</h2>
+        <div class="badge">Recommended Stays</div>
+      </div>
+
+      <div class="rsvp-section">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px;">Nearby Hotels</h3>
+
+        <div class="card" style="margin-bottom:12px;">
+          <h3>Wingate by Wyndham Louisville Fair and Expo</h3>
+          <p>3200 Kemmons Drive, Louisville, KY • ~6 min to venue</p>
+          <p class="small-note">Free breakfast • Pet Friendly • Group-friendly</p>
+          <div class="tools-row" style="margin-top:8px;">
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Wingate+by+Wyndham+Louisville+Fair+and+Expo+3200+Kemmons+Drive+Louisville+KY">View on Maps</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.wyndhamhotels.com/wingate/louisville-kentucky/wingate-by-wyndham-louisville-fair-and-expo/overview">Book / Group Code</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:12px;">
+          <h3>Candlewood Suites Louisville Airport</h3>
+          <p>1367 Gardiner Lane, Louisville, KY • ~5 min to venue</p>
+          <p class="small-note">Kitchenette • Laundry facilities • Market</p>
+          <div class="tools-row" style="margin-top:8px;">
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Candlewood+Suites+Louisville+Airport+1367+Gardiner+Lane+Louisville+KY">View on Maps</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.ihg.com/candlewood/hotels/us/en/louisville/sdfgl/hoteldetail">Book / Group Code</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:12px;">
+          <h3>Holiday Inn Express Louisville Airport Expo</h3>
+          <p>1921 Bishop Lane, Louisville, KY • ~6 min to venue</p>
+          <p class="small-note">Pool • Fitness Center • 1 on-site restaurant</p>
+          <div class="tools-row" style="margin-top:8px;">
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Holiday+Inn+Express+Louisville+Airport+Expo+1921+Bishop+Lane+Louisville+KY">View on Maps</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.ihg.com/holidayinn/hotels/us/en/louisville/sdfcd/hoteldetail">Book / Group Code</a>
+          </div>
+        </div>
+
+        <p class="small-note" style="margin-top:10px;">Need more options or a group block? Contact us and we’ll add details here.</p>
+      </div>
+    </div>
+  </div> <!-- END HOTELS PAGE -->
 
   <!-- GOLF OUTING PAGE -->
-<div id="golf-page" class="page">
-  <div class="container">
-    <div class="header">
-      <h1>Golf Outing Sign-Up</h1>
-      <h2>Celebrate with a round of golf ⛳</h2>
-      <div class="badge">Golf Registration</div>
-      <div class="small-note" id="golfCalendarLinks" style="display:none;"></div>
-      <div id="golfCountdown" class="countdown hidden"></div>
-    </div>
-
-    <div class="golf-details-card">
-  <div class="golf-details-overlay">
-    <h3>🏌️ Golf Outing Details</h3>
-    <p><strong>Date:</strong> Saturday, May 23, 2026</p>
-    <p><strong>Time:</strong> [Time TBD]</p>
-    <p><strong>Location:</strong> [Venue TBD]</p>
-    <p><strong>Attire:</strong> Golf Casual</p>
-  </div>
-</div>
-
-    <!-- Sign-up form -->
-    <div class="rsvp-section">
-      <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px; font-size:1.6rem;">Sign Up to Golf</h3>
-      <form class="rsvp-form" id="golfForm" autocomplete="on" novalidate>
-        <input type="text" id="golfCompany" name="company" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
-
-        <div class="form-group">
-          <label for="golfName">Full Name *</label>
-          <input type="text" id="golfName" name="name" required/>
-        </div>
-
-        <div class="form-group">
-          <label for="golfEmail">Email Address *</label>
-          <input type="email" id="golfEmail" name="email" required/>
-        </div>
-
-        <div class="form-group">
-          <label for="golfHandicap">Handicap / Skill Level</label>
-          <select id="golfHandicap" name="handicap">
-            <option value="">Prefer not to say</option>
-            <option value="0-9">0–9</option>
-            <option value="10-19">10–19</option>
-            <option value="20-29">20–29</option>
-            <option value="30+">30+</option>
-            <option value="Beginner">Beginner</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="golfPartySize">Players in Your Party</label>
-          <select id="golfPartySize" name="party_size">
-            <option value="1">Just me</option>
-            <option value="2">2 players</option>
-            <option value="3">3 players</option>
-            <option value="4">4 players (full foursome)</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="golfPairingPref">Pairing Preference (optional)</label>
-          <input type="text" id="golfPairingPref" name="pairing_pref" placeholder="Pair me with…"/>
-        </div>
-
-        <div class="form-group">
-          <label for="golfNotes">Notes (optional)</label>
-          <textarea id="golfNotes" name="notes" rows="3" placeholder="Anything we should know?"></textarea>
-        </div>
-
-        <button type="submit" class="submit-btn" id="golfSubmitBtn">Submit Golf Sign-Up</button>
-        <div class="success-message" id="golfSuccessMessage">Thanks! You’re on the golf list.</div>
-        <div class="error-message" id="golfErrorMessage">Couldn’t sync online, but your sign-up is saved locally. Try refreshing later.</div>
-      </form>
-    </div>
-
-    <!-- Summary -->
-    <div class="rsvp-summary">
-      <h3 style="margin-bottom:10px;">📊 Golf Summary</h3>
-      <div class="tools-row">
-        <button class="btn" onclick="refreshGolfFromServer()">🔄 Refresh</button>
-        <button class="btn" onclick="exportGolfCSV()">⬇️ Export CSV</button>
-        <button class="btn" onclick="copyGolfShare()">🔗 Copy Share Link</button>
+  <div id="golf-page" class="page">
+    <div class="container">
+      <div class="header">
+        <h1>Golf Outing Sign-Up</h1>
+        <h2>Celebrate with a round of golf ⛳</h2>
+        <div class="badge">Golf Registration</div>
+        <div class="small-note" id="golfCalendarLinks" style="display:none;"></div>
+        <div id="golfCountdown" class="countdown hidden"></div>
       </div>
-      <div class="summary-stats">
-        <div class="stat-box">
-          <span class="stat-number" id="golfTotalSignups">0</span>
-          <span>Total Sign-Ups</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-number" id="golfTotalPlayers">0</span>
-          <span>Total Players</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-number" id="golfFoursomes">0</span>
-          <span>Full Foursomes</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-number" id="golfRemainder">0</span>
-          <span>Remaining Players</span>
+
+      <div class="golf-details-card">
+        <div class="golf-details-overlay">
+          <h3>🏌️ Golf Outing Details</h3>
+          <p><strong>Date:</strong> Saturday, May 23, 2026</p>
+          <p><strong>Time:</strong> [Time TBD]</p>
+          <p><strong>Location:</strong> [Venue TBD]</p>
+          <p><strong>Attire:</strong> Golf Casual</p>
         </div>
       </div>
-    </div>
 
-    <!-- List -->
-    <div class="rsvp-list">
-      <h3 style="color:#1e3c72; margin-bottom:20px;">📋 Golfers</h3>
-      <div id="golfDetailsList">
-        <p style="text-align:center; color:#666; padding:40px;">No golf sign-ups yet.</p>
+      <!-- Sign-up form -->
+      <div class="rsvp-section">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px; font-size:1.6rem;">Sign Up to Golf</h3>
+        <form class="rsvp-form" id="golfForm" autocomplete="on" novalidate>
+          <input type="text" id="golfCompany" name="company" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="form-group">
+            <label for="golfName">Full Name *</label>
+            <input type="text" id="golfName" name="name" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="golfEmail">Email Address *</label>
+            <input type="email" id="golfEmail" name="email" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="golfHandicap">Handicap / Skill Level</label>
+            <select id="golfHandicap" name="handicap">
+              <option value="">Prefer not to say</option>
+              <option value="0-9">0–9</option>
+              <option value="10-19">10–19</option>
+              <option value="20-29">20–29</option>
+              <option value="30+">30+</option>
+              <option value="Beginner">Beginner</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="golfPartySize">Players in Your Party</label>
+            <select id="golfPartySize" name="party_size">
+              <option value="1">Just me</option>
+              <option value="2">2 players</option>
+              <option value="3">3 players</option>
+              <option value="4">4 players (full foursome)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="golfPairingPref">Pairing Preference (optional)</label>
+            <input type="text" id="golfPairingPref" name="pairing_pref" placeholder="Pair me with…"/>
+          </div>
+
+          <div class="form-group">
+            <label for="golfNotes">Notes (optional)</label>
+            <textarea id="golfNotes" name="notes" rows="3" placeholder="Anything we should know?"></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" id="golfSubmitBtn">Submit Golf Sign-Up</button>
+          <div class="success-message" id="golfSuccessMessage">Thanks! You’re on the golf list.</div>
+          <div class="error-message" id="golfErrorMessage">Couldn’t sync online, but your sign-up is saved locally. Try refreshing later.</div>
+        </form>
+      </div>
+
+      <!-- Summary -->
+      <div class="rsvp-summary">
+        <h3 style="margin-bottom:10px;">📊 Golf Summary</h3>
+        <div class="tools-row">
+          <button class="btn" onclick="refreshGolfFromServer()">🔄 Refresh</button>
+          <button class="btn" onclick="exportGolfCSV()">⬇️ Export CSV</button>
+          <button class="btn" onclick="copyGolfShare()">🔗 Copy Share Link</button>
+        </div>
+        <div class="summary-stats">
+          <div class="stat-box">
+            <span class="stat-number" id="golfTotalSignups">0</span>
+            <span>Total Sign-Ups</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="golfTotalPlayers">0</span>
+            <span>Total Players</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="golfFoursomes">0</span>
+            <span>Full Foursomes</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="golfRemainder">0</span>
+            <span>Remaining Players</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- List -->
+      <div class="rsvp-list">
+        <h3 style="color:#1e3c72; margin-bottom:20px;">📋 Golfers</h3>
+        <div id="golfDetailsList">
+          <p style="text-align:center; color:#666; padding:40px;">No golf sign-ups yet.</p>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-  <!-- Modal for enlarged photos -->
-  <div id="photoModal" class="modal" onclick="closeModal()">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="modalImage" alt="Enlarged"/>
-  </div>
+  </div> <!-- END GOLF PAGE -->
 
-  <!-- Minimal lightbox for the ring -->
-<div class="ring-lb" id="ringLightbox" aria-hidden="true">
-  <button class="ring-lb-close" aria-label="Close">✕</button>
-  <img id="ringLbi" alt="">
-</div>
-  
   <!-- your JS bundle -->
   <script src="script.js"></script>
 
