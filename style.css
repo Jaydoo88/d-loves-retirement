@@ -730,3 +730,26 @@ body {
   .timeline-item { flex-direction: column; text-align: center; }
   .timeline-photo { margin-right: 0; margin-bottom: 15px; }
 }
+
+/* --- Venue page hero: show the entire image (no stretching) --- */
+#venue .venue-details-card{
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;   /* show full image inside the box */
+  min-height: 360px;          /* adjust to taste; ensures the box has height */
+  aspect-ratio: 21 / 9;       /* optional: set closer to your banner's shape */
+}
+
+/* Keep the text readable on top of a "contain" image */
+#venue .golf-details-overlay{
+  background: rgba(0,0,0,.45);
+}
+
+/* On smaller screens you may prefer edge-to-edge fill (allow cropping) */
+@media (max-width: 640px){
+  #venue .venue-details-card{
+    background-size: cover;   /* fill on phones */
+    aspect-ratio: auto;
+    min-height: 300px;
+  }
+}
