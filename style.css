@@ -310,41 +310,22 @@ body {
   min-height: 300px;
   color: #fff;
 }
+
+/* Golf hero background */
 .golf-details-card {
   background: url('assets/golfouting.jpg') no-repeat center center;
   background-size: cover;
 }
 
-/* Make venue hero behave like golf (fixed height, full-bleed cover) */
-.venue-details-card{
-  background: url('assets/venuebanner.png') center center / cover no-repeat;
-  height: 300px;     /* match golf’s visual height */
-  min-height: 0;     /* override shared min-height:300px */
+/* Venue hero background — identical behavior to golf */
+.venue-details-card {
+  background: url('assets/venuebanner.png') no-repeat center center;
+  background-size: cover;
+  min-height: 300px;
   position: relative;
 }
 
-/* Prevent overlay content from increasing the card's height */
-.venue-details-card .golf-details-overlay{
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 24px;
-  background: rgba(0,0,0,.45);
-  overflow: hidden; /* use 'auto' if you prefer it to scroll instead of clip */
-}
-
-/* Optional: tweak focal point if you want a bit more bottom/top */
-.venue-details-card{ background-position: 50% 42%; }  /* 50% 42–48% is a good range */
-
-/* Mobile: allow a bit more height so it still looks good */
-@media (max-width: 640px){
-  .venue-details-card{
-    aspect-ratio: 16 / 9;  /* taller on phones */
-  }
-}
-.golf-details-overlay,
+/* Overlay styling for both cards */
 .golf-details-overlay {
   background: rgba(0,0,0,0.45);
   padding: 24px;
@@ -352,9 +333,23 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: absolute;
+  inset: 0;
 }
+
+/* Text spacing inside overlay */
 .golf-details-overlay h3,
-.golf-details-overlay p { margin: 0 0 10px; }
+.golf-details-overlay p {
+  margin: 0 0 10px;
+}
+
+/* Mobile tweak: maintain proportionate height on smaller screens */
+@media (max-width: 640px) {
+  .golf-details-card,
+  .venue-details-card {
+    min-height: 240px;
+  }
+}
 
 /* Banner cards row (golf + venue) */
 .golf-banner-card {
