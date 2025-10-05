@@ -314,10 +314,11 @@ body {
   background: url('assets/golfouting.jpg') no-repeat center center;
   background-size: cover;
 }
-/* Venue image: scale percentage of card width */
+/* Venue image: match card height */
 .venue-details-card{
-  background-size: 120% auto !important; /* try 110%–160% */
-  background-position: 50% 45%;          /* adjust focus if needed */
+  background-size: auto 100% !important;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 .golf-details-overlay,
 .golf-details-overlay {
