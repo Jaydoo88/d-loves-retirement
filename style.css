@@ -310,46 +310,27 @@ body {
   min-height: 300px;
   color: #fff;
 }
-
-/* Golf hero background */
 .golf-details-card {
   background: url('assets/golfouting.jpg') no-repeat center center;
   background-size: cover;
 }
-
-/* Venue hero background — identical behavior to golf */
 .venue-details-card {
+  /* ensure the extension matches your asset (PNG to sync with HTML preview card) */
   background: url('assets/venuebanner.png') no-repeat center center;
   background-size: cover;
-  min-height: 300px;
-  position: relative;
 }
-
-/* Overlay for BOTH cards: top dark -> bottom clear */
+.golf-details-overlay,
 .golf-details-overlay {
-  position: absolute;
-  inset: 0;
+  background: rgba(0,0,0,0.45);
+  padding: 24px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 24px;
-
-  /* gradient: darker on top, fades out by the bottom */
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.62) 0%,
-    rgba(0,0,0,0.52) 25%,
-    rgba(0,0,0,0.32) 55%,
-    rgba(0,0,0,0.10) 80%,
-    rgba(0,0,0,0.00) 100%
-  );
 }
-
-/* Text spacing inside overlay */
 .golf-details-overlay h3,
 .golf-details-overlay p {
   margin: 0 0 10px;
-}
 
 /* Mobile tweak: maintain proportionate height on smaller screens */
 @media (max-width: 640px) {
