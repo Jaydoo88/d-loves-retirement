@@ -555,3 +555,44 @@ document.addEventListener('DOMContentLoaded', () => {
     downloadICS(GOLF_START_ISO, GOLF_END_ISO, GOLF_TITLE, GOLF_DETAILS, GOLF_COURSE, 'golf-outing.ics');
   });
 });
+
+/* ---------- HERO CROSSFADE (2–N images) ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  const hero = document.getElementById('retireePhoto');
+  if (!hero) return;
+
+  // Put the two (or more) images you want to rotate here:
+  const HERO_IMAGES = [
+    'assets/dlovek9beginning.jpg',
+    'assets/photos/dloveK9.jpg'
+  ];
+
+  // If user prefers reduced motion, don’t auto-rotate.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (HERO_IMAGES.length <= 1 || reduceMotion) return;
+
+  // Preload to avoid flicker
+  HERO_IMAGES.forEach(src => { const i = new Image(); i.src = src; });
+
+  let idx = 0;
+  const DURATION = 5000;   // time each image is shown (ms)
+  const FADE = 600;        // keep in sync with CSS transition (ms)
+
+  function nextHero() {
+    idx = (idx + 1) % HERO_IMAGES.length;
+    // fade out
+    hero.style.opacity = '0';
+    setTimeout(() => {
+      hero.src = HERO_IMAGES[idx];
+      // fade back in
+      requestAnimationFrame(() => { hero.style.opacity = '1'; });
+    }, FADE);
+  }
+
+  // ensure we start from the first in the list
+  if (hero.src.indexOf(HERO_IMAGES[0]) === -1) {
+    hero.src = HERO_IMAGES[0];
+  }
+
+  setInterval(nextHero, DURATION);
+});
