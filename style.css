@@ -323,7 +323,7 @@ body {
 .venue-details-card{
   height: 300px;              /* lock the card height */
   min-height: 0;              /* override the shared min-height */
-  background-size: 100% auto; /* adjust zoom: try 110%–150% */
+  background-size: 94% auto; /* adjust zoom: try 110%–150% */
   background-position: 50% 45%; /* tweak focus; 42–55% is a good range */
 }
 .golf-details-overlay,
