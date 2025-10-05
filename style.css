@@ -314,10 +314,10 @@ body {
   background: url('assets/golfouting.jpg') no-repeat center center;
   background-size: cover;
 }
-.venue-details-card {
-  /* ensure the extension matches your asset (PNG to sync with HTML preview card) */
-  background: url('assets/venuebanner.png') no-repeat center center;
-  background-size: cover;
+/* Venue image: scale percentage of card width */
+.venue-details-card{
+  background-size: 120% auto !important; /* try 110%–160% */
+  background-position: 50% 45%;          /* adjust focus if needed */
 }
 .golf-details-overlay,
 .golf-details-overlay {
