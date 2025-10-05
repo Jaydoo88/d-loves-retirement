@@ -315,14 +315,12 @@ body {
   background-size: cover;
 }
 
-/* Venue page hero — show full image inside the box */
+/* Venue hero: match golf behavior (full-bleed cover) */
 .venue-details-card{
-  background: url('assets/venuebanner.png') center / contain no-repeat;
-  /* override the shared min-height so we don't force a tall box */
-  min-height: auto;
-  /* give the card a wide banner shape so the image fits naturally */
-  aspect-ratio: 21 / 9;           /* adjust to your banner's true ratio if needed */
-  background-color: #0b0f1a;      /* fills letterbox edges cleanly */
+  background: url('assets/venuebanner.png') center center / cover no-repeat !important;
+  min-height: 300px !important;   /* same as golf */
+  aspect-ratio: auto !important;  /* remove the wide banner lock */
+  background-color: transparent;  /* no dark bars */
 }
 .golf-details-overlay,
 .golf-details-overlay {
