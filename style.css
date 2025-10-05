@@ -314,10 +314,15 @@ body {
   background: url('assets/golfouting.jpg') no-repeat center center;
   background-size: cover;
 }
-.venue-details-card {
-  /* ensure the extension matches your asset (PNG to sync with HTML preview card) */
-  background: url('assets/venuebanner.png') no-repeat center center;
-  background-size: cover;
+
+/* Venue page hero — show full image inside the box */
+.venue-details-card{
+  background: url('assets/venuebanner.png') center / contain no-repeat;
+  /* override the shared min-height so we don't force a tall box */
+  min-height: auto;
+  /* give the card a wide banner shape so the image fits naturally */
+  aspect-ratio: 21 / 9;           /* adjust to your banner's true ratio if needed */
+  background-color: #0b0f1a;      /* fills letterbox edges cleanly */
 }
 .golf-details-overlay,
 .golf-details-overlay {
