@@ -319,10 +319,10 @@ body {
 .venue-details-card{
   background: url('assets/venuebanner.png') no-repeat center / cover;
   /* lock a consistent hero height so scaling is predictable */
-  height: 200px;                 /* same visual height as golf; tweak 260–340px if needed */
+  height: 300px;                 /* same visual height as golf; tweak 260–340px if needed */
   min-height: 0;                 /* override the shared min-height:300px */
   /* nudge the crop to show the best part of the image */
-  background-position: 50% 38%;  /* 50% center; lower this % to show more top, raise for bottom */
+  background-position: 50% 18%;  /* 50% center; lower this % to show more top, raise for bottom */
 }
 
 /* Mobile: allow a bit more height so it still looks good */
