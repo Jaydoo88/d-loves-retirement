@@ -507,19 +507,33 @@ body {
 }
 .hl-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 @media (max-width: 900px){ .hl-grid{ grid-template-columns: 1fr; } }
+
+/* CHANGED: default to single column inside the card so lists use full width */
 .hl-card{
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
+  grid-template-columns: 1fr;
   gap: 14px;
   background: #f7f9ff;
   border-left: 6px solid var(--patriot-blue);
   border-radius: 12px;
   padding: 16px;
 }
-@media (max-width: 700px){ .hl-card{ grid-template-columns: 1fr; } }
+
+/* CHANGED: if a media column exists, switch to two columns */
+.hl-card:has(.hl-media){ grid-template-columns: 1.4fr 1fr; }
+
+/* Fallback for older browsers: add .media on .hl-card when you include .hl-media */
+@supports not(selector(:has(*))){
+  .hl-card.media{ grid-template-columns: 1.4fr 1fr; }
+}
+
 .hl-content h4{ color: var(--patriot-blue); margin-bottom: 8px; }
-.hl-content ul{ margin-left: 18px; margin-bottom: 10px; }
-.hl-content li{ margin: 4px 0; }
+
+/* CHANGED: allow bullets to occupy width and wrap normally */
+.hl-content{ min-width: 0; }
+.hl-content ul{ margin-left: 18px; margin-bottom: 10px; padding-left: 18px; }
+.hl-content li{ margin: 4px 0; white-space: normal; }
+
 .hl-btn{
   background: var(--patriot-blue);
   color: #fff;
