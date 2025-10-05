@@ -331,13 +331,6 @@ body {
 .golf-details-overlay h3,
 .golf-details-overlay p {
   margin: 0 0 10px;
-
-/* Mobile tweak: maintain proportionate height on smaller screens */
-@media (max-width: 640px) {
-  .golf-details-card,
-  .venue-details-card {
-    min-height: 240px;
-  }
 }
 
 /* Banner cards row (golf + venue) */
