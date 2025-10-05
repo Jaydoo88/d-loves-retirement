@@ -315,14 +315,22 @@ body {
   background-size: cover;
 }
 
-/* Venue hero — full-bleed like golf, but not overly zoomed */
+/* Venue hero — wide like the golf image, but without heavy zoom */
 .venue-details-card{
-  background: url('assets/venuebanner.png') no-repeat center / cover;
-  /* lock a consistent hero height so scaling is predictable */
-  height: 300px;                 /* same visual height as golf; tweak 260–340px if needed */
-  min-height: 0;                 /* override the shared min-height:300px */
-  /* nudge the crop to show the best part of the image */
-  background-position: 50% 38%;  /* 50% center; lower this % to show more top, raise for bottom */
+  background: url('assets/venuebanner.png') center / cover no-repeat;
+  /* key changes */
+  min-height: 0;        /* stop forcing a tall box */
+  height: auto;
+  aspect-ratio: 3 / 1;  /* wide banner; try 2.6/1 to 3.4/1 until it looks right */
+  border-radius: 15px;  /* keep your styling */
+  overflow: hidden;
+}
+
+/* Mobile: allow a bit more height so it still looks good */
+@media (max-width: 640px){
+  .venue-details-card{
+    aspect-ratio: 16 / 9;  /* taller on phones */
+  }
 }
 .golf-details-overlay,
 .golf-details-overlay {
