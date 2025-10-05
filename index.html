@@ -43,7 +43,7 @@
     <button class="nav-btn" onclick="showPage(event,'hotels'); closeMobileNav()">Hotels</button>
   </div>
 
-  <!-- Navigation buttons -->
+  <!-- Desktop nav buttons -->
   <div class="nav-buttons">
     <button class="nav-btn active" onclick="showPage(event,'main')">Main Page</button>
     <button class="nav-btn" onclick="showPage(event,'rsvp-list')">RSVP List</button>
@@ -59,17 +59,16 @@
         <h1>Celebrating the Retirement of Officer <span style="display:block">Darren "D-Love" Johnson</span></h1>
         <h2>K9 Extraordinaire – A Legacy of Service</h2>
 
-        <!-- FIXED PATH to photos folder -->
         <img
           id="retireePhoto"
-          src="assets/photos/dlovek9beginning.jpg"
+          src="assets/dlovek9beginning.jpg"
           alt="Retiree with K9"
           class="retiree-photo"
           style="opacity:1; transition: opacity .6s ease"
         >
 
         <div class="badge">Retirement Celebration</div>
-        <p style="margin-top: 20px; font-size: 1.1rem; color: #555;">
+        <p style="margin-top:20px; font-size:1.1rem; color:#555;">
           Join us as we honor an exceptional career of protecting our nation and serving our communities.
         </p>
       </div>
@@ -85,7 +84,7 @@
           </div>
           <div id="countdown" class="countdown hidden"></div>
           <div id="calendarLinks" class="small-note hidden"></div>
-          <p style="margin-top: 20px;">
+          <p style="margin-top:20px;">
             Come celebrate the remarkable achievements and lasting impact of a distinguished career in government service.
           </p>
         </div>
@@ -132,6 +131,7 @@
         <div class="scroll-gallery">
           <button class="sg-btn sg-prev" aria-label="Previous" onclick="sgScroll(-1)">‹</button>
           <div class="sg-track" id="sgTrack">
+            <!-- reel items -->
             <figure class="sg-item" onclick="openModal(this.querySelector('img').src)">
               <img src="assets/photos/486550387.jpg" alt="Loyalty, Service, Family, Forever." loading="lazy">
               <figcaption class="sg-cap">Loyalty, Service, Family, Forever.</figcaption>
@@ -209,9 +209,139 @@
         </div>
       </div>
 
-      <!-- (Removed hard-coded Universal Lightbox; JS will create it) -->
+      <!-- NOTE: Universal Lightbox is created by script.js (no static duplicate here) -->
+
+      <!-- Career Highlights -->
+      <section class="career-highlights">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:20px;">📜 Career Highlights</h3>
+        <div class="hl-grid">
+          <article class="hl-card">
+            <div class="hl-content">
+              <h4>Accomplishments & Awards</h4>
+              <ul>
+                <li>Distinguished/Expert firearms qualifications (1988–2026)</li>
+                <li>USAF Top Dog competitions: 1st (Base-wide, 1989); 2nd (USAFE, 1990)</li>
+                <li>USAF Performance & Achievement/Commendation medals (1992–1994)</li>
+                <li>Knights of Columbus “Blue Coat” Award (1994)</li>
+                <li>Good Conduct, Longevity & Outstanding Unit Awards (1988–1994)</li>
+                <li>U.S. Customs Millennium Tour of Duty (1999–2000)</li>
+                <li>Founding Member/Employee of DHS (2003)</li>
+                <li>CBP Blue Eagle Award (2014)</li>
+                <li>Unit Citation Awards ×5 (2008–2026)</li>
+              </ul>
+            </div>
+          </article>
+          <article class="hl-card">
+            <div class="hl-content">
+              <h4>Memberships</h4>
+              <ul>
+                <li>Dogs Against Drugs & Crime; National L.E. K-9 Assoc. (2001)</li>
+                <li>American Legion (2008)</li>
+                <li>Veterans of Foreign Wars — Lifetime (since 2010)</li>
+                <li>Guns of Justice L.E. Motorcycle Club (2009)</li>
+                <li>German American Club (2025)</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Career Timeline -->
+      <section class="career-section">
+        <div class="career-timeline">
+          <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px;">🏆 Career Journey</h3>
+
+          <div class="timeline-item">
+            <img src="assets/airforce.png" alt="United States Air Force" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>United States Air Force (USAF)</h4>
+              <p>1988 – 1994 · Built the foundation of service, discipline, and mission focus.</p>
+            </div>
+            <img src="assets/security-police.png" alt="USAF Badge" class="timeline-badge" />
+          </div>
+
+          <div class="timeline-item">
+            <img src="assets/secret-servicelogo.png" alt="U.S. Secret Service" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>U.S. Secret Service</h4>
+              <p>1995 – 1997 · Protection & investigations in support of national leadership.</p>
+            </div>
+            <img src="assets/secret-service.jpg" alt="Secret Service Badge" class="timeline-badge" />
+          </div>
+
+          <div class="timeline-item">
+            <img src="assets/us-customs-service.png" alt="U.S. Customs Service" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>U.S. Customs Service</h4>
+              <p>1997 – 2003 · Trade enforcement and border security—the legacy agency that later integrated into DHS.</p>
+            </div>
+            <img src="assets/us-customs-badge.png" alt="U.S. Customs Service Badge" class="timeline-badge" />
+          </div>
+
+          <div class="timeline-item">
+            <img src="assets/cbplogo.png" alt="U.S. Customs and Border Protection" class="timeline-photo" />
+            <div class="timeline-content">
+              <h4>U.S. Customs and Border Protection (CBP)</h4>
+              <p>2003 – 2026 · Frontline homeland security—K9 operations, leadership, and mentorship.</p>
+            </div>
+            <img src="assets/cbp.png" alt="CBP Badge" class="timeline-badge" />
+          </div>
+        </div>
+      </section>
+
+      <!-- RSVP -->
+      <div class="rsvp-section">
+        <h3 style="text-align:center; color:#1e3c72; margin-bottom:30px; font-size:2rem;">Please RSVP</h3>
+        <form class="rsvp-form" id="rsvpForm" autocomplete="on" novalidate>
+          <input type="text" id="company" name="company" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="organization">Department/Organization</label>
+            <input type="text" id="organization" name="organization" placeholder="e.g., DHS, CBP, TSA, etc."/>
+          </div>
+
+          <div class="form-group">
+            <label for="attending">Will you be attending? *</label>
+            <select id="attending" name="attending" required>
+              <option value="">Please select</option>
+              <option value="yes">Yes, I'll be there!</option>
+              <option value="no">Unfortunately, I cannot attend</option>
+              <option value="maybe">Not sure yet</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="guestGroup" style="display:none;">
+            <label for="guests">Number of guests (including yourself)</label>
+            <select id="guests" name="guests">
+              <option value="1">Just me</option>
+              <option value="2">2 people</option>
+              <option value="3">3 people</option>
+              <option value="4">4 people</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Share a memory or message (optional)</label>
+            <textarea id="message" name="message" rows="4" placeholder="Share a favorite memory, congratulations, or well wishes..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">Submit RSVP</button>
+          <div class="success-message" id="successMessage">Thank you for your RSVP! We look forward to celebrating together.</div>
+          <div class="error-message" id="errorMessage">We couldn't save your RSVP online, but it is saved locally. Try refreshing later to sync.</div>
+        </form>
+      </div>
     </div>
-  </div>
+  </div> <!-- /MAIN PAGE -->
 
   <!-- RSVP LIST PAGE -->
   <div id="rsvp-list-page" class="page">
@@ -319,13 +449,13 @@
         </div>
       </div>
 
-      <!-- Ring Lightbox (keep this one) -->
+      <!-- Ring Lightbox (single copy) -->
       <div class="ring-lb" id="ringLightbox" aria-hidden="true">
         <button class="ring-lb-close" aria-label="Close">×</button>
         <img src="" alt="Expanded venue photo">
       </div>
     </div>
-  </div> <!-- END VENUE PAGE -->
+  </div>
 
   <!-- HOTELS PAGE -->
   <div id="hotels-page" class="page">
@@ -342,7 +472,7 @@
         <div class="card" style="margin-bottom:12px;">
           <h3>Wingate by Wyndham Louisville Fair and Expo</h3>
           <p>3200 Kemmons Drive, Louisville, KY • ~6 min to venue</p>
-          <p class="small-note">Free breakfast • Pet Friendly • Group-friendly</p>
+          <p class="small-note">Free breakfast • Pet Freindly • Group-friendly</p>
           <div class="tools-row" style="margin-top:8px;">
             <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Wingate+by+Wyndham+Louisville+Fair+and+Expo+3200+Kemmons+Drive+Louisville+KY">View on Maps</a>
             <a class="btn" target="_blank" rel="noopener" href="https://www.wyndhamhotels.com/wingate/louisville-kentucky/wingate-by-wyndham-louisville-fair-and-expo/overview">Book / Group Code</a>
@@ -372,7 +502,7 @@
         <p class="small-note" style="margin-top:10px;">Need more options or a group block? Contact us and we’ll add details here.</p>
       </div>
     </div>
-  </div> <!-- END HOTELS PAGE -->
+  </div>
 
   <!-- GOLF OUTING PAGE -->
   <div id="golf-page" class="page">
@@ -485,7 +615,7 @@
         </div>
       </div>
     </div>
-  </div> <!-- END GOLF PAGE -->
+  </div>
 
   <!-- your JS bundle -->
   <script src="script.js"></script>
