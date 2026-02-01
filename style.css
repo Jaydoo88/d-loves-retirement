@@ -1,5 +1,6 @@
 /* =========================
    D-Love Retirement (R/W/B Theme)
+   + Lodging Spotlight + Modal (Neon header only)
    ========================= */
 :root{
   --patriot-red: #b22234;
@@ -8,6 +9,9 @@
   --patriot-white: #ffffff;
   --ink: #223;
   --vr-gap: 16px; /* vertical rhythm */
+
+  /* added accents */
+  --neon-green: #39ff14;
 }
 
 /* RESET */
@@ -221,16 +225,6 @@ body {
   box-shadow: 0 14px 26px rgba(178,34,52,.25);
   background: linear-gradient(45deg, var(--patriot-red), #7a1e2b);
 }
-.success-message {
-  background: linear-gradient(45deg, #2e7d32, #5bb75b);
-  color: #fff; padding: 15px; border-radius: 10px;
-  text-align: center; margin: 20px 0; display: none;
-  animation: slideIn .5s ease;
-}
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
 
 /* NAV BUTTONS */
 .nav-buttons {
@@ -315,7 +309,6 @@ body {
   background-size: cover;
 }
 .venue-details-card {
-  /* ensure the extension matches your asset (PNG to sync with HTML preview card) */
   background: url('assets/venuebanner1.jpg') no-repeat center center;
   background-size: cover;
 }
@@ -431,6 +424,156 @@ body {
 }
 .callout-close:hover{ opacity:1; }
 
+/* =========================
+   NEW: Lodging Spotlight styles (card sits below callout)
+   - Neon headline only
+   - Body text is readable
+   ========================= */
+.neon-script{
+  font-family: "Dancing Script", cursive;
+  color: var(--neon-green);
+  text-shadow: 0 0 6px rgba(57,255,20,.55), 0 0 16px rgba(57,255,20,.25);
+  letter-spacing:.4px;
+}
+
+.lodging-spotlight{
+  /* uses .card base styles */
+  background: linear-gradient(135deg, #2b4f93 0%, #173a73 100%);
+  color: #fff;
+  border-top: 4px solid rgba(255,255,255,.25);
+  text-align: center;
+}
+
+.lodging-spotlight h3{
+  color: #fff;
+  border-bottom-color: rgba(255,255,255,.22);
+}
+
+.lodging-text{
+  margin: 10px auto 12px;
+  max-width: 920px;
+  line-height: 1.55;
+  font-size: 1.02rem;
+  color: rgba(255,255,255,.92);
+  text-shadow: 0 1px 0 rgba(0,0,0,.25);
+}
+
+.lodging-phone{
+  color: var(--neon-green);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lodging-actions{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top: 10px;
+}
+
+.lodging-btn{
+  padding: .62rem 1.05rem;
+  border-radius: 999px;
+  cursor:pointer;
+  font-weight: 800;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(57,255,20,.45);
+  color: rgba(255,255,255,.95);
+  box-shadow: 0 8px 18px rgba(0,0,0,.18);
+  transition: transform .15s ease, background .2s ease, border-color .2s ease, filter .2s ease;
+}
+
+.lodging-btn:hover{
+  background: rgba(255,255,255,.14);
+  border-color: rgba(57,255,20,.70);
+  transform: translateY(-1px);
+}
+
+.lodging-btn.secondary{
+  border-color: rgba(255,255,255,.25);
+}
+
+.lodging-note{
+  margin-top: 10px;
+  text-align:center;
+  color: rgba(255,255,255,.78);
+  font-size: .95rem;
+}
+
+/* =========================
+   NEW: Modal styles for "Read full details"
+   ========================= */
+.modal-backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.65);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 9999;
+}
+.modal-backdrop.show{ display:flex; }
+
+.modal{
+  width: min(820px, 96vw);
+  max-height: 86vh;
+  overflow: hidden;
+  background: #0d0f10;
+  border: 1px solid rgba(57,255,20,.30);
+  border-radius: 18px;
+  box-shadow: 0 18px 60px rgba(0,0,0,.55);
+}
+
+.modal-header, .modal-footer{
+  padding: 14px 16px;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.modal-footer{
+  border-top: 1px solid rgba(255,255,255,.08);
+  border-bottom: none;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-close{
+  background: transparent;
+  border: 0;
+  color: rgba(255,255,255,.85);
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* IMPORTANT: modal body is readable, NOT neon */
+.modal-body{
+  padding: 14px 16px 18px;
+  overflow: auto;
+  max-height: calc(86vh - 120px);
+  line-height: 1.65;
+  color: rgba(255,255,255,.92);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  text-shadow: none;
+}
+.modal-body p{ margin: 0 0 14px; }
+.modal-body strong{ color: rgba(255,255,255,.96); font-weight: 800; }
+.modal-body a{ color: var(--neon-green); }
+
+.btn-ghost{
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.20);
+  color: rgba(255,255,255,.90);
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
 /* Scrolling gallery (carousel) */
 .scroll-gallery{
   position: relative;
@@ -510,7 +653,7 @@ body {
 .hl-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 @media (max-width: 900px){ .hl-grid{ grid-template-columns: 1fr; } }
 
-/* CHANGED: default to single column inside the card so lists use full width */
+/* default to single column inside the card so lists use full width */
 .hl-card{
   display: grid;
   grid-template-columns: 1fr;
@@ -521,7 +664,7 @@ body {
   padding: 16px;
 }
 
-/* CHANGED: if a media column exists, switch to two columns */
+/* if a media column exists, switch to two columns */
 .hl-card:has(.hl-media){ grid-template-columns: 1.4fr 1fr; }
 
 /* Fallback for older browsers: add .media on .hl-card when you include .hl-media */
@@ -530,8 +673,6 @@ body {
 }
 
 .hl-content h4{ color: var(--patriot-blue); margin-bottom: 8px; }
-
-/* CHANGED: allow bullets to occupy width and wrap normally */
 .hl-content{ min-width: 0; }
 .hl-content ul{ margin-left: 18px; margin-bottom: 10px; padding-left: 18px; }
 .hl-content li{ margin: 4px 0; white-space: normal; }
@@ -714,13 +855,15 @@ body {
 .rsvp-list,
 .venue-details-card,
 .golf-details-card,
-.ring-wrap {
+.ring-wrap,
+.lodging-spotlight {
   margin-top: var(--vr-gap) !important;
   margin-bottom: var(--vr-gap) !important;
 }
 .banner-row .golf-banner-card { margin: 0 !important; }
 .banner-row + #hotelsCallout.callout-gradient { margin-top: var(--vr-gap) !important; }
-#hotelsCallout.callout-gradient + .photo-gallery { margin-top: var(--vr-gap) !important; }
+#hotelsCallout.callout-gradient + .lodging-spotlight { margin-top: var(--vr-gap) !important; }
+.lodging-spotlight + .photo-gallery { margin-top: var(--vr-gap) !important; }
 .header { margin-bottom: calc(var(--vr-gap) * 1.5) !important; }
 
 /* RESPONSIVE TWEAKS */
