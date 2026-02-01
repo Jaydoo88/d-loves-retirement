@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Celebrating the Retirement of Officer Darren Johnson</title>
+
   <link rel="stylesheet" href="style.css"/>
 
-  <!-- Neon script font -->
+  <!-- Neon script font for the header line only -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
@@ -24,144 +25,6 @@
     .status-maybe{background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:999px}
     .countdown{margin-top:14px;font-weight:600;color:#1e3c72}
     .small-note{font-size:.85rem;color:#666;margin-top:6px}
-
-    /* =========================
-       Added: Lodging Spotlight + Modal + Neon headline
-       (Moves hotel details OUT of Celebration Details card)
-    ========================= */
-    .neon-script{
-      font-family: "Dancing Script", cursive;
-      color:#39ff14;
-      text-shadow: 0 0 6px rgba(57,255,20,.55), 0 0 16px rgba(57,255,20,.25);
-      letter-spacing:.4px;
-    }
-
-    .lodging-spotlight{
-      margin-top: 14px;
-    }
-
-    .lodging-text{
-      margin: 8px auto 12px;
-      max-width: 900px;
-      line-height: 1.55;
-      font-size: 1.02rem;
-      color: rgba(255,255,255,.92);
-      text-align: center;
-      text-shadow: 0 1px 0 rgba(0,0,0,.25);
-    }
-
-    .lodging-phone{
-      color:#39ff14;
-      font-weight: 800;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    .lodging-actions{
-      display:flex;
-      gap:10px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top: 10px;
-    }
-
-    .lodging-btn{
-      padding: .62rem 1.05rem;
-      border-radius: 999px;
-      cursor:pointer;
-      font-weight: 800;
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(57,255,20,.45);
-      color: rgba(255,255,255,.95);
-      box-shadow: 0 8px 18px rgba(0,0,0,.18);
-    }
-
-    .lodging-btn:hover{
-      background: rgba(255,255,255,.14);
-      border-color: rgba(57,255,20,.70);
-      transform: translateY(-1px);
-    }
-
-    .lodging-btn.secondary{
-      border-color: rgba(255,255,255,.25);
-    }
-
-    .lodging-note{
-      margin-top: 10px;
-      text-align:center;
-      color: rgba(255,255,255,.78);
-      font-size: .95rem;
-    }
-
-    /* Modal */
-    .modal-backdrop{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.65);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      z-index: 9999;
-    }
-    .modal-backdrop.show{ display:flex; }
-
-    .modal{
-      width: min(820px, 96vw);
-      max-height: 86vh;
-      overflow: hidden;
-      background: #0d0f10;
-      border: 1px solid rgba(57,255,20,.30);
-      border-radius: 18px;
-      box-shadow: 0 18px 60px rgba(0,0,0,.55);
-    }
-
-    .modal-header, .modal-footer{
-      padding: 14px 16px;
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .modal-footer{
-      border-top: 1px solid rgba(255,255,255,.08);
-      border-bottom: none;
-      justify-content: flex-end;
-      gap: 10px;
-    }
-
-    .modal-close{
-      background: transparent;
-      border: 0;
-      color: rgba(255,255,255,.85);
-      font-size: 20px;
-      cursor: pointer;
-      line-height: 1;
-    }
-
-    /* IMPORTANT: modal body uses readable font, NOT neon */
-    .modal-body{
-      padding: 14px 16px 18px;
-      overflow: auto;
-      max-height: calc(86vh - 120px);
-      line-height: 1.65;
-      color: rgba(255,255,255,.92);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      text-shadow: none;
-    }
-    .modal-body p{ margin: 0 0 14px; }
-    .modal-body strong{ color: rgba(255,255,255,.96); font-weight: 800; }
-    .modal-body a{ color: #39ff14; }
-
-    .btn-ghost{
-      background: transparent;
-      border: 1px solid rgba(255,255,255,.20);
-      color: rgba(255,255,255,.90);
-      padding: 10px 12px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 700;
-    }
   </style>
 </head>
 <body>
@@ -260,45 +123,37 @@
         </div>
       </div>
 
-      <!-- Hotels Callout (Gradient Glow Bar) -->
-      <div id="hotelsCallout" class="callout-gradient" role="region" aria-label="Hotels information">
-        <span class="callout-text">✨ Explore lodging options for May 23 weekend</span>
-        <button class="callout-cta" onclick="showPage(event,'hotels'); window.scrollTo({ top: 0, behavior: 'smooth' });">
-          View Hotels
-        </button>
-        <button class="callout-close" aria-label="Dismiss">×</button>
-      </div>
+      <!-- Lodging Spotlight (REPLACES the old "Explore lodging options..." bar) -->
+      <section class="card lodging-spotlight" aria-label="Lodging spotlight">
+        <h3>🏨 Lodging Spotlight</h3>
 
-      <!-- NEW: Lodging Spotlight Box (full width, separate from Celebration Details cards) -->
-      <div class="card lodging-spotlight" role="region" aria-label="Lodging spotlight">
-        <h3 style="margin-bottom:10px;">🏨 Lodging Spotlight</h3>
-
-        <div class="neon-script" style="font-size:1.65rem; text-align:center; margin:6px 0 10px;">
+        <div class="neon-script" style="font-size:1.85rem; margin: 10px 0 8px;">
           ATTENTION RAMSTEIN ALUMNI
         </div>
 
         <p class="lodging-text">
-          Derby City Gaming Hotel is the choice to stay at — a majority of everyone coming will be staying there.
-          Call <a class="lodging-phone" href="tel:15029617636">502-961-7636</a> and ask for
-          <strong>“Johnson Retirement Party”</strong> to receive a <strong>$25 play credit</strong>.
-          <strong>(Booking online will NOT include the credit.)</strong>
+          <strong>Derby City Gaming Hotel</strong> is the recommended place to stay — a majority of attendees will be there.
+          Call <a class="lodging-phone" href="tel:+15029617636">502-961-7636</a> and use
+          <strong>“Johnson Retirement Party”</strong> when you speak to a human to receive a <strong>$25 casino play credit</strong>.
+          <strong>Booking online will NOT include the credit.</strong>
+        </p>
+
+        <p class="lodging-text">
+          The hotel is connected to the casino and is open <strong>24 hours</strong>, with a full bar and a stage featuring live music
+          on Friday and Saturday nights. Rooms are blocked — please book when you can. If it goes over, more rooms can be added.
         </p>
 
         <div class="lodging-actions">
-          <button class="lodging-btn" type="button" onclick="openCelebrationModal()">
-            Read full details
-          </button>
-
-          <button class="lodging-btn secondary" type="button"
-            onclick="showPage(event,'hotels'); window.scrollTo({ top: 0, behavior: 'smooth' });">
-            Go to Hotels Page
+          <button class="lodging-btn" type="button" id="openLodgingModalBtn">Read full hotel/casino details</button>
+          <button class="lodging-btn secondary" type="button" onclick="showPage(event,'hotels'); window.scrollTo({ top: 0, behavior: 'smooth' });">
+            View Hotels Page
           </button>
         </div>
 
-        <p class="lodging-note">
-          P.S. This hotel/casino is 1.6 miles from the venue and 3.6 miles from the Louisville Intl Airport.
-        </p>
-      </div>
+        <div class="lodging-note">
+          P.S. This hotel/casino is located <strong>1.6 miles</strong> from the venue and <strong>3.6 miles</strong> from Louisville Intl Airport.
+        </div>
+      </section>
 
       <!-- Scrolling Gallery (Carousel) -->
       <div class="photo-gallery" id="photo-reel">
@@ -383,8 +238,6 @@
           <button class="sg-btn sg-next" aria-label="Next" onclick="sgScroll(1)">›</button>
         </div>
       </div>
-
-      <!-- NOTE: Universal Lightbox is created by script.js (no static duplicate here) -->
 
       <!-- Career Highlights -->
       <section class="career-highlights">
@@ -517,55 +370,6 @@
       </div>
     </div>
   </div> <!-- /MAIN PAGE -->
-
-  <!-- Lodging Details Modal -->
-  <div class="modal-backdrop" id="celebrationModal" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="celebrationTitle">
-      <div class="modal-header">
-        <h4 id="celebrationTitle" class="neon-script" style="margin:0;font-size:1.7rem;">ATTENTION RAMSTEIN ALUMNI</h4>
-        <button class="modal-close" type="button" onclick="closeCelebrationModal()" aria-label="Close">✕</button>
-      </div>
-
-      <div class="modal-body">
-        <p><strong>Derby City Gaming Hotel</strong> is the choice to stay at — a majority of everyone coming will be staying there.</p>
-
-        <p>
-          Please call <a class="lodging-phone" href="tel:15029617636">502 961-7636</a> to make your reservation and use
-          <strong>"Johnson Retirement Party"</strong> when you speak to a human.
-        </p>
-
-        <p>
-          You will receive a <strong>$25 play credit</strong> for the casino games if you call that number and make your reservation.
-          If you do it online, you will <strong>NOT</strong> get the credit.
-        </p>
-
-        <p>
-          The hotel is connected to the casino and is open 24hrs with a full bar and stage with live music on Friday and Saturday nights.
-          It beats the snot out of hanging out in a hotel lobby like we all have done before at our reunions.
-          I have rooms blocked so book when you can and if it goes over, I will contact them and add more rooms if need be.
-        </p>
-
-        <p>
-          This is not just for Ramstein Alumni, this is also for anyone traveling from out of state, city, country that will stay for a night or two.
-          May everyone have safe travels and can't wait to see all of you.
-        </p>
-
-        <p>
-          <strong>P.S.</strong> This hotel/casino is located 1.6 miles from where the event venue is located, and 3.6 miles from the Louisville Intl Airport.
-        </p>
-
-        <p>
-          Please feel free to contact me via email or phone text if you have any questions.
-          Please remember, I work nights so I sleep everyday during the day.
-          Be safe, stay warm and cannot wait to see each and everyone of you.
-        </p>
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn-ghost" type="button" onclick="closeCelebrationModal()">Close</button>
-      </div>
-    </div>
-  </div>
 
   <!-- RSVP LIST PAGE -->
   <div id="rsvp-list-page" class="page">
@@ -851,30 +655,95 @@
     </div>
   </div>
 
+  <!-- Lodging Spotlight Modal -->
+  <div class="modal-backdrop" id="lodgingModal" aria-hidden="true" role="dialog" aria-label="Derby City Gaming Hotel details">
+    <div class="modal" role="document">
+      <div class="modal-header">
+        <div class="neon-script" style="font-size:1.55rem;">ATTENTION RAMSTEIN ALUMNI</div>
+        <button class="modal-close" type="button" id="closeLodgingModalBtn" aria-label="Close">×</button>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          <strong>Derby City Gaming Hotel</strong> is the choice to stay at — a majority of everyone coming will be staying there.
+          Please call <a href="tel:+15029617636">502-961-7636</a> to make your reservation and use <strong>“Johnson Retirement Party”</strong>
+          when you speak to a <strong>human</strong>.
+        </p>
+
+        <p>
+          You will receive a <strong>$25 play credit</strong> for the casino games if you call that number and make your reservation.
+          If you do it online, you will <strong>NOT</strong> get the credit.
+        </p>
+
+        <p>
+          The hotel is connected to the casino and is open <strong>24hrs</strong> with a full bar and stage with live music on Friday
+          and Saturday nights. It beats the snot out of hanging out in a hotel lobby like we all have done before at our reunions.
+          Rooms are blocked so book when you can — if it goes over, more rooms can be added.
+        </p>
+
+        <p>
+          This is not just for Ramstein Alumni — this is also for anyone traveling from out of state, city, or country that will stay for
+          a night or two. May everyone have safe travels and can’t wait to see all of you.
+        </p>
+
+        <p>
+          <strong>P.S.</strong> This hotel/casino is located <strong>1.6 miles</strong> from the event venue, and <strong>3.6 miles</strong>
+          from the Louisville Intl Airport.
+        </p>
+
+        <p>
+          Please feel free to contact me via email or phone/text if you have any questions. Please remember, I work nights so I sleep
+          everyday during the day. Be safe, stay warm, and cannot wait to see each and everyone of you.
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-ghost" type="button" id="closeLodgingModalBtn2">Close</button>
+        <button class="lodging-btn" type="button" onclick="showPage(event,'hotels'); window.scrollTo({ top: 0, behavior: 'smooth' });">
+          View Hotels Page
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- your JS bundle -->
   <script src="script.js"></script>
 
-  <!-- Added: modal JS (self-contained; does not touch your existing script.js) -->
+  <!-- Small modal script (safe + isolated) -->
   <script>
-    function openCelebrationModal(){
-      const el = document.getElementById('celebrationModal');
-      if(!el) return;
-      el.classList.add('show');
-      el.setAttribute('aria-hidden', 'false');
-    }
-    function closeCelebrationModal(){
-      const el = document.getElementById('celebrationModal');
-      if(!el) return;
-      el.classList.remove('show');
-      el.setAttribute('aria-hidden', 'true');
-    }
-    document.addEventListener('click', (e) => {
-      const el = document.getElementById('celebrationModal');
-      if(el && el.classList.contains('show') && e.target === el) closeCelebrationModal();
-    });
-    document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape') closeCelebrationModal();
-    });
+    (function(){
+      const backdrop = document.getElementById('lodgingModal');
+      const openBtn = document.getElementById('openLodgingModalBtn');
+      const closeBtn = document.getElementById('closeLodgingModalBtn');
+      const closeBtn2 = document.getElementById('closeLodgingModalBtn2');
+
+      function openModal(){
+        backdrop.classList.add('show');
+        backdrop.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal(){
+        backdrop.classList.remove('show');
+        backdrop.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+      }
+
+      if(openBtn) openBtn.addEventListener('click', openModal);
+      if(closeBtn) closeBtn.addEventListener('click', closeModal);
+      if(closeBtn2) closeBtn2.addEventListener('click', closeModal);
+
+      // click outside to close
+      if(backdrop){
+        backdrop.addEventListener('click', function(e){
+          if(e.target === backdrop) closeModal();
+        });
+      }
+
+      // ESC to close
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape' && backdrop && backdrop.classList.contains('show')) closeModal();
+      });
+    })();
   </script>
 
   <footer style="background: var(--patriot-blue); color: var(--patriot-white); text-align: center; padding: 15px 0; font-size: 0.9rem; margin-top: 40px;">
