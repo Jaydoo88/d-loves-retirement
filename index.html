@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Celebrating the Retirement of Officer Darren Johnson</title>
   <link rel="stylesheet" href="style.css"/>
+
+  <!-- Added: Google Font for neon script -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
+
   <style>
     /* tiny helpers; keep or move to style.css if you want */
     .hidden{display:none!important;}
@@ -18,6 +24,107 @@
     .status-maybe{background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:999px}
     .countdown{margin-top:14px;font-weight:600;color:#1e3c72}
     .small-note{font-size:.85rem;color:#666;margin-top:6px}
+
+    /* =========================
+       Added: Celebration Details "Read More" modal + neon script styling
+    ========================= */
+    .neon-script{
+      font-family: "Dancing Script", cursive;
+      color: #39ff14; /* neon green */
+      text-shadow:
+        0 0 6px rgba(57,255,20,.60),
+        0 0 18px rgba(57,255,20,.35);
+      letter-spacing: .2px;
+    }
+    .celebration-preview{
+      margin-top: 12px;
+      line-height: 1.45;
+      color: #555;
+      font-size: 1rem;
+    }
+    .phone-link{
+      color: #39ff14;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    .btn-neon{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:.6rem .95rem;
+      border-radius:10px;
+      border:1px solid rgba(57,255,20,.55);
+      background: rgba(57,255,20,.10);
+      color:#1e3c72;
+      cursor:pointer;
+      font-weight:700;
+      margin-top:12px;
+    }
+    .btn-neon:hover{ background: rgba(57,255,20,.16); }
+
+    .modal-backdrop{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 9999;
+    }
+    .modal-backdrop.show{ display:flex; }
+
+    .modal{
+      width: min(820px, 96vw);
+      max-height: 86vh;
+      overflow: hidden;
+      background: #0d0f10;
+      border: 1px solid rgba(57,255,20,.30);
+      border-radius: 18px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
+    }
+    .modal-header, .modal-footer{
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .modal-footer{
+      border-top: 1px solid rgba(255,255,255,.08);
+      border-bottom: none;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .modal-close{
+      background: transparent;
+      border: 0;
+      color: rgba(255,255,255,.85);
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-body{
+      padding: 14px 16px 18px;
+      overflow: auto;
+      max-height: calc(86vh - 120px);
+      line-height: 1.65;
+    }
+    .modal-body p{ margin: 0 0 14px; }
+    .modal-body .neon-script{ font-size: 1.25rem; }
+    .modal-body strong{ color: rgba(255,255,255,.92); font-weight: 800; }
+    .modal-body a{ color: #39ff14; }
+
+    .btn-ghost{
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.20);
+      color: rgba(255,255,255,.90);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
@@ -87,6 +194,27 @@
           <p style="margin-top:20px;">
             Come celebrate the remarkable achievements and lasting impact of a distinguished career in government service.
           </p>
+
+          <!-- =========================
+               Added: compact teaser + Read More (doesn't take over homepage)
+          ========================= -->
+          <div style="margin-top:14px;">
+            <div class="neon-script" style="font-size:1.35rem; line-height:1.1;">
+              ATTENTION RAMSTEIN ALUMNI
+            </div>
+
+            <p class="celebration-preview">
+              Derby City Gaming Hotel is the recommended place to stay — most attendees will be there.
+              Call <a class="phone-link" href="tel:15029617636">502-961-7636</a> and ask for
+              <strong>“Johnson Retirement Party”</strong> to receive a <strong>$25 play credit</strong>.
+              (Booking online will not include the credit.)
+            </p>
+
+            <button class="btn-neon" type="button" onclick="openCelebrationModal()">
+              Read full hotel/casino details
+            </button>
+          </div>
+          <!-- /Added block -->
         </div>
 
         <div class="card">
@@ -343,6 +471,58 @@
     </div>
   </div> <!-- /MAIN PAGE -->
 
+  <!-- =========================
+       Added: Modal for full "Celebration Details" hotel/casino message
+  ========================= -->
+  <div class="modal-backdrop" id="celebrationModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="celebrationTitle">
+      <div class="modal-header">
+        <h4 id="celebrationTitle" class="neon-script" style="margin:0;font-size:1.7rem;">
+          Celebration Details
+        </h4>
+        <button class="modal-close" type="button" onclick="closeCelebrationModal()" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-body neon-script">
+        <p><strong>ATTENTION RAMSTEIN ALUMNI:</strong></p>
+
+        <p>
+          Derby City Gaming Hotel is the choice to stay at, a majority of everyone coming will be staying there.
+          Please call <a class="phone-link" href="tel:15029617636">502 961-7636</a> to make your reservation and use
+          <strong>"Johnson Retirement Party"</strong> when you speak to a human.
+          You will receive a <strong>$25 play credit</strong> for the casino games if you call that # and make your reservation.
+          If you do it online, you will <strong>NOT</strong> get the credit.
+        </p>
+
+        <p>
+          The hotel is connected to the casino and is open 24hrs with a full bar and stage with live music on Friday and Saturday nights.
+          It beats the snot out of hanging out in a hotel lobby like we all have done before at our reunions.
+          I have rooms blocked so book when you can and if it goes over, I will contact them and add more rooms if need be.
+        </p>
+
+        <p>
+          This is not just for Ramstein Alumni, this is also for anyone traveling from out of state, city, country that will stay for a night or two.
+          May everyone have safe travels and can't wait to see all of you.
+        </p>
+
+        <p>
+          <strong>P.S.</strong> This hotel/casino is located 1.6 miles from where the event venue is located, and 3.6 miles from the Louisville Intl Airport.
+        </p>
+
+        <p>
+          Please feel free to contact me via email or phone text if you have any questions.
+          Please remember, I work nights so I sleep everyday during the day.
+          Be safe, stay warm and cannot wait to see each and everyone of you.
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-ghost" type="button" onclick="closeCelebrationModal()">Close</button>
+      </div>
+    </div>
+  </div>
+  <!-- /Added modal -->
+
   <!-- RSVP LIST PAGE -->
   <div id="rsvp-list-page" class="page">
     <div class="container">
@@ -499,7 +679,7 @@
           </div>
         </div>
 
-       <div class="card" style="margin-bottom:12px;">
+        <div class="card" style="margin-bottom:12px;">
           <h3>Derby City Gaming Hotel</h3>
           <p>4520 Poplar Level Rd, Louisville, KY • ~1.9 miles to venue</p>
           <p class="small-note">Gaming • Restaurants • Live Entertainment</p>
@@ -508,7 +688,7 @@
             <a class="btn" target="_blank" rel="noopener" href="https://hotel.derbycitygaming.com/hotel/">Book / Group Code</a>
           </div>
         </div>
-        
+
         <p class="small-note" style="margin-top:10px;">Need more options or a group block? Contact us and we’ll add details here.</p>
       </div>
     </div>
@@ -585,7 +765,7 @@
 
           <button type="submit" class="submit-btn" id="golfSubmitBtn">Submit Golf Sign-Up</button>
           <div class="success-message" id="golfSuccessMessage">Thanks! You’re on the golf list.</div>
-          <div class="error-message" id="golfErrorMessage">Couldn’t sync online, but your sign-up is saved locally. Try refreshing later.</div>
+          <div class="error-message" id="golfErrorMessage">Couldn’t sync online, but your sign-up is saved locally. Try refreshing later to sync.</div>
         </form>
       </div>
 
@@ -629,6 +809,31 @@
 
   <!-- your JS bundle -->
   <script src="script.js"></script>
+
+  <!-- Added: tiny modal JS (keeps it self-contained; does not touch your existing script.js) -->
+  <script>
+    function openCelebrationModal(){
+      const el = document.getElementById('celebrationModal');
+      if(!el) return;
+      el.classList.add('show');
+      el.setAttribute('aria-hidden', 'false');
+    }
+    function closeCelebrationModal(){
+      const el = document.getElementById('celebrationModal');
+      if(!el) return;
+      el.classList.remove('show');
+      el.setAttribute('aria-hidden', 'true');
+    }
+    // Close on backdrop click
+    document.addEventListener('click', (e) => {
+      const el = document.getElementById('celebrationModal');
+      if(el && el.classList.contains('show') && e.target === el) closeCelebrationModal();
+    });
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') closeCelebrationModal();
+    });
+  </script>
 
   <footer style="background: var(--patriot-blue); color: var(--patriot-white); text-align: center; padding: 15px 0; font-size: 0.9rem; margin-top: 40px;">
     &copy; 2025 Jaydoo Ramstein Productions. All rights reserved.
