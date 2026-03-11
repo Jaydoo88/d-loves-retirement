@@ -1,0 +1,68 @@
+We are still getting a missing env variable error in the frontend. The app is explicitly looking for:
+
+VITE_SUPABASE_URL
+
+VITE_SUPABASE_ANON_KEY
+
+Please verify all of the following exactly:
+
+In Replit Secrets, the names are exactly:
+
+VITE_SUPABASE_URL
+
+VITE_SUPABASE_ANON_KEY
+
+The values are set correctly:
+
+VITE_SUPABASE_URL = https://ousuvbrcuuzazetusmjh.supabase.co
+
+VITE_SUPABASE_ANON_KEY = [Supabase publishable key]
+
+After adding/changing the Secrets, fully restart the Replit app/server. A browser refresh alone is not enough for Vite env vars.
+
+Add a temporary debug check in the frontend to confirm whether Vite can see the variables:
+
+console.log('VITE_SUPABASE_URL exists:', !!import.meta.env.VITE_SUPABASE_URL);
+console.log('VITE_SUPABASE_ANON_KEY exists:', !!import.meta.env.VITE_SUPABASE_ANON_KEY);
+console.log('Available env keys:', Object.keys(import.meta.env).filter(k => k.includes('SUPABASE')));
+
+If those logs still show missing values, verify whether this Replit setup requires exposing env vars through the build config or a .env file for Vite instead of Secrets alone.
+
+The current issue is not Supabase. It is that the frontend build does not have access to the expected Vite env vars.
+
+Also ask them to verify the file client/src/lib/supabase.ts is using exactly this:
+
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error(
+    'Missing Supabase environment variables. Please check your Replit Secrets and ensure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are set.'
+  );
+}
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
+
+And here’s the simpler explanation of what’s probably happening:
+
+Vite only exposes variables that start with VITE_, but the running app still does not see them.
+So the names are either wrong, not loaded, or the server needs a full restart/rebuild.
+
+One thing you can ask them to check manually:
+open Replit Secrets and make sure the secret names are exactly:
+
+VITE_SUPABASE_URL
+
+VITE_SUPABASE_ANON_KEY
+
+No spaces, no quotes, no typo like:
+
+VITE_SUPABSE_URL
+
+VITE_SUPABASE_KEY
+
+SUPABASE_URL
+
+If you want, send me a screenshot of the Replit Secrets names only, and I’ll spot the mismatch fast.

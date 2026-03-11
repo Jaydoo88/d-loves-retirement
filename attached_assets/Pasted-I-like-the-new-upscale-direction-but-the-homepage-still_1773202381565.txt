@@ -1,0 +1,201 @@
+I like the new upscale direction, but the homepage still does not flow correctly yet. I need the page reorganized and refined so it feels like one guided experience instead of stacked sections.
+
+HOMEPAGE FLOW I WANT
+
+Please restructure the homepage in this order:
+
+1. Hero section
+2. Honoring 37 Years of Service + Main Event card
+3. Celebration Weekend
+   - Golf Outing card
+   - Venue card
+4. Lodging Spotlight
+5. A Life of Service
+   - Career Journey
+   - Career Highlights
+6. Memories on the Job
+7. Join Us in Celebration (RSVP)
+
+FLOW GOAL
+
+I want the page to move naturally like this:
+tribute -> main event details -> weekend activities -> lodging -> life of service -> memories -> RSVP
+
+Right now the page feels like separate sections stacked together. I want it to feel intentional, elegant, and well-paced.
+
+SECTION-BY-SECTION FIXES
+
+1. Hero section
+- Keep it strong, clean, and upscale
+- Large centered headline
+- Refined typography
+- Circular hero image with elegant border/shadow
+- Tasteful spacing above and below
+- Intro text should not feel cramped
+- Make sure the hero has enough breathing room before the next section
+
+2. Honoring 37 Years of Service + Main Event card
+- This should be the first section after the hero
+- Left side should be the tribute/intro copy
+- Right side should be the Main Event card
+- Rename this section from “The Journey” to something stronger like:
+  - Honoring 37 Years of Service
+  - or Honoring a Life of Service
+- The event card should feel cleaner and more premium
+- Improve alignment between the text block and the event card
+- Add more balanced vertical spacing inside the card
+- The left/right columns should feel visually connected, not like two unrelated blocks
+
+3. Celebration Weekend section
+- Add a shared section heading above the Golf and Venue cards
+- Use a heading like:
+  - Celebration Weekend
+  - or The Weekend Experience
+- The Golf and Venue cards should feel like part of the same section
+- Match card heights
+- Match image treatment and padding
+- Buttons should align consistently
+- Card body text should sit at the same vertical rhythm
+- Improve spacing below images and above buttons
+- The cards should feel more upscale and less like promo tiles
+
+4. Lodging Spotlight
+- Simplify and refine this section
+- It is currently too text-heavy
+- Make it feel more premium and less like a flyer
+- Keep the important booking info, but tighten the copy layout
+- Use:
+  - one clean section heading
+  - one short supporting intro
+  - one highlighted booking callout box
+  - one supporting sentence below
+  - one or two buttons max
+- Improve padding inside the lodging card
+- Add more white space around the text blocks
+- Make the highlighted booking callout feel intentional and elegant
+- Ensure button spacing feels balanced
+
+5. A Life of Service
+- This should be one shared section wrapper, not disconnected blocks
+- Add one main section heading:
+  - A Life of Service
+- Add one short intro sentence if it helps
+- Then place:
+  - Career Journey
+  - Career Highlights
+- These should feel like part of one tribute chapter
+- Career Journey should come first
+- Career Highlights should immediately follow it
+
+Career Journey fixes:
+- Improve row spacing between journey items
+- Make each row feel more polished and consistent
+- Ensure left image, middle text, and right badge are vertically centered
+- Increase inner padding so rows feel less compressed
+- Keep all rows the same visual height if possible
+- Improve spacing between the section title and the first card
+
+Career Highlights fixes:
+- Keep the two-column layout if it works well
+- Make sure both cards have equal height
+- Improve list spacing and readability
+- Add more breathing room inside each card
+- Make the cards feel premium and not too flat
+- Ensure heading, list content, and margins are consistent
+
+6. Memories on the Job
+- Move the photo reel to after A Life of Service
+- This should be the emotional payoff section
+- Keep it rich and memorable, but better integrated with the rest of the page
+- The photo section should not feel like a completely different site
+- Refine the dark section so it still feels upscale and cohesive
+- Improve spacing above the heading and below the subheading
+- Ensure the photo cards have consistent sizing and captions
+- Tighten the carousel spacing and alignment
+- Make navigation arrows feel elegant and properly placed
+- Avoid any awkward cropped images if possible
+
+7. Join Us in Celebration (RSVP)
+- RSVP should be the final section on the homepage
+- Rename the section heading from just “RSVP” to something warmer, such as:
+  - Join Us in Celebration
+- The RSVP area should feel like the final call to action
+- It should have stronger top spacing from the photo reel
+- Improve form spacing, input padding, and button styling
+- Make the form feel polished and inviting
+- The section should not feel like an afterthought
+
+GLOBAL DESIGN / LAYOUT FIXES
+
+Please clean up the following sitewide issues:
+
+Spacing / vertical rhythm
+- Standardize the spacing between all homepage sections
+- Add consistent top and bottom padding for each section
+- Avoid sections feeling too tight or too far apart
+- Use a cleaner vertical rhythm throughout the page
+
+Container widths
+- Make sure content widths feel consistent from section to section
+- Some sections currently feel too wide while others feel boxed differently
+- Unify the main content width and card alignment
+
+Card styling
+- Refine all cards so they feel like part of one system
+- Consistent corner radius
+- Consistent border treatment
+- Consistent shadow softness
+- Consistent inner padding
+- Consistent heading spacing
+- Match card heights where they are side-by-side
+
+Typography
+- Improve the hierarchy of headings, subheadings, and body text
+- Keep the elegant serif direction, but make sizes and spacing more intentional
+- Section labels should feel subtle and upscale
+- Avoid text blocks feeling too large, too cramped, or too light
+
+Buttons
+- Standardize button styles across the site
+- Same padding language
+- Same border radius family
+- Same hover quality
+- Same visual weight
+- Buttons should look premium, not generic
+
+Alignment
+- Fix any visual misalignment between cards, buttons, headings, and text blocks
+- Make sure two-column sections align properly across the top
+- Make section headings align consistently with their content below
+
+Image treatment
+- Ensure all major images feel curated and premium
+- Keep image crops intentional
+- Use consistent image radius treatment
+- Make promo cards and photo reel feel visually related
+
+SECTION NAMING I WANT
+
+Please use these naming ideas to improve the flow:
+
+- Honoring 37 Years of Service
+- Celebration Weekend
+- Lodging Spotlight
+- A Life of Service
+- Memories on the Job
+- Join Us in Celebration
+
+IMPORTANT
+
+I want the new page to preserve the richness of the content, but the presentation must be much more elegant and cohesive. It should feel like a premium tribute/event experience, not just a collection of nice sections.
+
+The final homepage should feel intentional from top to bottom:
+Hero
+-> Honoring 37 Years of Service + Main Event
+-> Celebration Weekend
+-> Lodging Spotlight
+-> A Life of Service
+-> Memories on the Job
+-> Join Us in Celebration
+
+Please focus on flow, spacing, padding, section hierarchy, card consistency, and overall polish.

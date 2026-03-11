@@ -1,0 +1,226 @@
+I want you to recreate my retirement event website from scratch and move it to a cleaner production setup with a more upscale, polished look.
+
+STACK I WANT
+- GitHub for source control
+- Vercel for hosting/deployment
+- Supabase for database and future file storage
+
+MAIN GOAL
+Rebuild the site so it feels more premium, elegant, and upscale than it does now, while still keeping the same overall purpose and page structure. It does NOT need to look exactly the same as the current site. I want it to feel more refined, professional, and visually elevated.
+
+IMPORTANT
+My current site has RSVP and Golf Sign-Up forms that save locally first and then try to sync online. That is causing problems. I want Supabase to be the single source of truth.
+
+CORE PAGES I NEED
+Please recreate the site with these pages and features:
+
+1. Main Page
+- Elegant hero/header section honoring Officer Darren “D-Love” Johnson
+- Event details section
+- Legacy of Service section
+- Golf outing promo/banner section
+- Venue promo/banner section
+- Lodging spotlight section
+- Photo reel/gallery with lightbox
+- Career highlights section
+- Career journey timeline
+- RSVP form
+
+2. RSVP List Page
+This page is very important and must be fully built.
+I need a dedicated RSVP List page that shows all RSVP responses in a clean, polished layout.
+
+Required features:
+- Summary stats at the top
+- Total RSVP responses
+- Total attending
+- Total cannot attend
+- Total maybe
+- Total guests expected
+- Refresh button
+- Export CSV button
+- Copy share link button
+- Search/filter capability if possible
+- Clean list of responses below the summary
+
+Each RSVP entry should show:
+- Full name
+- Attending status
+- Organization/department if provided
+- Guest count if attending
+- Message/memory if provided
+- Submission date/time
+
+Design notes:
+- Make this page look polished and organized
+- Status badges should be visually clear
+- “Attending,” “Cannot Attend,” and “Maybe” should be easy to distinguish
+- The list should feel like a clean event management dashboard, not a plain dump of text
+
+3. Golf Outing Page
+- Elegant golf outing hero/details section
+- Golf sign-up form
+- Golf summary section
+- Golf participant list section
+
+4. Golf List / Golf Participants Section
+This is also very important and must be fully built.
+I need the Golf page to clearly show the golf sign-up list and summary.
+
+Required features:
+- Total golf sign-ups
+- Total golfers/players
+- Number of full foursomes
+- Remaining players not yet grouped into foursomes
+- Refresh button
+- Export CSV button
+- Copy share link button
+- Search/filter capability if possible
+- Clean list of golf participants
+
+Each golf signup entry should show:
+- Full name
+- Handicap or skill level if provided
+- Party size
+- Pairing preference if provided
+- Notes if provided
+- Submission date/time
+
+Design notes:
+- This should feel organized and premium
+- It should be easy to quickly review who signed up
+- The summary should make it easy to manage pairings
+
+5. Venue Page
+- Venue hero/details section
+- About the venue section
+- Upscale gallery treatment or rotating image gallery with lightbox
+
+6. Hotels Page
+- Hotel/lodging cards with links
+- Clean premium presentation
+
+7. Mobile Navigation
+- Hamburger menu on mobile
+- Clean desktop navigation on larger screens
+
+8. Other UI Features
+- Lodging modal popup
+- Photo lightbox
+- Hero image rotation/crossfade
+- Calendar link support if dates are filled in
+
+DESIGN DIRECTION
+I want the new site to look more upscale, elegant, modern, and polished.
+
+Please improve the visual design with things like:
+- premium typography pairing
+- cleaner spacing and layout
+- more refined card styling
+- more elegant buttons
+- stronger image presentation
+- tasteful use of color
+- subtle luxury/event-style feel
+- professional, memorable event website quality
+
+STYLE NOTES
+- keep a patriotic red / white / blue influence, but make it more sophisticated and less loud
+- avoid making it look cartoonish, overly bright, or cheap
+- think elegant celebration / premium event / distinguished retirement tribute
+- it should feel warm, honorable, stylish, and professional
+- make it look like a high-end event site, not just a basic info page
+
+You can modernize the current layout and improve it visually. It does NOT have to match the current design exactly.
+
+BACKEND REQUIREMENTS
+Use Supabase as the real backend.
+
+Create these tables:
+
+A. rsvps
+Fields:
+- id
+- created_at
+- updated_at
+- full_name
+- email
+- organization
+- attending_status
+- guest_count
+- message
+- source
+- is_spam
+
+B. golf_signups
+Fields:
+- id
+- created_at
+- updated_at
+- full_name
+- email
+- handicap
+- party_size
+- pairing_preference
+- notes
+- source
+- is_spam
+
+FORM BEHAVIOR
+RSVP form:
+- validate required fields
+- submit directly to Supabase
+- only show success after successful database insert
+- show real error if it fails
+- keep honeypot anti-spam field
+
+Golf form:
+- validate required fields
+- submit directly to Supabase
+- only show success after successful database insert
+- show real error if it fails
+- keep honeypot anti-spam field
+
+VERY IMPORTANT
+- Do NOT use localStorage as the main save path
+- Do NOT use Google Sheets or Apps Script in production
+- Do NOT show “saved locally, try refreshing later” type messaging
+- Supabase must be the source of truth
+
+DATA DISPLAY REQUIREMENTS
+This part is critical:
+
+RSVP List page must pull live RSVP data from Supabase and display it on the site.
+
+Golf List section/page must pull live golf data from Supabase and display it on the site.
+
+Both must include:
+- refresh functionality
+- export CSV functionality
+- polished list display
+- summary counts based on real database data
+
+SECURITY
+Set up Supabase properly with RLS.
+Public users can submit forms.
+Public users should not be able to freely edit or delete records.
+If needed, build secure server-side routes for reading/exporting list data.
+
+TECH REQUIREMENTS
+- Build it cleanly and production-ready
+- Structure it for GitHub + Vercel deployment
+- Use environment variables for Supabase
+- Keep code organized and maintainable
+- Make it easy for me to manage later
+
+DELIVERABLES I WANT
+- rebuilt website files
+- upscale redesigned frontend
+- working RSVP List page
+- working Golf List / Golf participants section
+- Supabase SQL for tables
+- RLS policies
+- environment variable list
+- deployment/setup instructions for GitHub, Supabase, and Vercel
+
+BOTTOM LINE
+I want the site recreated with a more upscale premium look and a real backend. Keep the same purpose and core pages, but make sure the RSVP List page and Golf participant list are fully built and connected to Supabase.

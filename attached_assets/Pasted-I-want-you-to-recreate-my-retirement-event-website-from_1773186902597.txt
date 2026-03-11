@@ -1,0 +1,166 @@
+I want you to recreate my retirement event website from scratch and move it to a cleaner production setup with a more upscale, polished look.
+
+STACK I WANT
+- GitHub for source control
+- Vercel for hosting/deployment
+- Supabase for database and future file storage
+
+MAIN GOAL
+Rebuild the site so it feels more premium, elegant, and upscale than it does now, while still keeping the same overall purpose and page structure. It does NOT need to look exactly the same as the current site. I want it to feel more refined, professional, and visually elevated.
+
+IMPORTANT
+My current site has RSVP and Golf Sign-Up forms that save locally first and then try to sync online. That is causing problems. I want Supabase to be the single source of truth.
+
+WHAT I NEED REBUILT
+Please recreate the site with these pages and features:
+
+1. Main Page
+- Hero/header area
+- Event details card
+- Legacy of Service section
+- Golf outing promo/banner section
+- Venue promo/banner section
+- Lodging spotlight section
+- Photo reel/gallery with lightbox
+- Career highlights section
+- Career journey timeline
+- RSVP form
+
+2. RSVP List Page
+- Summary stats
+- RSVP response list
+- Refresh button
+- Export CSV button
+- Copy share link button
+
+3. Golf Outing Page
+- Golf outing hero/details section
+- Golf signup form
+- Golf summary stats
+- Golf signup list
+- Refresh button
+- Export CSV button
+- Copy share link button
+
+4. Venue Page
+- Venue hero/details section
+- About the venue section
+- Rotating image gallery or another upscale gallery treatment with lightbox
+
+5. Hotels Page
+- Hotel/lodging cards with links
+- Clean premium presentation
+
+6. Mobile Navigation
+- Hamburger menu on mobile
+- Clean desktop navigation on larger screens
+
+7. Other UI Features
+- Lodging modal popup
+- Photo lightbox
+- Hero image rotation/crossfade
+- Calendar link support if dates are filled in
+
+DESIGN DIRECTION
+I want the new site to look more upscale, elegant, modern, and polished.
+
+Please improve the visual design with things like:
+- premium typography pairing
+- cleaner spacing and layout
+- more refined card styling
+- more elegant buttons
+- stronger image presentation
+- tasteful use of color
+- subtle luxury/event-style feel
+- professional, memorable event website quality
+
+STYLE NOTES
+- keep a patriotic red / white / blue influence, but make it more sophisticated and less loud
+- avoid making it look cartoonish, overly bright, or cheap
+- think elegant celebration / premium event / distinguished retirement tribute
+- it should feel warm, honorable, stylish, and professional
+- make it look like a high-end event site, not just a basic info page
+
+You can modernize the current layout and improve it visually. It does NOT have to match the current design exactly.
+
+BACKEND REQUIREMENTS
+Use Supabase as the real backend.
+
+Create these tables:
+
+A. rsvps
+- id
+- created_at
+- updated_at
+- full_name
+- email
+- organization
+- attending_status
+- guest_count
+- message
+- source
+- is_spam
+
+B. golf_signups
+- id
+- created_at
+- updated_at
+- full_name
+- email
+- handicap
+- party_size
+- pairing_preference
+- notes
+- source
+- is_spam
+
+FORM BEHAVIOR
+RSVP form:
+- validate required fields
+- submit directly to Supabase
+- only show success after successful database insert
+- show real error if it fails
+- keep honeypot anti-spam field
+
+Golf form:
+- validate required fields
+- submit directly to Supabase
+- only show success after successful database insert
+- show real error if it fails
+- keep honeypot anti-spam field
+
+VERY IMPORTANT
+- Do NOT use localStorage as the main save path
+- Do NOT use Google Sheets or Apps Script in production
+- Do NOT show “saved locally, try refreshing later” type messaging
+- Supabase must be the source of truth
+
+DATA DISPLAY
+- RSVP List page should pull live RSVP data from Supabase
+- Golf page summary/list should pull live golf data from Supabase
+- Export CSV should export actual Supabase data
+- Refresh buttons should reload from Supabase
+
+SECURITY
+Set up Supabase properly with RLS.
+Public users can submit forms.
+Public users should not be able to freely edit or delete records.
+If needed, build secure server-side routes for reading/exporting list data.
+
+TECH REQUIREMENTS
+- Build it cleanly and production-ready
+- Structure it for GitHub + Vercel deployment
+- Use environment variables for Supabase
+- Keep code organized and maintainable
+- Make it easy for me to manage later
+
+DELIVERABLES I WANT
+- rebuilt website files
+- upscale redesigned frontend
+- Supabase SQL for tables
+- RLS policies
+- environment variable list
+- deployment/setup instructions for GitHub, Supabase, and Vercel
+
+BOTTOM LINE
+I want the site recreated with a more upscale premium look and a real backend. Keep the same purpose and core pages, but elevate the design and replace the broken Google/local-storage workflow with Supabase.

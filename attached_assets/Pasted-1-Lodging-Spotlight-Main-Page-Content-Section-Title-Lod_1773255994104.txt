@@ -1,0 +1,119 @@
+1. Lodging Spotlight (Main Page Content)
+
+Section Title
+
+Lodging Spotlight
+
+Intro Paragraph
+
+We recommend the Derby City Gaming Hotel as the primary place to stay during the celebration weekend. Connected directly to the casino and open 24 hours, it offers dining, entertainment, and a lively atmosphere that makes it the perfect gathering spot for guests throughout the weekend.
+
+Booking Highlight Box
+
+⭐ Important Booking Information
+
+Call 502-961-7636 and use “Johnson Retirement Party” when speaking with a reservation agent to receive a $25 casino play credit.
+
+Reservations made online will NOT include the credit.
+
+Buttons
+
+Button 1
+Read Full Hotel & Casino Details
+
+Button 2
+View All Lodging Options
+
+2. Popup / Modal Content
+
+(This appears when users click “Read Full Hotel & Casino Details”)
+
+Derby City Gaming Hotel Details
+
+The Derby City Gaming Hotel is the recommended place to stay, and many guests attending the retirement celebration are expected to book here.
+
+To receive the $25 casino play credit, guests must call the hotel directly at:
+
+502-961-7636
+
+When speaking with a reservation agent, mention:
+
+“Johnson Retirement Party”
+
+This credit is only available for reservations made by phone.
+
+Reservations made online will not include the casino credit.
+
+Why This Hotel Is Recommended
+
+The Derby City Gaming Hotel is directly connected to the casino and offers a much more social and entertaining environment than a traditional hotel stay.
+
+Guests will have access to:
+
+• Over 1,300 historical horse racing gaming machines
+• A full sportsbook lounge
+• Multiple dining options
+• Full bar and lounge areas
+• Live music performances on Friday and Saturday nights
+
+This makes it an ideal place for guests to relax, reconnect, and continue the celebration outside of the main event.
+
+Rather than everyone gathering in a quiet hotel lobby, the casino and entertainment venue provide a fun and comfortable space for everyone to socialize throughout the weekend.
+
+Room Block Information
+
+Rooms have been blocked for guests attending the retirement celebration.
+
+We recommend booking your room as early as possible to ensure availability.
+
+If the reserved room block fills up, additional rooms may be added based on availability.
+
+Who This Hotel Is For
+
+This hotel is ideal for:
+
+• Ramstein alumni attending the celebration
+• Guests traveling from out of town or out of state
+• Anyone planning to stay overnight after the event
+• Guests who want entertainment, dining, and nightlife nearby
+
+Location Details
+
+Derby City Gaming Hotel is conveniently located:
+
+1.6 miles from the event venue
+
+3.6 miles from Louisville International Airport
+
+This makes it an easy and convenient stay for both local and traveling guests.
+
+3. Button Behavior
+
+Read Full Hotel & Casino Details
+
+Opens the popup modal containing the full information above.
+
+View All Lodging Options
+
+Links to the full Hotels / Lodging page where all hotel choices are listed.
+
+Optional Design Notes for Replit (recommended)
+
+You can add this to your instructions:
+
+• Keep the Lodging Spotlight section visually clean and centered
+• Use a subtle highlight box for the booking instructions
+• The phone number should be styled as a clickable phone link on mobile
+• The popup modal should feel elegant and easy to close
+• Maintain consistent typography and spacing with the rest of the site
+• The modal should not feel cluttered—use clear section spacing
+
+Final Result
+
+This structure gives you:
+
+✔ clean homepage
+✔ persuasive recommendation
+✔ clear booking instructions
+✔ full hotel details without cluttering the page
+✔ better user experience

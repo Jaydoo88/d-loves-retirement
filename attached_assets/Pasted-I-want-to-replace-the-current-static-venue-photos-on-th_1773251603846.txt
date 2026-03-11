@@ -1,0 +1,38 @@
+I want to replace the current static venue photos on the right side of this section with an interactive 3D rotating photo carousel like the one from my old site. Instead of three flat vertical images, I want that same space to become a premium rotating venue gallery.
+
+What I want changed:
+
+remove the current stacked/static photo layout on the right
+
+replace it with a 3D circular rotating image carousel
+
+the carousel should sit in the same general area where the current photos are now
+
+several venue photos should be visible at once, with the front image larger and side images angled
+
+the gallery should feel elegant, interactive, and upscale
+
+when a user clicks a photo, it should open larger in a modal/lightbox
+
+keep rounded corners and subtle shadow so it matches the rest of the page
+
+do not distort the images
+
+use venue/location photos in this rotating gallery
+
+Layout goal:
+Keep the text, parking/accessibility cards, and directions button on the left, but replace the current right-side image strip with the interactive 3D carousel. The right side should feel like a visual feature area for exploring the venue.
+
+Design direction:
+I want the right side to feel more dynamic and premium. The current photo stack is okay, but the rotating gallery would make this section much more impressive and interactive.
+
+If helpful, here is a more technical version:
+
+Please replace the current right-side venue image column with a 3D transform-based rotating carousel using CSS/JS. The carousel should live inside the same right-side container, with perspective applied so the images appear arranged in a circular ring. The front image should be most prominent, side images partially visible and angled. Clicking an image should open it in a modal/lightbox. On smaller screens, it can collapse into a simpler swipeable gallery.
+
+And here is a shorter version to paste directly:
+
+Please replace the current static venue photos on the right side of this section with the 3D rotating photo gallery from my old site. I want that same area to become an interactive circular image carousel with multiple photos visible at once, front image larger, side images angled, and click-to-open modal behavior. Keep the left-side text and info cards as they are, but make the right-side image area a more premium interactive venue gallery.
+
+One thing I’d also tell them:
+make sure the carousel is sized to fit that section cleanly, so it doesn’t overpower the left-side content. The gallery should complement the text, not dominate it.

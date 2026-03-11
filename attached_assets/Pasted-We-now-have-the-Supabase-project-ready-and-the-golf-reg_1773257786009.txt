@@ -1,0 +1,67 @@
+We now have the Supabase project ready and the golf_registrations table has already been created successfully in Supabase. I need you to connect the live Golf Registration form on the site to this Supabase table.
+
+Use these environment variables in Replit Secrets:
+
+SUPABASE_URL = https://ousuvbrcuuzazetusmjh.supabase.co
+
+SUPABASE_KEY = [I will paste the publishable key in Replit Secrets]
+
+Please do the following:
+
+Connect the Golf Registration form so submissions insert into the golf_registrations table in Supabase.
+
+Match the form fields to these database columns:
+
+submitted_at
+
+full_name
+
+email
+
+handicap_range
+
+party_size
+
+pairing_preference
+
+notes
+
+registration_type
+
+source
+
+On submit:
+
+validate required fields
+
+save the row to Supabase
+
+set registration_type to golf
+
+set source to site_form
+
+set submitted_at to the current date/time
+
+Show a clear success message after submission.
+
+Show a clear error message if submission fails.
+
+Do not break the current front-end design or styling.
+
+After connecting the form, verify that a live test submission appears in the Supabase golf_registrations table.
+
+Also, once the form is working, please help connect the Golf Participants admin/dashboard page so it pulls live data from golf_registrations instead of mock data. The dashboard should calculate:
+
+total sign-ups = number of rows
+
+total players = sum of party_size
+
+full foursomes = total players divided into groups of 4
+
+unpaired players = total players mod 4
+
+Please keep this step focused on Golf first. We will do RSVP after Golf is fully working.
+
+If you want an even shorter version, use this:
+
+Please connect the live Golf Registration form to my Supabase golf_registrations table using the Replit Secrets SUPABASE_URL and SUPABASE_KEY. Validate the form, insert submissions into Supabase, show success/error messages, and then connect the Golf Participants dashboard to pull live data instead of mock data. Keep the current design intact. We are testing Golf first before building RSVP

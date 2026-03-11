@@ -1,0 +1,108 @@
+The RSVP data has now been imported into Supabase successfully. Please connect the live RSVP form and the RSVP dashboard to the rsvps table using the same Supabase setup pattern we used for golf.
+
+Use the imported Supabase table rsvps as the live source for the page.
+
+Field mapping
+
+Form → Supabase:
+
+name → full_name
+
+email → email
+
+organization → organization
+
+attending → status
+
+guests → guest_count
+
+message → message
+
+On submit:
+
+insert or update the row in rsvps
+
+set submitted_at to the current timestamp
+
+set source to site_form
+
+Important status change
+
+Please make sure the RSVP form uses the same status values that are now in Supabase:
+
+attending
+
+cannot_attend
+
+maybe
+
+Do not keep using old values like yes if the form still has that anywhere. Update the form submission logic and any dropdown/radio values so they match the database exactly.
+
+Dashboard requirements
+
+Keep the current RSVP dashboard design and layout the same.
+
+The dashboard should pull live data from rsvps and calculate:
+
+total responses = count of rows
+
+attending = count where status = attending
+
+cannot attend = count where status = cannot_attend
+
+maybe = count where status = maybe
+
+extra guests = sum of guest_count
+
+Keep the public table columns as:
+
+Full Name
+
+Status
+
+Organization
+
+Guests
+
+Message / Memory
+
+Submission Date
+
+Do not display email publicly.
+
+Sort responses by:
+
+submitted_at DESC
+
+Message / Memory modal
+
+Because this is a tribute to Darren, many of the messages are meaningful and longer than the table width allows.
+
+Please keep the table preview truncated with ellipsis for layout purposes, but make the Message / Memory column clickable so that clicking a truncated message opens a modal popup showing:
+
+the guest name
+
+the full message / memory text
+
+This modal should feel polished and match the rest of the site styling.
+
+Duplicate handling
+
+We also want duplicate handling based on email.
+If a person submits the RSVP form again using the same email, please update the existing RSVP instead of inserting a duplicate row.
+
+Also fix the form
+
+Please review the RSVP submit form and make sure:
+
+it is connected to Supabase
+
+the status values match the database
+
+it shows a clear success message
+
+it shows a clear error message if submission fails
+
+it does not break the current front-end styling
+
+Please keep the rest of the RSVP dashboard the same and only make the needed backend/data connection changes plus the message modal improvement.

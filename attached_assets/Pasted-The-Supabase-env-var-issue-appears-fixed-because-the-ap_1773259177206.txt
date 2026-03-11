@@ -1,0 +1,57 @@
+The Supabase env var issue appears fixed, because the app is now loading farther. The new error on the Golf Outing page is likely happening when the page tries to read from golf_registrations.
+
+Please check the exact Supabase error in the browser console/network tab and confirm whether the read request is failing due to RLS or permissions.
+
+Most likely issue:
+The golf_registrations table currently allows INSERT, but does not yet allow SELECT for the page/dashboard query.
+
+Please verify:
+
+whether the Golf page is querying golf_registrations
+
+whether that query is using the browser Supabase client
+
+what exact error Supabase returns for the failed read
+
+If the page needs public read access for this view, then we need a SELECT policy. If this is supposed to be an admin-only page, then we should not expose all golf registrations publicly and should instead secure the page or use a protected backend route.
+
+Before changing anything, please tell me whether the Golf Outing page is:
+
+a public-facing sign-up page, or
+
+an admin/dashboard page pulling all registrations
+
+And here’s the important part for you:
+
+If this page is an admin page
+
+Do not allow public SELECT on all golf registrations.
+That table has names, emails, notes, and preferences. You do not want everyone reading that in the browser.
+
+In that case, the right solution is:
+
+keep public INSERT for the golf signup form
+
+make the dashboard/admin page protected
+
+use a backend/server route or secure admin access to read rows
+
+If this page is only the public golf signup page
+
+Then the error may be because they accidentally made the public page try to load the admin dataset/table when it shouldn’t.
+
+What I think is happening
+
+From your screenshot and earlier mockup, this looks like the Golf Participants list / admin dashboard page, not just the public golf form.
+
+So the best fix is probably:
+
+public golf form: allowed to insert
+
+admin golf dashboard: protected page with secure read access
+
+Quick question you should answer for Replit
+
+Tell them:
+
+This Golf page that is failing is the dashboard/list page, not the public signup form. I do not want public users to be able to read everyone’s registration data. Please secure the dashboard properly rather than opening public SELECT access to the whole table.
