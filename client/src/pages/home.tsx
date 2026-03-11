@@ -175,27 +175,27 @@ export default function Home() {
       <section className="relative pt-8 pb-6 lg:pt-10 lg:pb-8 bg-white flex flex-col items-center justify-center text-center px-4">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/30 to-white pointer-events-none" />
         
-        <div className="relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-1000 max-w-5xl mx-auto mt-2">
+        <div className="relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-1000 max-w-5xl mx-auto mt-2 px-2">
           <p className="text-secondary font-medium tracking-[0.25em] uppercase text-xs md:text-sm mb-2 opacity-90">
             Celebrating the Retirement of Officer
           </p>
           
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-primary font-bold mb-3 tracking-tight leading-[1.05] whitespace-nowrap">
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-primary font-bold mb-3 tracking-tight leading-[1.05] break-words hyphens-auto">
             Darren "D-Love" Johnson
           </h1>
           
-          <div className="flex items-center justify-center gap-6 mb-6">
-            <div className="h-[1px] w-12 bg-primary/20" />
-            <h3 className="font-sans text-sm md:text-base text-primary/70 tracking-[0.2em] uppercase">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 mb-6">
+            <div className="hidden sm:block h-[1px] w-12 bg-primary/20" />
+            <h3 className="font-sans text-xs sm:text-sm md:text-base text-primary/70 tracking-[0.1em] sm:tracking-[0.2em] uppercase text-center">
               K9 Extraordinaire – A Legacy of Service
             </h3>
-            <div className="h-[1px] w-12 bg-primary/20" />
+            <div className="hidden sm:block h-[1px] w-12 bg-primary/20" />
           </div>
           
-          <div className="relative mb-6 inline-block group">
+          <div className="relative mb-6 inline-block group max-w-[90vw]">
             <div className="absolute inset-0 rounded-full border border-primary/5 scale-[1.15] transition-transform duration-1000 group-hover:scale-[1.2]" />
             <div className="absolute inset-0 rounded-full border border-secondary/10 scale-[1.08] transition-transform duration-700 group-hover:scale-[1.12]" />
-            <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl mx-auto relative z-10 ring-8 ring-white">
+            <div className="w-52 h-52 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl mx-auto relative z-10 ring-4 sm:ring-8 ring-white">
               <img 
                 src={heroImages[currentHeroImageIndex]} 
                 alt="Officer Darren Johnson" 
