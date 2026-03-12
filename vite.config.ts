@@ -4,7 +4,6 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import fs from "fs";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
-import { metaImagesPlugin } from "./vite-plugin-meta-images";
 
 // Plugin to copy index.html to 404.html for GitHub Pages SPA routing
 const copyIndexTo404Plugin = () => ({
@@ -25,7 +24,6 @@ export default defineConfig({
     react(),
     runtimeErrorOverlay(),
     tailwindcss(),
-    metaImagesPlugin(),
     copyIndexTo404Plugin(),
     ...(process.env.NODE_ENV !== "production" &&
     process.env.REPL_ID !== undefined
