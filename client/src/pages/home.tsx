@@ -180,7 +180,7 @@ export default function Home() {
             Celebrating the Retirement of Officer
           </p>
           
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-primary font-bold mb-3 tracking-tight leading-[1.05] break-words hyphens-auto">
+          <h1 className="font-serif text-[7vw] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-primary font-bold mb-3 tracking-tight leading-[1.05] whitespace-nowrap">
             Darren "D-Love" Johnson
           </h1>
           
