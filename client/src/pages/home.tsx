@@ -295,9 +295,9 @@ export default function Home() {
                 <img src={golfPromoImg} alt="Golf Promo" className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-105" />
               </div>
               <div className="px-6 py-6 md:px-8 md:py-8 flex flex-col flex-grow items-center text-center">
-                <div className="mb-6 flex-grow flex flex-col justify-center w-full">
+                <div className="mb-6 flex-grow flex flex-col justify-center w-full px-2">
                   <h3 className="font-serif text-2xl md:text-[28px] text-primary font-bold mb-2 tracking-wide whitespace-nowrap">Golf Outing Scramble</h3>
-                  <p className="text-primary/70 font-light text-[13px] md:text-sm w-full mx-auto whitespace-nowrap">
+                  <p className="text-primary/70 font-light text-[13px] md:text-sm w-full mx-auto leading-relaxed">
                     Join us for a round before the main event.
                   </p>
                 </div>
@@ -315,10 +315,10 @@ export default function Home() {
                 <img src={venueImg} alt="Venue Promo" className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-105" />
               </div>
               <div className="px-6 py-6 md:px-8 md:py-8 flex flex-col flex-grow items-center text-center">
-                <div className="mb-6 flex-grow flex flex-col justify-center w-full">
+                <div className="mb-6 flex-grow flex flex-col justify-center w-full px-2">
                   <h3 className="font-serif text-2xl md:text-[28px] text-primary font-bold mb-2 tracking-wide whitespace-nowrap">The Venue</h3>
-                  <p className="text-primary/70 font-light text-[13px] md:text-sm w-full mx-auto whitespace-nowrap">
-                    Explore the German American Club.
+                  <p className="text-primary/70 font-light text-[13px] md:text-sm w-full mx-auto leading-relaxed">
+                    Come celebrate D-Love and enjoy a delicious German dinner, great fellowship, and a night to remember.
                   </p>
                 </div>
                 <Link href="/venue" className="w-full mt-auto" onClick={() => window.scrollTo(0, 0)}>
